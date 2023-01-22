@@ -1,6 +1,6 @@
 # dw-starter
 This is sample project for [Bloods](https://www.rocy-data.com/products/bigdata/bloods-dwdi-core).  
-`Bloods` is zero-code big data and science framework by parsing XML data flow to Spark big data or data mining and intelligence code can run at cluster. It lets big data calculation simpler and clear.
+`Bloods` is zero-code big data and science framework by parsing XML data flow to Spark big data warehouse(dw) or data mining(dm) and intelligence code(di) can run at cluster. It lets big data calculation simpler and clear.
 ## Install
 1. Download the binary from [here](https://www.rocy-data.com/downloads#bloods-dwdi-core) and decompress it to some directory,we name it as `${ROCY_DATA_HOME}`, this directory has the following content.
 *  `Bloods` product,its name format: `bloods-1.0.0`
