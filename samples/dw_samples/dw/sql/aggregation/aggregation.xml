@@ -1,0 +1,42 @@
+<dw xmlns="https://www.rocy-data.com/dw/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://www.rocy-data.com/dw/v1.0.0 ../../../.dw/dw.xsd" dw_market="market1" dw_subject="subject1"
+    owner="whq" dw_level="ods"
+>
+    <computed_column_groups>
+        <computed_column_group id="id_group_measures_ref">
+            <computed_column name="avg" expression="avg(amount)"/>
+
+        </computed_column_group>
+    </computed_column_groups>
+    <sources>
+        <source_csv id="id_aggregation_group_by" path="csv_path_none" group_by="seller_id">
+            <measures>
+                <computed_column name="total" expression="sum(amount)"/>
+            </measures>
+        </source_csv>
+        <source_csv id="id_aggregation_is_rollup" path="csv_path_none" group_by="product_id,seller_id" is_rollup="true">
+            <measures>
+                <computed_column name="total" expression="sum(amount)"/>
+            </measures>
+        </source_csv>
+        <source_csv id="id_aggregation_pivot_column" path="csv_path_none" group_by="product_id" pivot_column="seller_id">
+            <measures>
+                <computed_column name="total" expression="sum(amount)"/>
+            </measures>
+        </source_csv>
+        <source_csv id="id_aggregation_group_where_list" path="csv_path_none" group_by="product_id">
+            <measures>
+                <computed_column name="total" expression="sum(amount)"/>
+            </measures>
+            <group_where_list>
+                <where name="seller1" expression="seller_id=1"/>
+                <where name="seller2" expression="seller_id=2"/>
+            </group_where_list>
+        </source_csv>
+        <source_csv id="id_aggregation_measures_ref" path="csv_path_none" group_by="product_id">
+            <measures measures_ref="id_group_measures_ref">
+                <computed_column name="total" expression="sum(amount)"/>
+            </measures>
+        </source_csv>
+    </sources>
+</dw>

@@ -1,0 +1,25 @@
+<dw dw_level="tmp" dw_subject="subject1" dw_market="RX-DATA" owner="whq"
+    xsi:schemaLocation="https://www.rocy-data.com/di/v1.0.0  ../.dw/di.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://www.rocy-data.com/di/v1.0.0">
+    <sources>
+        <source_sequence_constants id="sentenceData" quote_char="'">
+            <sequence_constant column_name="label" column_values="0.0,0.0,0.1"/>
+            <sequence_constant column_name="sentence" column_values="'Hi I heard about Spark','I wish Java could use case classes','Logistic regression models are neat'"/>
+        </source_sequence_constants>
+        
+        <source_sequence_constants id="dataFrame">
+            <sequence_constant column_name="label" column_values="0,1,2"/>
+            <sequence_constant column_name="features" column_values="1.0 0.5 -1.0,2.0 1.0 1.0,4.0 10.0 5.0"/>
+        </source_sequence_constants>
+    </sources>
+    <transforms>
+
+        <transform_ml_transformer_feature_tokenizer id="id_feature_tokenizer" transform_ref="sentenceData" input_col="sentence" output_col="words"/>
+        <transform_ml_transformer_feature_hashing_tf id="hashingTF" transform_ref="id_feature_tokenizer" output_col="rawFeatures" input_col="words" num_features="20"/>
+        <transform_ml_estimator_feature_idf id="idf" transform_ref="hashingTF" input_col="rawFeatures" output_col="features" model_path="path_idf_model"/>
+        
+        <transform_ml_transformer_feature_normalizer id="normalizer" transform_ref="dataFrame" input_col="features" output_col="normFeatures" p="1.0"/>
+        <transform_ml_transformer_feature_sql_transformer id="sqlTrans" transform_ref="sentenceData" statement="select label,sentence,concat(label,sentence) as concat from __THIS__"/>
+    </transforms>
+</dw>

@@ -1,0 +1,11 @@
+<dw xmlns="https://www.rocy-data.com/dw/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://www.rocy-data.com/dw/v1.0.0 ../../.dw/dw.xsd" dw_market="market1" dw_subject="subject1" owner="whq" dw_level="ods">
+    <transforms>
+        <!--range_date will be ignored because upstream have no date-->
+        <transform_transform range_date="this_week" id="id_trans_range_date_none" transform_ref="id_source_csv_path_none"/>
+        <transform_transform range_date="none" id="id_trans_range_date_week" transform_ref="id_source_csv_path_week">
+            <measures>
+                <computed_column name="m" expression="count(distinct PARTITIONS)" category="security"/>
+            </measures>
+        </transform_transform>
+    </transforms>
+</dw>

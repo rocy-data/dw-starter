@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+        elementFormDefault="qualified"
+        targetNamespace="https://www.rocy-data.com/dw/standard_index"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:simpleType name="standard_index">
+        <xs:union memberTypes="xs:Name">
+            <xs:simpleType>
+                <xs:restriction>
+                    <xs:enumeration value="mileage_avg">
+                        <xs:annotation>
+                            <xs:documentation>
+                                average of total mileage
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:enumeration>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+</xs:schema>
+

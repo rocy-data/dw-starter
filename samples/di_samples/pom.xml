@@ -1,0 +1,25 @@
+<compose active_profile="test"
+         xsi:schemaLocation="https://www.rocy-data.com/di/v1.0.0  .dw/di.xsd"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="https://www.rocy-data.com/di/v1.0.0">
+    <!--1-->
+    <modules>
+        <module path="dw/model_selection.xml"/>
+        <module path="dw/frequent_pattern_mining.xml"/>
+        <module path="dw/collaborative_filtering.xml"/>
+        <module path="dw/clustering.xml"/>
+        <module path="dw/decision_tree_classifier.xml"/>
+        <module path="dw/binomial_logistic_regression.xml"/>
+        <module path="dw/transform.xml"/>
+        <module path="dw/sources.xml"/>
+        <module path="dw/paths.xml"/>
+        <module path="dw/models/multi_classification.xml"/>
+        <module path="dw/hello_world.xml"/>
+        <module path="dw/pipelines/pipeline_hello.xml"/>
+        <module path=".dw/system.xml"/>
+    </modules>
+    <pipelines>
+        <pipeline path="dw/pipelines/pipeline.xml"/>
+        <pipeline path="dw/model_selection_pipeline.xml" />
+    </pipelines>
+</compose>

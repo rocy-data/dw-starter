@@ -1,0 +1,44 @@
+<dw xmlns="https://www.rocy-data.com/dw/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://www.rocy-data.com/dw/v1.0.0 ../../.dw/dw.xsd" dw_market="market1" dw_subject="subject1"
+    owner="whq" dw_level="ods"
+>
+    <computed_column_groups>
+        <computed_column_group id="g2">
+            <computed_column name="amount_high" expression="amount &gt; 0.6"/>
+            <computed_column name="amount_low" expression="amount &lt; 0.3"/>
+        </computed_column_group>
+    </computed_column_groups>
+    <sources>
+        <source_csv id="id_source_multi_operations"
+                    where="amount &gt; 5 and amount &lt; 80"
+                    distinct_by="product_id,seller_id"
+                    computed_columns_ref="g2"
+                    group_by="product_number"
+                    is_rollup="true"
+                    sort_columns="true"
+                    path="csv_path_none">
+            <name_standardize_list>
+                <name_standardize name="product_id" standardized_name="product_number"/>
+                <name_standardize name="seller_id" standardized_name="seller_number"/>
+            </name_standardize_list>
+            <value_standardize_list>
+                <value_standardize name="amount" expression="0-100_0-1"/>
+            </value_standardize_list>
+            <boolean_convert_list>
+                <boolean_convert true_values="yes" names_regex="on_"/>
+            </boolean_convert_list>
+            <computed_column_group>
+                <computed_column name="amount_middle" expression="amount &gt; 0.3 and amount &lt; 0.6"/>
+            </computed_column_group>
+            <measures>
+                <computed_column name="total" expression="sum(amount)"/>
+                <computed_column name="amount_middle_count" expression="sum(if(amount_middle,1,0))"/>
+            </measures>
+            <group_where_list>
+                <where name="seller_1" expression="seller_number=1"/>
+                <where name="seller_2" expression="seller_number=2"/>
+                <where name="seller_3" expression="seller_number=3"/>
+            </group_where_list>
+        </source_csv>
+    </sources>
+</dw>

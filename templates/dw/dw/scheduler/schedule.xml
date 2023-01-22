@@ -1,0 +1,14 @@
+<dw xmlns="https://www.rocy-data.com/dw/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://www.rocy-data.com/dw/v1.0.0 ../../.dw/dw.xsd" dw_market="market1" dw_subject="subject1"
+    owner="whq" dw_level="ods"
+>
+    <sinks>
+        <!--variables:year,month,day,week,month_end.-->
+        <sink_show id="id_sink_schedule" transform_ref="id_test_constants" sink_cycle="daily"/>
+        <sink_show id="id_sink_schedule_year1" transform_ref="id_test_constants" sink_cycle="daily" sink_cycle_pattern="year==2022"/>
+        <sink_show id="id_sink_schedule_year2" transform_ref="id_test_constants" sink_cycle="daily" sink_cycle_pattern="!(year==2022)"/>
+        <sink_show id="id_sink_schedule_month_day1" transform_ref="id_test_constants" sink_cycle="daily" sink_cycle_pattern="month==10 &amp;&amp; day==1"/>
+        <sink_show id="id_sink_schedule_month_end" transform_ref="id_test_constants" sink_cycle="daily" sink_cycle_pattern="month==10 &amp;&amp; day==month_end"/>
+        <sink_show id="id_sink_schedule_weekly" transform_ref="id_test_constants" sink_cycle="weekly"/>
+    </sinks>
+</dw>

@@ -1,0 +1,119 @@
+<dw dw_level="tmp" dw_subject="subject1"
+    dw_market="market1" owner="whq"
+    xsi:schemaLocation="https://www.rocy-data.com/iov_dw/v1.0.0  ../.dw/iov_dw.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://www.rocy-data.com/iov_dw/v1.0.0">
+    <sources>
+        <source_parquet
+                dw_level="dwd" path="tsp_raw_data" description="原始TSP数据1天" computed_columns_ref="tsp_log_data_columns"
+                is_cache="false"
+                drop="battery_born_date_code,end_batch_code,logout_flow_number,logout_time,manufacturer_code,protocol_version,reserve_charging_status,sim_card_number,sim_telephone,sky_window_state,skylight_position_feedback,tsp_ready_enable_state_function,tsp_start,tsp_start_time,tsp_stop_time,veh_model,vehicle_window_left_back,vehicle_window_left_front,vehicle_window_right_back,vehicle_window_right_front,zc_battery_type_number,tsp_command,tsp_data_length,zc_flow_number,zc_register_time,zc_vehicle_number,tsp_ack,tsp_che_men_data_length"
+                id="tsp_raw_data_day_command2_5" sort_columns="false" where="tsp_command=2 OR tsp_command=5" owner="whq"
+                range_date="day_one" is_rollup="false">
+            <name_standardize_list>
+                <name_standardize name="db_probe_temperature_list" standardized_name="temp_list"/>
+                <name_standardize name="dbe_su_voltage_list" standardized_name="voltage_list"/>
+                <name_standardize name="vehicle_model_number" standardized_name="veh_model"/>
+                <name_standardize name="jz_current" standardized_name="veh_curr"/>
+                <name_standardize name="jz_voltage" standardized_name="veh_volt"/>
+                <name_standardize name="other_fault_count" standardized_name="other_error_count"/>
+                <name_standardize name="hv_battery_isltn_rsistn" standardized_name="hv_battery_resistance"/>
+                <name_standardize name="veh_dcdc_state" standardized_name="dcdc_state"/>
+                <name_standardize name="dbt_probe_count" standardized_name="charge_temp_probe_count"/>
+                <name_standardize name="dbe_zongcheng_num" standardized_name="power_batt_assembly_count"/>
+                <name_standardize name="hv_battery_remain_energy" standardized_name="remain_energy"/>
+                <name_standardize name="driver_sit_men_lock_state" standardized_name="driver_door_lock_state"/>
+                <name_standardize name="driver_motor_volt" standardized_name="driver_motor_volt"/>
+                <name_standardize name="driver_motor_torq" standardized_name="motor_torq"/>
+                <name_standardize name="driver_motor_temp" standardized_name="motor_temp"/>
+                <name_standardize name="driver_motor_state" standardized_name="motor_state"/>
+                <name_standardize name="driver_motor_ctl_temp" standardized_name="motor_controller_temp"/>
+                <name_standardize name="dc_dc_temperature" standardized_name="dcdc_temp"/>
+                <name_standardize name="dbe_sc_num" standardized_name="esd_sc_count"/>
+                <name_standardize name="dbe_hvbat_voltage" standardized_name="power_batt_volt"/>
+                <name_standardize name="dbe_hvbat_current" standardized_name="power_batt_current"/>
+                <name_standardize name="che_zhuang_tai_fa_sheng_bian_hua" standardized_name="veh_state_change"/>
+                <name_standardize name="chong_dian_zhuang_tai_fa_sheng_bian_hua"
+                                  standardized_name="charge_state_change"/>
+                <name_standardize name="yun_xing_mo_shi_fa_sheng_bian_hua" standardized_name="run_mode_change"/>
+                <name_standardize name="battery_state_plug_connect_state"
+                                  standardized_name="charge_plug_connect_state"/>
+                <name_standardize name="an_fang_baojing_xiao_deng_wei_guan_tixing"
+                                  standardized_name="small_light_not_close_tip"/>
+                <name_standardize name="an_fang_baojing_fei_fa_ru_qin_tixing"
+                                  standardized_name="illegal_intrusion_tip"/>
+                <name_standardize name="an_fang_baojing_che_men_wei_suo_tixing"
+                                  standardized_name="security_guard_door_unlock_tip"/>
+                <name_standardize name="alarm_driver_motor_cnt" standardized_name="drive_motor_error_count"/>
+                <name_standardize name="accelerator_pedal_position" standardized_name="accelerator_pedal_position"/>
+                <name_standardize name="ac_set_temperature" standardized_name="ac_set_level"/>
+                <name_standardize name="DCXTGZSJ-JGZSJ_chong_dian_ji_guzhang" standardized_name="acc_charge_error"/>
+                <name_standardize name="DCXTGZSJ-JGZSJ_chong_dian_dian_chi_wen_du_guodi"
+                                  standardized_name="rechargeable_batt_temp_low"/>
+                <name_standardize name="DCXTGZSJ-JGZSJ_chong_dian_dian_chi_wen_du_bu_jun_heng"
+                                  standardized_name="rechargeable_batt_temp_imbalance"/>
+                <name_standardize name="12v_lead_acid_cell_voltage" standardized_name="v12_lead_acid_cell_volt"/>
+                <name_standardize name="DCXTGZSJ-JGZSJ_guodi" standardized_name="batt_error_soc_low"/>
+                <name_standardize name="DCXTGZSJ-JGZSJ_guzhang" standardized_name="busoff_error"/>
+                <name_standardize name="DCXTGZSJ-JGZSJ_dian_liu_chuan_gan_qi_ying_jian_guzhang"
+                                  standardized_name="batt_alarm_curr_sensor"/>
+                <name_standardize name="DCXTGZSJ-JGZSJ_shao_shu_wen_du_chuan_gan_qi_ying_jian_guzhang"
+                                  standardized_name="batt_error_some_temp_sensor"/>
+                <name_standardize name="DCXTGZSJ-JGZSJ_wen_du_chuan_gan_qi_ying_jian_guzhang"
+                                  standardized_name="batt_error_temp_sensor"/>
+                <name_standardize name="DCXTGZSJ-JGZSJ_jue_yuan_jian_ce_ying_jian_guzhang"
+                                  standardized_name="batt_error_insulation_test"/>
+                <name_standardize name="DCXTGZSJ-JGZSJ_dan_ti_dian_ya_jian_ce_gu_zhang_tong_xun_guzhang"
+                                  standardized_name="batt_error_sc_vol_test"/>
+                <name_standardize name="DCXTGZSJ-JGZSJ_dan_ti_dian_ya_cai_ji_xian_lu_guzhang"
+                                  standardized_name="batt_error_sc_vol_collect"/>
+                <name_standardize name="DCXTGZSJ-JGZSJ_gong_dian_guogao" standardized_name="batt_error_power_high"/>
+                <name_standardize name="DCXTGZSJ-JGZSJ_gong_dian_guodi" standardized_name="batt_error_power_low"/>
+                <name_standardize name="DCXTGZSJ-JGZSJ_yu_chong_ji_dian_qi_zhan_lian"
+                                  standardized_name="batt_error_precharge_relay_adhesion"/>
+                <name_standardize name="DCXTGZSJ-JGZSJ_yu_chong_ji_dian_qi_duanlu"
+                                  standardized_name="batt_error_precharge_relay_break"/>
+                <name_standardize name="DCXTGZSJ-JGZSJ_zheng_ji_ji_dian_qi_duanlu"
+                                  standardized_name="batt_error_positive_relay_open_circuit"/>
+                <name_standardize name="DCXTGZSJ-JGZSJ_zheng_ji_ji_dian_qi_zhan_lian"
+                                  standardized_name="batt_error_positive_relay_open_adhesion"/>
+                <name_standardize name="DCXTGZSJ-JGZSJ_duanlu" standardized_name="batt_error_open_circuit"/>
+                <name_standardize name="DCXTGZSJ-JGZSJ_yu_chong_guzhang" standardized_name="batt_error_precharge"/>
+                <name_standardize name="DCXTGZSJ-JGZSJ_fang_dian_dian_chi_wen_du_guodi"
+                                  standardized_name="batt_error_fang_discharge_temp_low"/>
+                <name_standardize name="DCXTGZSJ-JGZSJ_ji_dian_qi_guzhang" standardized_name="batt_error_relay"/>
+                <name_standardize name="DCXTGZSJ-JGZSJ_dong_li_dian_chi_gu_zhang_zhuang_tai"
+                                  standardized_name="batt_error_power"/>
+                <name_standardize name="DCXTGZSJ-JGZSJ_jun_heng_gu_zhang_zhuang_tai"
+                                  standardized_name="batt_error_rebalance"/>
+                <name_standardize name="DCXTGZSJ-JGZSJ_fang_dian_dian_liu_yi_chang"
+                                  standardized_name="batt_error_discharge_curr"/>
+                <name_standardize name="DCXTGZSJ-QGZSJ_dian_chi_dan_ti_jing_tai_ya_cha_yan_zhong_guoda"
+                                  standardized_name="batt_error_sc_static_volt_diff_big"/>
+                <name_standardize name="DCXTGZSJ-QGZSJ_chong_dian_dian_chi_wen_du_guogao"
+                                  standardized_name="batt_error_fang_discharge_temp_high"/>
+                <name_standardize name="DCXTGZSJ-QGZSJ_dian_xin_wen_sheng_guokuai"
+                                  standardized_name="batt_error_sc_temp_increase_fast"/>
+                <name_standardize name="DCXTGZSJ-QGZSJ_dian_chi_chong_dian_guo_liu_guzhang"
+                                  standardized_name="batt_error_charge_current_over"/>
+                <name_standardize name="DCXTGZSJ-QGZSJ_wen_du_guogao" standardized_name="batt_error_temp_high"/>
+            </name_standardize_list>
+            <boolean_convert_list>
+                <boolean_convert true_values="alarm" names_regex="^alarm\_common"/>
+                <boolean_convert true_values="yes" names_regex="^rechargeable\_batt\_temp"/>
+                <boolean_convert true_values="yes" names_regex="^batt_error\_"/>
+                <boolean_convert true_values="yes" end_with="_tip"/>
+                <boolean_convert true_values="yes,lock,valid"
+                                 full_names="batt_alarm_curr_sensor,acc_charge_error,acc_charge_error,veh_state_change,charge_state_change,driver_system_ready,busoff_error,driver_system_ready,loc_valid_state"/>
+                <boolean_convert true_values="lock" end_with="_lock_state"/>
+                <boolean_convert true_values="enabled" end_with="_enable"/>
+            </boolean_convert_list>
+            <computed_column_group>
+                <computed_column name="loc_lon_state"
+                                 expression="translate_word('loc_lon_state_earth:loc_lon_state_east',loc_lon_state)"/>
+                <computed_column name="loc_lat84" expression="sign_lon_lat(loc_lat_state,loc_lat84)"/>
+                <computed_column name="loc_lon84" expression="sign_lon_lat(loc_lon_state,loc_lon84)"/>
+            </computed_column_group>
+        </source_parquet>
+    </sources>
+</dw>

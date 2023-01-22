@@ -1,0 +1,21 @@
+<dw dw_level="tmp" dw_subject="subject1" dw_market="RX-DATA" owner="whq"
+    xsi:schemaLocation="https://www.rocy-data.com/di/v1.0.0  ../.dw/di.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://www.rocy-data.com/di/v1.0.0">
+    <sources>
+        <source_text id="sample_movielens_ratings" path="sample_movielens_ratings" drop="splits">
+            <computed_column_group>
+                <computed_column name="splits" expression="split(value,'::')"/>
+                <computed_column name="userId" expression="cast(element_at(splits,1) as double)"/>
+                <computed_column name="movieId" expression="cast(element_at(splits,2) as double)"/>
+                <computed_column name="rating" expression="cast(element_at(splits,3) as double)"/>
+                <computed_column name="timestamp" expression="cast(element_at(splits,4) as long)"/>
+            </computed_column_group>
+        </source_text>
+        <source_ml_libsvm id="source_sample_lda_libsvm_data" path="sample_lda_libsvm_data"/>
+        <source_ml_libsvm id="source_sample_kmeans_data" path="sample_kmeans_data"/>
+        <source_ml_libsvm id="training" path="sample_libsvm_data"/>
+        <source_ml_libsvm dw_level="tmp" path="sample_multiclass_classification_data"
+                          id="id_sample_multiclass_classification_data_source" owner="whq"/>
+    </sources>
+</dw>

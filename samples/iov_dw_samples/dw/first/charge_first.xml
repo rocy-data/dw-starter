@@ -1,0 +1,37 @@
+<dw dw_level="tmp" dw_subject="subject1"
+    dw_market="market1" owner="whq"
+    xsi:schemaLocation="https://www.rocy-data.com/iov_dw/v1.0.0  ../../.dw/iov_dw.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://www.rocy-data.com/iov_dw/v1.0.0">
+    <transforms>
+        <transform_transform dw_level="tmp" description="充电行程统计表,当月,维度：vin,is_quick" group_by="vin,is_quick"
+                             is_cache="false" id="charge_stat_first" measures_ref="stat_first" sort_columns="false"
+                             transform_ref="charge_stat_s" owner="whq" range_date="none" is_rollup="false"/>
+        <transform_transform dw_level="tmp" description="首次充电统计" group_by="vin,is_quick" is_cache="false"
+                             id="first_charge_stat" measures_ref="stat_first" sort_columns="false"
+                             transform_ref="charge_stat" owner="whq" range_date="none" is_rollup="false"/>
+        <transform_transform dw_level="dim" description="充电行程统计表,当月" is_cache="false" id="charge_stat_s3"
+                             sort_columns="false" transform_ref="charge_stat_source" owner="whq" range_date="none"
+                             is_rollup="false">
+            <computed_column_group>
+                <computed_column name="trip_begin_time_prev"
+                                 expression="lag(trip_begin_time,1,null) over(partition by vin order by trip_begin_time)"
+                                 category="trip_charging" chinese_name="上次充电时间"/>
+                <computed_column name="days_to_prev"
+                                 expression="cast((trip_begin_time-@{trip_begin_time_prev})/${day_milli} as int)"
+                                 category="trip_charging" chinese_name="距离上次充电间隔"/>
+            </computed_column_group>
+        </transform_transform>
+
+    </transforms>
+    <sinks>
+        <sink_join_fill dw_level="tmp" description="单车当月充电行程统计表JOIN首次充电行程统计表" transform_ref="charge_stat_first"
+                             join_columns="vin,is_quick" is_cache="false" id="charge_stat_first_join"
+                             sort_columns="false" owner="whq" range_date="none" path="charge_stat_first"
+                             is_rollup="false">
+            <selects>
+                <select select_fields="vin,is_quick,avg_veh_curr,trip_charge_per_soc_electric, trip_avg_temperature_range, trip_avg_voltage_range,trip_charge_power,avg_su,avg_veh_volt,trip_charge_full_hours"/>
+            </selects>
+        </sink_join_fill>
+    </sinks>
+</dw>

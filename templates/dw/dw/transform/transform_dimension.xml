@@ -1,0 +1,26 @@
+<dw xmlns="https://www.rocy-data.com/dw/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://www.rocy-data.com/dw/v1.0.0 ../../.dw/dw.xsd" dw_market="market1" dw_subject="subject1"
+    owner="whq" dw_level="ods"
+>
+    <columns_group>
+        <columns id="product_id" columns="product_id"/>
+    </columns_group>
+    <transforms>
+        <transform_dimension id="id_dimension_by_area" transform_ref="id_source_csv" group_by="area_id">
+            <measures>
+                <computed_column name="total" expression="sum(amount)"/>
+            </measures>
+        </transform_dimension>
+        <transform_dimension id="id_dimension_by_seller" transform_ref="id_source_csv" group_by="seller_id">
+            <measures>
+                <computed_column name="total" expression="sum(amount)"/>
+            </measures>
+        </transform_dimension>
+        <transform_join_dimensions id="id_transform_join_dimensions" dimensions_columns_ref="product_id" >
+            <transform_refs>
+                <transform_ref id="id_dimension_by_area"/>
+                <transform_ref id="id_dimension_by_seller"/>
+            </transform_refs>
+        </transform_join_dimensions>
+    </transforms>
+</dw>

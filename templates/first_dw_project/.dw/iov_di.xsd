@@ -1,0 +1,194 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="https://www.rocy-data.com/iov_di/v1.0.0"
+           xmlns:di="https://www.rocy-data.com/di/v1.0.0"
+           xmlns:di_ml="https://www.rocy-data.com/di_ml/v1.0.0"
+           xsi:schemaLocation="https://www.rocy-data.com/dw/v1.0.0 ./dw.xsd
+           https://www.rocy-data.com/di/v1.0.0 ./di.xsd
+           https://www.rocy-data.com/iov_dw/v1.0.0 ./iov_dw.xsd
+           https://www.rocy-data.com/di_ml/v1.0.0 ./di_ml.xsd"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:dw="https://www.rocy-data.com/dw/v1.0.0"
+           xmlns:iov_dw="https://www.rocy-data.com/iov_dw/v1.0.0"
+           elementFormDefault="qualified">
+    <xs:element name="dw" type="iov_di"/>
+    <xs:element name="compose" type="di:compose"/>
+    <xs:element name="dw_pipeline" type="dw:dw_pipeline"/>
+    <xs:element name="di_pipeline" type="di:di_pipeline"/>
+
+    <xs:complexType name="iov_di">
+        <xs:complexContent>            
+            <xs:extension base="di:dw">
+                <xs:all>
+                    <xs:element type="sources" name="sources" minOccurs="0"/>
+                    <xs:element type="transforms" name="transforms" minOccurs="0"/>
+                </xs:all>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="sources">
+        <xs:complexContent>
+            <xs:extension base="di_ml:sources">
+                <xs:sequence>
+                    <xs:choice maxOccurs="unbounded" minOccurs="0">
+                        <xs:element name="source_iov_can_signals" type="dw:action"/>
+                    </xs:choice>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:simpleType name="field_list">
+        <xs:list itemType="xs:Name"/>
+    </xs:simpleType>
+    <xs:complexType name="transforms">
+        <xs:complexContent>
+            <xs:extension base="di:transforms">
+                <xs:sequence>
+                    <xs:choice maxOccurs="unbounded">
+                        <xs:element name="transform_iov_exception_pattern_extract"
+                                    type="iov_dw:transform_iov_exception_pattern_extract_type"/>
+                        <xs:element name="transform_iov_standardize_name" type="iov_dw:transform_iov_standardize_name_type"/>
+                        <xs:element name="transform_iov_standardize_check" type="iov_dw:transform_iov_standardize_check_type"/>
+                        
+                        <xs:element name="transform_ml_iov_alarm_package_diff" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:complexContent>
+                                    <xs:extension base="dw:transform_one_ref">
+                                        <xs:sequence>
+                                            <xs:element name="package_diff_config">
+                                                <xs:complexType>
+                                                    <xs:attribute name="groups" type="field_list"/>
+                                                    <xs:attribute name="k_value" type="xs:float"/>
+                                                    <xs:attribute name="offline_continued_second" type="xs:int"/>
+                                                </xs:complexType>
+                                            </xs:element>
+                                        </xs:sequence>
+                                        <xs:attribute name="tsp_got_time_col" type="xs:Name"/>
+                                        <xs:attribute name="temperatures_col" type="xs:Name" />
+                                        <xs:attribute name="voltages_col" type="xs:Name"/>
+                                        <xs:attribute name="data_id_by_group" type="field_list" use="required"/>
+                                    </xs:extension>
+                                </xs:complexContent>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="transform_ml_iov_exception_capacity_cyclic"  minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:complexContent>
+                                    <xs:extension base="iov_exception_recognize_type">
+                                        <xs:attribute name="acc_cyclic_times_col" type="xs:Name" use="required"/>
+                                        <xs:attribute name="capacity_attenuation_name_col" type="xs:Name" use="required"/>
+                                    </xs:extension>
+                                </xs:complexContent>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="transform_ml_iov_exception_capacity_usage_time"  minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:complexContent>
+                                    <xs:extension base="iov_exception_recognize_type">
+                                        <xs:attribute name="acc_usage_time_col" type="xs:Name" use="required"/>
+                                        <xs:attribute name="capacity_attenuation_name_col" type="xs:Name" use="required"/>
+                                    </xs:extension>
+                                </xs:complexContent>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="transform_ml_iov_exception_charge_temperature"  minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:complexContent>
+                                    <xs:extension base="iov_exception_recognize_type">
+                                        <xs:attribute name="charge_temperature_up_hour_col" type="xs:Name" use="required"/>
+                                        <xs:attribute name="charge_avg_current_hour_col" type="xs:Name" use="required"/>
+                                    </xs:extension>
+                                </xs:complexContent>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="transform_ml_iov_exception_charge_voltage_current"  minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:complexContent>
+                                    <xs:extension base="iov_exception_recognize_type">
+                                        <xs:attribute name="current_col" type="xs:Name" use="required"/>
+                                        <xs:attribute name="single_max_voltage_col" type="xs:Name" use="required"/>
+                                    </xs:extension>
+                                </xs:complexContent>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="transform_ml_iov_exception_temperature_difference"  minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:complexContent>
+                                    <xs:extension base="iov_exception_recognize_type">
+                                        <xs:attribute name="trip_avg_temperature_range_col" type="xs:Name" use="required"/>
+                                        <xs:attribute name="trip_five_percent_temperature_range_col" type="xs:Name" use="required"/>
+                                    </xs:extension>
+                                </xs:complexContent>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="transform_ml_iov_exception_voltage_difference"  minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:complexContent>
+                                    <xs:extension base="iov_exception_recognize_type">
+                                        <xs:attribute name="trip_avg_voltage_range_col" type="xs:Name" use="required"/>
+                                        <xs:attribute name="trip_five_percent_voltage_range_col" type="xs:Name" use="required"/>
+                                    </xs:extension>
+                                </xs:complexContent>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="transform_ml_iov_health_down_predict"  minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:complexContent>
+                                    <xs:extension base="dw:transform_one_ref">
+                                        <xs:attribute name="date_col" type="xs:Name" use="required"/>
+                                        <xs:attribute name="health_col" type="xs:Name" use="required"/>
+                                        <xs:attribute name="acc_cyclic_times_col" type="xs:Name"/>
+                                        <xs:attribute name="acc_mileage_col" type="xs:Name"/>
+                                        <xs:attribute name="health_to" type="xs:float" use="required"/>
+                                    </xs:extension>
+                                </xs:complexContent>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="transform_ml_iov_health_factor_analysis"  minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:complexContent>
+                                    <xs:extension base="dw:transform_one_ref">
+                                        <xs:attribute name="health_col" use="required"/>
+                                        <xs:attribute name="med_charge_duration_col"/>
+                                        <xs:attribute name="med_charge_start_soc_col"/>
+                                        <xs:attribute name="med_charge_end_soc_col"/>
+                                        <xs:attribute name="sum_charge_soc_times_col"/>
+                                        <xs:attribute name="med_charge_soc_col"/>
+                                        <xs:attribute name="med_charge_max_tem_col"/>
+                                        <xs:attribute name="med_charge_bat_max_vol_col"/>
+                                        <xs:attribute name="med_capacity_slow_charge_col"/>
+                                        <xs:attribute name="med_capacity_quick_charge_col"/>
+                                        <xs:attribute name="med_drive_duration_col"/>
+                                        <xs:attribute name="med_drive_soc_col"/>
+                                        <xs:attribute name="med_drive_max_tem_col"/>
+                                        <xs:attribute name="med_drive_min_tem_col"/>
+                                        <xs:attribute name="med_drive_bat_min_vol_col"/>
+                                    </xs:extension>
+                                </xs:complexContent>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:choice>                    
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="iov_exception_recognize_type">
+        <xs:complexContent>
+            <xs:extension base="dw:transform_one_ref">
+                <xs:attribute name="recognize_precision" type="xs:double"/>
+                <xs:attribute name="recognize_by_group" type="field_list"/>
+                <xs:attribute name="data_id_by_group" type="field_list"/>
+                <xs:attribute name="try_k_sequence" type="int_list"/>
+                <xs:attribute name="outlier_radio" type="percent"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:simpleType name="int_list">
+        <xs:list itemType="xs:int"/>
+    </xs:simpleType>
+    <xs:simpleType name="percent">
+        <xs:restriction base="xs:float">
+            <xs:minExclusive value="0"/>
+            <xs:maxExclusive value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

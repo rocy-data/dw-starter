@@ -1,0 +1,41 @@
+<dw xmlns="https://www.rocy-data.com/dw/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://www.rocy-data.com/dw/v1.0.0 ../../.dw/dw.xsd" dw_market="market1" dw_subject="subject1"
+    owner="whq" dw_level="ods"
+>
+    <transforms>
+        <transform_data_governance id="id_transform_drop_if_exception" transform_ref="id_data_governance_csv">
+            <data_governance_list>
+                <drop_if_exception column="v1" k="1.5"/>
+            </data_governance_list>
+        </transform_data_governance>
+        <transform_data_governance id="id_transform_drop_if_expression" transform_ref="id_data_governance_csv">
+            <data_governance_list>
+                <drop_if_expression expression="v1 &gt; 8 and v2=0 "/>
+            </data_governance_list>
+        </transform_data_governance>
+        <transform_data_governance id="id_transform_set_as_value_for_expression" transform_ref="id_interpolation_governance_csv">
+            <data_governance_list>
+                <set_as_value_for_expression column="test" expression="test &gt;20 and time is not null" value="test"/>
+            </data_governance_list>
+        </transform_data_governance>
+        <transform_data_governance id="id_transform_interpolation_governance" transform_ref="id_interpolation_governance_csv">
+            <data_governance_list>
+                <interpolation_governance column="test" time_column="time" partition_by="vin" k="1.6"/>
+            </data_governance_list>
+        </transform_data_governance>
+        <transform_data_governance id="id_transform_set_as_avg_if_exception_array" transform_ref="id_source_json_array">
+            <data_governance_list>
+                <set_as_avg_if_exception_array column="v1,v2"/>
+            </data_governance_list>
+        </transform_data_governance>
+        <transform_data_governance id="id_transform_set_as_value_for_expression_array"
+                                   transform_ref="id_source_json_array">
+            <data_governance_list>
+                <set_as_value_for_expression_array column="v1" expression="DW_ARRAY_ITEM &gt; 90"
+                                                   value="DW_ARRAY_ITEM/10"/>
+                <set_as_value_for_expression_array column="v2" expression="DW_ARRAY_ITEM &gt; 90"
+                                                   value="DW_ARRAY_ITEM/10"/>
+            </data_governance_list>
+        </transform_data_governance>
+    </transforms>
+</dw>

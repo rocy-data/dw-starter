@@ -1,0 +1,17 @@
+<dw dw_level="tmp" dw_subject="subject1"
+    dw_market="market1" owner="whq"
+    xsi:schemaLocation="https://www.rocy-data.com/iov_dw/v1.0.0  ../../.dw/iov_dw.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://www.rocy-data.com/iov_dw/v1.0.0">
+    <transforms>
+        <transform_transform dw_level="tmp" description="充电行程划分" computed_columns_ref="charge_discharge" is_cache="false" id="charge_trip" sort_columns="false" transform_ref="transform_trip_split" where="split_range.state='charging'" owner="whq" range_date="none" is_rollup="false">
+            <computed_column_group>
+                <computed_column name="is_quick" description="常用维度" expression="trip_charge_soc_speed &gt; ${is_quick_threshold}" category="dimension" chinese_name="是否快充"/>
+            </computed_column_group>
+            <selects>
+                <select
+                select_fields="vin,trip_seconds,trip_begin_time,trip_end_time,trip_begin_soc,trip_end_soc,trip_begin_temperature,trip_end_temperature, trip_begin_low_voltage_su,trip_end_low_voltage_su,trip_begin_high_voltage_su,trip_end_high_voltage_su, veh_state,trip_begin_voltage_list,trip_end_voltage_list,trip_begin_temp_list,trip_end_temp_list, trip_begin_battery_state_remain_mileage,trip_begin_loc_lat84,trip_begin_loc_lon84, trip_end_battery_state_remain_mileage,trip_end_loc_lat84,trip_end_loc_lon84,trip_begin_hour,trip_end_hour,trip_soc_amount,trip_charge_soc_speed,trip_charge_full_hours,is_quick"/>
+            </selects>
+        </transform_transform>
+    </transforms>
+</dw>

@@ -1,0 +1,43 @@
+<dw
+        xsi:schemaLocation="https://www.rocy-data.com/iov_di/v1.0.0  ../.dw/iov_di.xsd"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://www.rocy-data.com/iov_di/v1.0.0" owner="whq"
+        dw_subject="subject1" dw_market="market1" dw_level="dws">
+    <path_list>
+        <profile name="test">
+            <path
+                    partition_count="10" pattern="none" path="dw/data/hello_world" name="name_hello_world_path"
+                    parent="PROJECT_PATH">
+            </path>
+        </profile>
+    </path_list>
+    <sources>
+        <source_whole_text_files
+                is_rollup="false" range_date="none" owner="whq" sort_columns="false" id="id_whole_text_files_source"
+                is_cache="false" path="name_hello_world_path" dw_level="dws">
+        </source_whole_text_files>
+    </sources>
+    <transforms>
+        <transform_transform
+                is_rollup="false" range_date="none" owner="whq" transform_ref="id_whole_text_files_source"
+                sort_columns="false" id="id_word_count_stat_transform" is_cache="false" group_by="word" dw_level="dws">
+            <measures>
+                <computed_column expression="size(collect_set(file_name))" name="file_count"/>
+                <computed_column expression="count(distinct word)" name="word_count"/>
+            </measures>
+            <computed_column_group>
+                <computed_column expression="split(file_content,'[,\r\n ]+')" name="file_content_splits"/>
+                <computed_column expression="explode(file_content_splits)" name="word"/>
+            </computed_column_group>
+            <selects>
+                <select select_fields="word,word_count,file_count"/>
+            </selects>
+        </transform_transform>
+    </transforms>
+    <sinks>
+        <sink_show
+                is_rollup="false" range_date="none" owner="whq" transform_ref="id_word_count_stat_transform"
+                sort_columns="false" id="id_word_count_stat_sink" truncate_count="0" vertical="false" is_cache="false"
+                show_count="20" truncate="false" sink_cycle="daily" sink_t_add="1" dw_level="dws">
+        </sink_show>
+    </sinks>
+</dw>

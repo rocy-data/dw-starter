@@ -1,0 +1,13 @@
+<dw dw_level="tmp" dw_subject="subject1"
+    dw_market="market1" owner="whq"
+    xsi:schemaLocation="https://www.rocy-data.com/iov_dw/v1.0.0  ../../.dw/iov_dw.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://www.rocy-data.com/iov_dw/v1.0.0">
+    <transforms>
+        <transform_transform dw_level="tmp" description="行程划分，充电状态=充满" computed_columns_ref="charge_discharge" is_cache="false" id="charge_full_trip" sort_columns="false" transform_ref="transform_trip_split" where="split_range.state='charging full'" owner="whq" range_date="none" is_rollup="false">
+            <selects>
+                <select select_fields="vin,trip_seconds,trip_begin_time,trip_end_time,trip_begin_temperature,trip_end_temperature"/>
+            </selects>
+        </transform_transform>
+    </transforms>
+</dw>

@@ -1,0 +1,92 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:market="https://www.rocy-data.com/dw/market"
+           xmlns:owner="https://www.rocy-data.com/dw/owner"
+           xmlns:subject="https://www.rocy-data.com/dw/subject"
+           xmlns:dw="https://www.rocy-data.com/dw/v1.0.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:di_ml="https://www.rocy-data.com/di_ml/v1.0.0"
+           xsi:schemaLocation="https://www.rocy-data.com/dw/v1.0.0 dw.xsd https://www.rocy-data.com/di_ml/v1.0.0 di_ml.xsd"
+           targetNamespace="https://www.rocy-data.com/di/v1.0.0" elementFormDefault="qualified">
+    <!--<xs:import xsi:schemaLocation="https://www.rocy-data.com/di_ml/v1.0.0 di_ml.xsd"/>-->
+    <xs:element name="dw" type="dw"/>
+    <xs:element name="compose" type="compose"/>
+    <xs:element name="dw_pipeline" type="dw:dw_pipeline"/>
+    <xs:element name="di_pipeline" type="di_pipeline"/>
+
+    <xs:complexType name="compose">
+        <xs:complexContent>
+            <xs:extension base="dw:compose">
+                <xs:all>
+                    <xs:element name="variable_actions" type="di_ml:variable_actions" minOccurs="0"/>
+                </xs:all>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="transforms">
+        <xs:complexContent>
+            <xs:extension base="di_ml:transforms">
+                <xs:sequence>
+                    <xs:choice>
+                        <xs:element name="transform_ml_utility_random_split" minOccurs="0">
+                            <xs:complexType>
+                                <xs:complexContent>
+                                    <xs:extension base="dw:transform_one_ref">
+                                        <xs:attribute name="random_radio" type="di_ml:array_double"/>
+                                        <xs:attribute name="pick_index" type="xs:int"/>
+                                        <xs:attribute name="random_seed" type="xs:long"/>
+                                        <xs:attribute name="rand_count" type="xs:int"/>
+                                        <xs:attribute name="partition_column_names" type="xs:string"/>
+                                    </xs:extension>
+                                </xs:complexContent>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:choice>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="dw">
+        <xs:annotation>
+            <xs:documentation>
+                <![CDATA[
+                    UDF List
+                    1:timestamp2parts:
+                    input:timestamp: Long
+                    output:DT_STRUCT(hour,hour_section,day,week,is_weekend,month,quarter)
+                    2:parser_a101_tu/parser_a101_tbox/parser_a102_tbox/parser_gb32960
+                    input:arr: Seq[Int]
+                    output:CanA101TU
+                    3:ll2s2:
+                    input:lon: Double,lat:Double,lvl:Int
+                    output:s2 id,
+                    4:province2area
+                    input:province:String
+                    output:大区比如"华北地区"
+                ]]>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="dw:dw">
+                <xs:all>
+                    <xs:element type="di_ml:variable_actions" name="variable_actions" minOccurs="0"/>
+                    <xs:element type="di_ml:sources" name="sources" minOccurs="0"/>
+                    <xs:element type="transforms" name="transforms" minOccurs="0"/>
+                    <xs:element type="di_ml:sinks" name="sinks" minOccurs="0"/>
+                </xs:all>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="di_pipeline">
+        <xs:sequence>
+            <xs:element type="di_ml:variable_actions" name="variable_actions" minOccurs="0"/>
+            <xs:element type="dw:path_list" name="path_list" minOccurs="0"/>
+            <xs:element type="dw:constants" name="constants" minOccurs="0"/>
+            <xs:element type="di_ml:transforms_pipeline" name="transforms"/>
+        </xs:sequence>
+        <xs:attribute name="dw_market" type="market:market" use="required"/>
+        <xs:attribute name="dw_subject" type="subject:subject" use="required"/>
+        <xs:attribute name="owner" type="owner:owner" use="required"/>
+        <xs:attribute name="dw_level" type="dw:dw_level" use="required"/>
+    </xs:complexType>
+</xs:schema>

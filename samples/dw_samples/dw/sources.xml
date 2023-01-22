@@ -1,0 +1,26 @@
+<dw xmlns="https://www.rocy-data.com/dw/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://www.rocy-data.com/dw/v1.0.0 ../.dw/dw.xsd" dw_market="market1" dw_subject="subject1"
+    owner="whq" dw_level="ods"
+>
+    <path_list>
+        <profile name="test">
+            <path name="csv_path" path="${PROJECT_PATH}/dw/data/ods/orders/order.csv" pattern="none"/>
+            <path name="json_path" path="${PROJECT_PATH}/dw/data/ods/test.jsonl" pattern="none"/>
+            <path name="csv_time_series" path="${PROJECT_PATH}/dw/data/ods/time_series.csv" pattern="none"/>
+            <path name="data_governance" path="${PROJECT_PATH}/dw/data/ods/data_governance.csv" pattern="none"/>
+            <path name="interpolation_governance" path="${PROJECT_PATH}/dw/data/ods/interpolation_governance.csv" pattern="none"/>
+            <path name="data_governance_array" path="${PROJECT_PATH}/dw/data/ods/data_governance_array.jsonl" pattern="none"/>
+        </profile>
+    </path_list>
+    <sources>
+        <source_csv id="id_interpolation_governance_csv" path="interpolation_governance" inferSchema="true"/>
+        <source_csv id="id_data_governance_csv" path="data_governance" inferSchema="true"/>
+        <source_csv id="id_source_csv" path="csv_path" inferSchema="true"/>
+        <source_csv id="id_source_csv_time_series" path="csv_time_series" inferSchema="true"/>
+        <source_json id="id_source_json" path="json_path" inferSchema="true"/>
+        <source_json id="id_source_json_array" path="data_governance_array" inferSchema="true"/>
+        <source_sequence_constants id="id_test_constants">
+            <sequence_constant column_name="c1" column_values="1,2,3"/>
+        </source_sequence_constants>
+    </sources>
+</dw>

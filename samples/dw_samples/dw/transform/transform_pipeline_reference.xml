@@ -1,0 +1,9 @@
+<dw xmlns="https://www.rocy-data.com/dw/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://www.rocy-data.com/dw/v1.0.0 ../../.dw/dw.xsd" dw_market="market1" dw_subject="subject1"
+    owner="whq" dw_level="ods"
+>
+    <transforms>
+        <transform_pipeline id="id_transform_pipeline" transform_ref="id_source_csv" pipeline_ref="id_pipeline_where"/>
+        <transform_pipeline id="id_transform_pipeline_another" transform_ref="id_transform_pipeline" pipeline_ref="id_pipeline_add_computed_columns"/>
+    </transforms>
+</dw>

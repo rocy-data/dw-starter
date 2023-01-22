@@ -1,0 +1,26 @@
+<dw dw_level="tmp" dw_subject="subject1" dw_market="RX-DATA" owner="whq"
+    xsi:schemaLocation="https://www.rocy-data.com/di/v1.0.0  ../../.dw/di.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://www.rocy-data.com/di/v1.0.0">
+    <sources>
+        <source_sequence_constants id="id_source_join_fill_has_null">
+            <sequence_constant column_name="vin" column_values="v1,v2,v3"/>
+            <sequence_constant column_name="current" column_values="1,,3"/>
+            <sequence_constant column_name="other1" column_values="11,,33"/>
+        </source_sequence_constants>
+        <source_sequence_constants id="id_source_join_fill_not_null">
+            <sequence_constant column_name="vin" column_values="v1,v2,v3"/>
+            <sequence_constant column_name="current" column_values="1,22,3"/>
+            <sequence_constant column_name="other1" column_values="11,222,33"/>
+        </source_sequence_constants>
+        <source_sequence_constants id="id_source_join_fill_new_column">
+            <sequence_constant column_name="vin" column_values="v1,v2,v3"/>
+            <sequence_constant column_name="new_column" column_values="new1,new2,new3"/>
+        </source_sequence_constants>
+    </sources>
+    <sinks>
+        <sink_join_fill id="id_sink_join_fill_has_null_to_empty_file" transform_ref="id_source_join_fill_has_null" path="sink_join_fill" join_columns="vin"/>
+        <sink_join_fill id="id_sink_join_fill_not_null" transform_ref="id_source_join_fill_not_null" path="sink_join_fill" join_columns="vin"/>
+        <sink_join_fill id="id_sink_join_fill_new_column" transform_ref="id_source_join_fill_new_column" path="sink_join_fill" join_columns="vin"/>
+    </sinks>
+</dw>

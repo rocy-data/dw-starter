@@ -1,0 +1,26 @@
+<dw xmlns="https://www.rocy-data.com/dw/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://www.rocy-data.com/dw/v1.0.0 ../../../.dw/dw.xsd" dw_market="market1" dw_subject="subject1"
+    owner="whq" dw_level="ods"
+>
+    <sources>
+        <source_csv id="id_aggregation_before_where" path="csv_path_none" where="amount &gt; 10 and amount &lt; 20"/>
+        <source_csv id="id_aggregation_before_distinct_by" path="csv_path_none" distinct_by="product_id,seller_id"/>
+        <source_csv id="id_aggregation_before_name_standardize" path="csv_path_none">
+            <!--standardized_name values are defined in standard_field.xsd-->
+            <name_standardize_list>
+                <name_standardize name="product_id" standardized_name="product_number"/>
+                <name_standardize name="seller_id" standardized_name="seller_number"/>
+            </name_standardize_list>
+        </source_csv>
+        <source_csv id="id_aggregation_before_value_standardize" path="csv_path_none">
+            <value_standardize_list>
+                <value_standardize name="amount" expression="0-100_0-1"/>
+            </value_standardize_list>
+        </source_csv>
+        <source_csv id="id_aggregation_before_boolean_convert" path="csv_path_none">
+            <boolean_convert_list>
+                <boolean_convert true_values="yes" names_regex="on_"/>
+            </boolean_convert_list>
+        </source_csv>
+    </sources>
+</dw>

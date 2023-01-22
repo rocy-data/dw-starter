@@ -1,0 +1,22 @@
+<dw dw_level="tmp" dw_subject="subject1" dw_market="RX-DATA" owner="whq"
+    xsi:schemaLocation="https://www.rocy-data.com/di/v1.0.0  ../.dw/di.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://www.rocy-data.com/di/v1.0.0">
+    <path_list>
+        <profile name="test">
+            <path name="path_id_cross_validation_model" path="${PROJECT_PATH}/model_output/id_cross_validation" pattern="none"/>
+            <path name="path_id_fpg_model" path="${PROJECT_PATH}/model_output/id_fpg" pattern="none"/>
+            <path name="path_als_model" partition_count="10" path="${PROJECT_PATH}/model_output/als" pattern="none"/>
+            <path name="path_clustering_lda_model" path="${PROJECT_PATH}/model_output/clustering_lda" pattern="none"/>
+            <path name="path_idf_model" path="${PROJECT_PATH}/model_output/idf_model" pattern="none"/>
+            <path name="lr_model" path="${PROJECT_PATH}/model_output/lr_model" pattern="none"/>
+
+            <path name="sample_movielens_ratings" path="${PROJECT_PATH}/dw/data/spark/data/mllib/als/sample_movielens_ratings.txt" pattern="none"/>
+            <path name="sample_lda_libsvm_data" path="${PROJECT_PATH}/dw/data/spark/data/mllib/sample_lda_libsvm_data.txt" pattern="none"/>
+            <path name="sample_kmeans_data" path="${PROJECT_PATH}/dw/data/spark/data/mllib/sample_kmeans_data.txt" pattern="none"/>
+            <path name="name_hello_world_path" path="dw/data/hello_world" pattern="none" parent="PROJECT_PATH"/>
+            <path name="sample_libsvm_data" path="${PROJECT_PATH}/dw/data/spark/data/mllib/sample_libsvm_data.txt"
+                  pattern="none"/>
+        </profile>
+    </path_list>
+</dw>

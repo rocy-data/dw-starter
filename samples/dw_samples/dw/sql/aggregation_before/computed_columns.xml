@@ -1,0 +1,24 @@
+<dw xmlns="https://www.rocy-data.com/dw/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://www.rocy-data.com/dw/v1.0.0 ../../../.dw/dw.xsd" dw_market="market1" dw_subject="subject1"
+    owner="whq" dw_level="ods"
+>
+    <computed_column_groups>
+        <computed_column_group id="g1">
+            <computed_column name="amount_high" expression="amount &gt; 20"/>
+            <computed_column name="amount_low" expression="amount &lt; 10"/>
+        </computed_column_group>
+    </computed_column_groups>
+    <sources>
+        <source_csv id="id_aggregation_before_computed_columns_ref" path="csv_path_none" computed_columns_ref="g1"/>
+        <source_csv id="id_aggregation_before_computed_column_group" path="csv_path_none" computed_columns_ref="g1">
+            <computed_column_group>
+                <computed_column name="amount_middle" expression="amount &gt; 10 and amount &lt; 15"/>
+            </computed_column_group>
+        </source_csv>
+        <source_csv id="id_aggregation_before_where_after_compute" where_after_compute="amount_middle = true" path="csv_path_none" computed_columns_ref="g1">
+            <computed_column_group>
+                <computed_column name="amount_middle" expression="amount &gt; 10 and amount &lt; 15"/>
+            </computed_column_group>
+        </source_csv>
+    </sources>
+</dw>

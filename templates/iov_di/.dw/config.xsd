@@ -1,0 +1,25 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://www.rocy-data.com/dw/config">
+    <xs:element name="config">
+        <xs:complexType>
+            <xs:attribute name="result_return_count" type="xs:int"/>
+            <xs:attribute name="port" type="xs:int"/>
+            <xs:attribute name="type" type="dw_type" use="required"/>
+            <xs:attribute name="local" type="xs:boolean"/>
+            <xs:attribute name="vertical" type="xs:boolean"/>
+            <xs:attribute name="date" type="xs:string"/>
+            <xs:attribute name="udf_package" type="xs:string"/>
+            <xs:attribute name="plugin_package" type="xs:string"/>
+            <xs:attribute name="config_package" type="xs:string"/>
+            <xs:attribute name="zookeeper_server" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="dw_type">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="dw"/>
+            <xs:enumeration value="di"/>
+            <xs:enumeration value="iov_dw"/>
+            <xs:enumeration value="iov_di"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

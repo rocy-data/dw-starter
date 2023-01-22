@@ -1,0 +1,12 @@
+<dw dw_level="tmp" dw_subject="subject1"
+    dw_market="market1" owner="whq"
+    xsi:schemaLocation="https://www.rocy-data.com/iov_dw/v1.0.0  ../.dw/iov_dw.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://www.rocy-data.com/iov_dw/v1.0.0">
+    <sources>
+        <source_parquet dw_level="tmp" path="charge_stat_first" description="首次充电行程统计表" is_cache="false"
+                        id="charge_stat_first_source" sort_columns="false" owner="whq" range_date="none"
+                        is_rollup="false"/>
+        <source_iov_can_signals id="id_source_iov_can_signals"/>
+    </sources>
+</dw>

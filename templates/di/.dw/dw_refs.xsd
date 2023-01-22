@@ -1,0 +1,1872 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="https://www.rocy-data.com/dw/refs"
+           elementFormDefault="qualified">
+    <xs:simpleType name="estimator_id">
+        <xs:restriction base="xs:string">
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="pipeline_id">
+        <xs:restriction base="xs:string">
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="di_pipeline_id">
+        <xs:restriction base="xs:string">
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="evaluator_id">
+        <xs:restriction base="xs:string">
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="classifier_id">
+        <xs:restriction base="xs:string">
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="computed_column_group_id">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="admin">
+                <xs:annotation>
+                    <xs:documentation>None</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="poi">
+                <xs:annotation>
+                    <xs:documentation>None</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_stat_first_join">
+                <xs:annotation>
+                    <xs:documentation>None</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="tsp_log_data_columns">
+                <xs:annotation>
+                    <xs:documentation>None</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="brake_pedal_stat">
+                <xs:annotation>
+                    <xs:documentation>None</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="stat_first">
+                <xs:annotation>
+                    <xs:documentation>None</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_stat">
+                <xs:annotation>
+                    <xs:documentation>None</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="common_stat">
+                <xs:annotation>
+                    <xs:documentation>None</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_discharge">
+                <xs:annotation>
+                    <xs:documentation>None</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="dim_veh_dictionary_sql">
+                <xs:annotation>
+                    <xs:documentation>None</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="weather">
+                <xs:annotation>
+                    <xs:documentation>None</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="stat_first_join">
+                <xs:annotation>
+                    <xs:documentation>None</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_stat">
+                <xs:annotation>
+                    <xs:documentation>None</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <xs:simpleType name="valid_path">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="dws_day">
+                <xs:annotation>
+                    <xs:documentation>day</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="index_description">
+                <xs:annotation>
+                    <xs:documentation>index_description</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="data_parser_source">
+                <xs:annotation>
+                    <xs:documentation>/Users/whq/data/FlumeData_a101_tu.1647252004653</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="data_dictionary">
+                <xs:annotation>
+                    <xs:documentation>data_dictionary</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="yearly_trip_stat">
+                <xs:annotation>
+                    <xs:documentation>trip_stat</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_full_trip">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/charge_full_trip</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="quarterly_discharge_stat">
+                <xs:annotation>
+                    <xs:documentation>discharge_stat</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="CM-008-thermal-runaway_score">
+                <xs:annotation>
+                    <xs:documentation>CM-008-thermal-runaway</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="off_hour_stats">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/off_hour_stats</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="quarterly_trip_stat">
+                <xs:annotation>
+                    <xs:documentation>trip_stat</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="yearly_discharge_stat">
+                <xs:annotation>
+                    <xs:documentation>discharge_stat</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="model_CM-001-work_directory">
+                <xs:annotation>
+                    <xs:documentation>/Users/whq/data/tmp_whq/python_di/venv/Scripts</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="test_source">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/data/test.csv</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="monthly_trip_stat">
+                <xs:annotation>
+                    <xs:documentation>trip_stat</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="table_field">
+                <xs:annotation>
+                    <xs:documentation>table_field</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="table_descriptor">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/metadata/table_descriptor</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="states_range">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/states_range</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="model_CM-017-charging-grading_model">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/model_017_charging</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="exception_diagnostic_statistics">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/exception_diagnostic_statistics
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="day_indexes_all">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/day_indexes_all</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="yearly_charge_stat">
+                <xs:annotation>
+                    <xs:documentation>charge_stat</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="dws_group">
+                <xs:annotation>
+                    <xs:documentation>group</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="data_governance_source_json_array">
+                <xs:annotation>
+                    <xs:documentation>/Users/whq/Library/Application
+                        Support/JetBrains/IdeaIC2021.3/scratches/data_governance.txt
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="dws_year">
+                <xs:annotation>
+                    <xs:documentation>year</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="abs_and_proportion_indexes_sink">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/abs_and_proportion_indexes_sink
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="CM-008-thermal-runaway_data">
+                <xs:annotation>
+                    <xs:documentation>/Users/whq/Library/Application
+                        Support/JetBrains/IdeaIC2021.3/scratches/CM-008-thermal-runaway_data
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="model_CM-001-predict_file">
+                <xs:annotation>
+                    <xs:documentation>/Users/whq/data/tmp_whq/python_di/data/model/PowerConsume/cm-001.predict
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="trip">
+                <xs:annotation>
+                    <xs:documentation>trip</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="half_year_charge_stat">
+                <xs:annotation>
+                    <xs:documentation>charge_stat</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="gb_exception_day">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/gb_exception_day</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="rx_iov_index">
+                <xs:annotation>
+                    <xs:documentation>/Users/whq/data/rx_iov_index</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_trip">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/charge_trip</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="model_CM-017-security-grading_predict">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/model_017_predict_security</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="poi_path">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/poi/poi.csv</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="index_blood">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/metadata/index_blood</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="table_index">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/metadata/table_index</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="model_CM-001-pwrconsum-grading">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/model_001</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_stat_first">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/charge_stat_first</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="model_CM-017-behavior-grading_predict">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/model_017_predict_behavior</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="car_day_fact_data">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/car_day_fact</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_gps_stat">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/charge_gps_stat</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_gps_stat">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/discharge_gps_stat</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys">
+                <xs:annotation>
+                    <xs:documentation>sys</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="model_CM-017-charging-grading_predict">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/model_017_predict_charging</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="standardized">
+                <xs:annotation>
+                    <xs:documentation>standardized</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="table_cyclic_type">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/metadata/table_cyclic_type</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="dws">
+                <xs:annotation>
+                    <xs:documentation>dws</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="ods">
+                <xs:annotation>
+                    <xs:documentation>ods</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="model_CM-001-input_file">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/model_001_input</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="constants">
+                <xs:annotation>
+                    <xs:documentation>${RX_DATA_DW_HOME}/dw/metadata/constants</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="storage_blood">
+                <xs:annotation>
+                    <xs:documentation>${RX_DATA_DW_HOME}/dw/metadata/storage_blood</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="dws_quarter">
+                <xs:annotation>
+                    <xs:documentation>quarter</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="model_CM-001-main_file">
+                <xs:annotation>
+                    <xs:documentation>/Users/whq/data/tmp_whq/python_di/main.py</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_trip">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/discharge_trip</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_trip_detail">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/discharge_trip_detail</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="CM-008-thermal-runaway_model">
+                <xs:annotation>
+                    <xs:documentation>CM-008-thermal-runaway</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="table_index_dimensions">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/metadata/table_index_dimensions</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="normalized">
+                <xs:annotation>
+                    <xs:documentation>normalized</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="mon_acc_data">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/mon_acc_data</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="table_index_domain_detail">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/metadata/table_index_domain_detail
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="model_CM-017-behavior-grading_model">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/model_017_behavior</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="dws_month">
+                <xs:annotation>
+                    <xs:documentation>month</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="dwd">
+                <xs:annotation>
+                    <xs:documentation>dwd</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_stat">
+                <xs:annotation>
+                    <xs:documentation>charge_stat</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="s2_admin_lvl10">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/s2_admin_lvl10</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="model_CM-017-energy_consume-grading_predict">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/model_017_predict_energy_consume
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="vehicle_group_portrait">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/vehicle_group_portrait</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="monthly_charge_stat">
+                <xs:annotation>
+                    <xs:documentation>charge_stat</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_stat_model">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/discharge_stat_model</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="monthly_discharge_stat">
+                <xs:annotation>
+                    <xs:documentation>discharge_stat</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="index_dimension">
+                <xs:annotation>
+                    <xs:documentation>index_dimension</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="vehicle_work_condition_month">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/vehicle_work_condition_month
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="veh_soh_statistics">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/veh_soh_statistics</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="scores">
+                <xs:annotation>
+                    <xs:documentation>scores</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="trip_stat">
+                <xs:annotation>
+                    <xs:documentation>stat</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="index_blood_deep">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/metadata/index_blood_deep</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="app">
+                <xs:annotation>
+                    <xs:documentation>app</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="models">
+                <xs:annotation>
+                    <xs:documentation>models</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="trip_exception_sink">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/trip_exception_sink</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="table_cycle">
+                <xs:annotation>
+                    <xs:documentation>table_cycle</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="table_blood">
+                <xs:annotation>
+                    <xs:documentation>table_blood</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_stat_first">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/discharge_stat_first</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="location_vin_count">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/location_vin_count</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_trip_detail">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/charge_trip_detail</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="index_detail_to_outer">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/metadata/index_detail_to_outer</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="weather">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/weather</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="CM-012-application-recgnis">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/CM-012-application-recgnis</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="car_mon_fact_data">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/car_mon_fact_data</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="car_month_running_stat">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/car_month_running_stat</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="tsp_raw_data">
+                <xs:annotation>
+                    <xs:documentation>/Users/whq/data/dw_offline</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="location_stat">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/location_stat</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="half_year_trip_stat">
+                <xs:annotation>
+                    <xs:documentation>trip_stat</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="tsp_first_last">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/tsp_first_last</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="storage_level">
+                <xs:annotation>
+                    <xs:documentation>${RX_DATA_DW_HOME}/dw/metadata/storage_level</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="model_CM-017-energy_consume-grading_model_month">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/model_017_energy_consume_month
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="project_base">
+                <xs:annotation>
+                    <xs:documentation>/Users/whq/code/gitee/iov_dm_di/iov-bigdata-dw</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_full_stat">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/charge_full_stat</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="model_CM-017-energy_consume-grading_model">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/model_017_energy_consume</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="acc_total_index_vinCount">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/acc_total_index_vinCount</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="dim_veh_dictionary_path">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/dim_veh_dictionary_path</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="model_CM-001-model_output">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/model_CM-001-model_output</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="quarterly_charge_stat">
+                <xs:annotation>
+                    <xs:documentation>charge_stat</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_pile_geo_data">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/charge_pile_geo_data</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="month_group">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/month_group</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="trip_split">
+                <xs:annotation>
+                    <xs:documentation>split</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="half_year_discharge_stat">
+                <xs:annotation>
+                    <xs:documentation>discharge_stat</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="model_CM-017-security-grading_model">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/model_017_security</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="dws_half_year">
+                <xs:annotation>
+                    <xs:documentation>half_year</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="data_governance_source_csv_quality">
+                <xs:annotation>
+                    <xs:documentation>
+                        /Users/whq/code/gitee/parent-data/parent-iov-bigdata/iov-bigdata-di/src/main/resources/quality_check.txt
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_stat">
+                <xs:annotation>
+                    <xs:documentation>discharge_stat</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="dws_week">
+                <xs:annotation>
+                    <xs:documentation>week</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="batch_exception_sub_indexes_sink">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/batch_exception_sub_indexes_sink
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_stat_model">
+                <xs:annotation>
+                    <xs:documentation>src/main/resources/index_system/data/charge_stat_model</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="weekly_trip_stat">
+                <xs:annotation>
+                    <xs:documentation>trip_stat</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <xs:simpleType name="source_id">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="states_range_year">
+                <xs:annotation>
+                    <xs:documentation>行程划分结果,前1年</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="data_parser_source">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="car_mon_fact_data_s">
+                <xs:annotation>
+                    <xs:documentation>单车统计宽表</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="tsp_raw_data_day_command2_5">
+                <xs:annotation>
+                    <xs:documentation>原始TSP数据1天</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="tsp_raw_data_day2_command2_5">
+                <xs:annotation>
+                    <xs:documentation>原始TSP数据1天</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_full_trip_half_year">
+                <xs:annotation>
+                    <xs:documentation>满充行程统计,前半年</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_blood_deep">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="tsp_first_last_source">
+                <xs:annotation>
+                    <xs:documentation>车辆最早最新数据表</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_stat_s">
+                <xs:annotation>
+                    <xs:documentation>放电行程统计表,当月</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_stat_first_source">
+                <xs:annotation>
+                    <xs:documentation>首次放电行程统计表</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="dim_veh_dictionary">
+                <xs:annotation>
+                    <xs:documentation>车辆维度表,取自主机厂同步来的数据</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="pipeline_source_test">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="test_source">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="dim_admin">
+                <xs:annotation>
+                    <xs:documentation>地域维度表,包含大区和GOOGLE S2区块</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_stat_year">
+                <xs:annotation>
+                    <xs:documentation>放电行程统计表,前1年</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="weekly_trip_stat_source">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="states_range">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="dim_poi">
+                <xs:annotation>
+                    <xs:documentation>POI维度表,当前还不具备POI数据,需要爬虫</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="yearly_quarterly_trip_stat_source">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_stat_half_year">
+                <xs:annotation>
+                    <xs:documentation>放电行程统计表,前1年</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_trip_raw">
+                <xs:annotation>
+                    <xs:documentation>放电行程划分表</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_trip_raw_month">
+                <xs:annotation>
+                    <xs:documentation>放电行程划分表,前30天</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="car_mon_fact_data_current">
+                <xs:annotation>
+                    <xs:documentation>单车统计宽表，当月</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_table_field">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="location_stat_source">
+                <xs:annotation>
+                    <xs:documentation>车辆家和公司位置表</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="tsp_raw_data_month">
+                <xs:annotation>
+                    <xs:documentation>原始TSP数据，前30天</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_storage_level">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="data_governance_source_json_array">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="CM-008-thermal-runaway_data">
+                <xs:annotation>
+                    <xs:documentation>新能源汽车电池的热失控风险评估-指标数据</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_storage_blood">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_stat_first_source">
+                <xs:annotation>
+                    <xs:documentation>首次充电行程统计表</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="gb_exception_day">
+                <xs:annotation>
+                    <xs:documentation>故障异常表,当日</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_trip_raw">
+                <xs:annotation>
+                    <xs:documentation>充电行程划分表</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="tsp_raw_data_days2">
+                <xs:annotation>
+                    <xs:documentation>原始TSP数据，前2天</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="tsp_normalized_data_day2">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_description">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_blood">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="car_day_fact_data_s">
+                <xs:annotation>
+                    <xs:documentation>车辆月级统计,当月</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="dim_weather_tmp">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="data_governance_source">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="gb_exception_day_half_year">
+                <xs:annotation>
+                    <xs:documentation>故障异常表,前半年</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_stat_half_year">
+                <xs:annotation>
+                    <xs:documentation>充电行程统计表,前半年</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_dimension">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="tsp_normalized_data_day_last3">
+                <xs:annotation>
+                    <xs:documentation>原始数据标准化表</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="gb_exception_day_s">
+                <xs:annotation>
+                    <xs:documentation>故障异常表,当月</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_table_blood">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_table_cycle">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_stat_source">
+                <xs:annotation>
+                    <xs:documentation>充电行程统计表,当月</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="monthly_trip_stat_source">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="states_range_sources_month">
+                <xs:annotation>
+                    <xs:documentation>行程划分结果，当月</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="halfyearly_quarterly_trip_stat_source">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_full_stat_s">
+                <xs:annotation>
+                    <xs:documentation>满充行程统计,当月</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_constants">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="dim_exception">
+                <xs:annotation>
+                    <xs:documentation>故障维度表,包含国标故障及其他故障</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="data_governance_source_csv_quality">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="quarterly_monthly_trip_stat_source">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <xs:simpleType name="common_computed_column_name">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="off_hour">
+                <xs:annotation>
+                    <xs:documentation>静止时长,常用维度</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="series">
+                <xs:annotation>
+                    <xs:documentation>系列,汽车系列</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="city">
+                <xs:annotation>
+                    <xs:documentation>市,行政区划-市,比如长春</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="area">
+                <xs:annotation>
+                    <xs:documentation>区,行政区划-区,比如绿园</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="model">
+                <xs:annotation>
+                    <xs:documentation>型号,汽车型号</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="gz_name">
+                <xs:annotation>
+                    <xs:documentation>故障名称,常用维度</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="acc_trip_year">
+                <xs:annotation>
+                    <xs:documentation>行驶时长(年),行驶时长(年)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="trip_begin_time">
+                <xs:annotation>
+                    <xs:documentation>行程开始时间,常用维度</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="is_night">
+                <xs:annotation>
+                    <xs:documentation>是否晚上时段,常用维度</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="car_usage">
+                <xs:annotation>
+                    <xs:documentation>车辆用途,常用维度</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="supplier">
+                <xs:annotation>
+                    <xs:documentation>供应商,常用维度</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="season">
+                <xs:annotation>
+                    <xs:documentation>季节,常用维度</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="brand">
+                <xs:annotation>
+                    <xs:documentation>品牌,汽车品牌</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="big_area">
+                <xs:annotation>
+                    <xs:documentation>大区,比如华北地区</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="batch">
+                <xs:annotation>
+                    <xs:documentation>批次,常用维度</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="acc_trip_odo_amount">
+                <xs:annotation>
+                    <xs:documentation>行驶里程数(万公里),常用维度</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="lon_lat">
+                <xs:annotation>
+                    <xs:documentation>100米方块,常用维度</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="vin">
+                <xs:annotation>
+                    <xs:documentation>车辆ID,17位VIN码</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="province">
+                <xs:annotation>
+                    <xs:documentation>省,行政区划-省,比如吉林</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="category">
+                <xs:annotation>
+                    <xs:documentation>天气类别,常用维度</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="controller">
+                <xs:annotation>
+                    <xs:documentation>控制器,常用维度</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="weather">
+                <xs:annotation>
+                    <xs:documentation>天气,常用维度</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="car_age_days">
+                <xs:annotation>
+                    <xs:documentation>车龄(天),常用维度</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="s2_17">
+                <xs:annotation>
+                    <xs:documentation>100米方块,常用维度</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="is_quick">
+                <xs:annotation>
+                    <xs:documentation>是否快慢充,常用维度</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="trip_end_time">
+                <xs:annotation>
+                    <xs:documentation>行程结束时间,常用维度</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="level">
+                <xs:annotation>
+                    <xs:documentation>故障等级,常用维度</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="tsp_got_time">
+                <xs:annotation>
+                    <xs:documentation>打点时间,常用维度</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <xs:simpleType name="transform_id">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="monthly_trip_stat_trans">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="exception_check">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="states_range_year">
+                <xs:annotation>
+                    <xs:documentation>行程划分结果,前1年</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="tsp_normalized_data_month">
+                <xs:annotation>
+                    <xs:documentation>原始数据标准化表,前30天</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="data_parser_source">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="states_range_merge_v3_schema">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="transform_trip_split">
+                <xs:annotation>
+                    <xs:documentation>行程划分，车辆状态和充电状态发生改变，两天</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="car_mon_fact_data_s">
+                <xs:annotation>
+                    <xs:documentation>单车统计宽表</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="tsp_raw_data_day_command2_5">
+                <xs:annotation>
+                    <xs:documentation>原始TSP数据1天</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="yearly_trip_stat">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_full_trip">
+                <xs:annotation>
+                    <xs:documentation>行程划分，充电状态=充满</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_stat_first_quick_source">
+                <xs:annotation>
+                    <xs:documentation>首次充电行程统计表，快充</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="tsp_raw_data_day2_command2_5">
+                <xs:annotation>
+                    <xs:documentation>原始TSP数据1天</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="quarterly_discharge_stat">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_full_trip_half_year">
+                <xs:annotation>
+                    <xs:documentation>满充行程统计,前半年</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_blood_deep">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="quarterly_trip_stat">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="tsp_first_last_source">
+                <xs:annotation>
+                    <xs:documentation>车辆最早最新数据表</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_stat_s">
+                <xs:annotation>
+                    <xs:documentation>放电行程统计表,当月</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="yearly_discharge_stat">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_stat_first_join">
+                <xs:annotation>
+                    <xs:documentation>单车当月放电行程统计JOIN首次放电行程统计表</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_stat_first_source">
+                <xs:annotation>
+                    <xs:documentation>首次放电行程统计表</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="dim_veh_dictionary">
+                <xs:annotation>
+                    <xs:documentation>车辆维度表,取自主机厂同步来的数据</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="pipeline_source_test">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="test_source">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="dim_admin">
+                <xs:annotation>
+                    <xs:documentation>地域维度表,包含大区和GOOGLE S2区块</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_stat_year">
+                <xs:annotation>
+                    <xs:documentation>放电行程统计表,前1年</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="monthly_trip_stat">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="weekly_trip_stat_source">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="states_range">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="dim_poi">
+                <xs:annotation>
+                    <xs:documentation>POI维度表,当前还不具备POI数据,需要爬虫</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="yearly_quarterly_trip_stat_source">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_stat_half_year">
+                <xs:annotation>
+                    <xs:documentation>放电行程统计表,前1年</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_trip_raw">
+                <xs:annotation>
+                    <xs:documentation>放电行程划分表</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_trip_raw_month">
+                <xs:annotation>
+                    <xs:documentation>放电行程划分表,前30天</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="car_mon_fact_data_current">
+                <xs:annotation>
+                    <xs:documentation>单车统计宽表，当月</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_table_field">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="location_stat_source">
+                <xs:annotation>
+                    <xs:documentation>车辆家和公司位置表</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="tsp_raw_data_month">
+                <xs:annotation>
+                    <xs:documentation>原始TSP数据，前30天</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_storage_level">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="yearly_charge_stat">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="data_governance_source_json_array">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="CM-008-thermal-runaway_data">
+                <xs:annotation>
+                    <xs:documentation>新能源汽车电池的热失控风险评估-指标数据</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_storage_blood">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_stat_first_source">
+                <xs:annotation>
+                    <xs:documentation>首次充电行程统计表</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="half_year_charge_stat">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="gb_exception_day">
+                <xs:annotation>
+                    <xs:documentation>故障异常表,当日</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_trip">
+                <xs:annotation>
+                    <xs:documentation>充电行程划分</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_trip_detail_month">
+                <xs:annotation>
+                    <xs:documentation>放电行程的tbox详细数据，前30天</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_trip_raw">
+                <xs:annotation>
+                    <xs:documentation>充电行程划分表</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="tsp_raw_data_days2">
+                <xs:annotation>
+                    <xs:documentation>原始TSP数据，前2天</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="tsp_normalized_data_day2">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_description">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_stat_first">
+                <xs:annotation>
+                    <xs:documentation>充电行程统计表,当月,维度：vin,is_quick</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_gps_stat">
+                <xs:annotation>
+                    <xs:documentation>充电行程GPS详细数据</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_gps_stat">
+                <xs:annotation>
+                    <xs:documentation>放电行程GPS详细数据</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="yearly_quarterly_trip_stat_trans">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="first_charge_stat">
+                <xs:annotation>
+                    <xs:documentation>首次充电统计</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_blood">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="StandardizeCheckTransform">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="pipeline">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_trip">
+                <xs:annotation>
+                    <xs:documentation>放电行程划分</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_trip_detail">
+                <xs:annotation>
+                    <xs:documentation>放电行程的tbox详细数据</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="tsp_normalized_data_day">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="car_day_fact_data_s">
+                <xs:annotation>
+                    <xs:documentation>车辆月级统计,当月</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="dim_weather_tmp">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="schema_tsp_raw_data_day">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="data_governance_source">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_stat">
+                <xs:annotation>
+                    <xs:documentation>充电行程统计</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="gb_exception_day_half_year">
+                <xs:annotation>
+                    <xs:documentation>故障异常表,前半年</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="monthly_charge_stat">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="monthly_discharge_stat">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="quarterly_trip_stat_trans">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_stat_half_year">
+                <xs:annotation>
+                    <xs:documentation>充电行程统计表,前半年</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_dimension">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="trip_stat">
+                <xs:annotation>
+                    <xs:documentation>行程划分统计</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="add_state">
+                <xs:annotation>
+                    <xs:documentation>行程划分，车辆状态和充电状态发生改变，两天</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="tsp_normalized_data_day_last3">
+                <xs:annotation>
+                    <xs:documentation>原始数据标准化表</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="gb_exception_day_s">
+                <xs:annotation>
+                    <xs:documentation>故障异常表,当月</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_table_blood">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_table_cycle">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_stat_first">
+                <xs:annotation>
+                    <xs:documentation>基于当月放电行程统计，单车快慢充</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="data_governance_source_trans">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_trip_detail">
+                <xs:annotation>
+                    <xs:documentation>充电行程的tbox详细数据</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_stat_source">
+                <xs:annotation>
+                    <xs:documentation>充电行程统计表,当月</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="monthly_trip_stat_source">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="tsp_state_detail">
+                <xs:annotation>
+                    <xs:documentation>tbox详细数据，包含行程划分结果</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_stat_s">
+                <xs:annotation>
+                    <xs:documentation>充电行程统计表,当月</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="half_year_trip_stat">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="weekly_trip_stat_trans">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_full_stat">
+                <xs:annotation>
+                    <xs:documentation>满充行程统计</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="states_range_sources_month">
+                <xs:annotation>
+                    <xs:documentation>行程划分结果，当月</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="halfyearly_quarterly_trip_stat_source">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_full_trip_detail">
+                <xs:annotation>
+                    <xs:documentation>满充行程的tbox详细数据</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_full_stat_s">
+                <xs:annotation>
+                    <xs:documentation>满充行程统计,当月</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_stat_first_join">
+                <xs:annotation>
+                    <xs:documentation>单车当月充电行程统计表JOIN首次充电行程统计表</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="quarterly_charge_stat">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_constants">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="dim_exception">
+                <xs:annotation>
+                    <xs:documentation>故障维度表,包含国标故障及其他故障</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="half_year_discharge_stat">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="data_governance_source_csv_quality">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_stat">
+                <xs:annotation>
+                    <xs:documentation>放电行程统计</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="halfyearly_trip_stat_trans">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="quarterly_monthly_trip_stat_source">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="weekly_trip_stat">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <xs:simpleType name="sink_id">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="charge_stat_sink">
+                <xs:annotation>
+                    <xs:documentation>充电行程统计</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_stat_show">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="add_state_show">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_full_stat_sink">
+                <xs:annotation>
+                    <xs:documentation>满充行程统计</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_stat_sink">
+                <xs:annotation>
+                    <xs:documentation>放电行程统计</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_stat_model_sink">
+                <xs:annotation>
+                    <xs:documentation>充电行程统计</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_stat_model_sink">
+                <xs:annotation>
+                    <xs:documentation>放电行程统计</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_stat_show">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="transform_trip_split_show">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_gps_stat_sink">
+                <xs:annotation>
+                    <xs:documentation>充电行程GPS详细数据</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_trip_show">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_full_trip_sink">
+                <xs:annotation>
+                    <xs:documentation>行程划分，充电状态=充满</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="halfyearly_trip_stat_trans_show">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="monthly_trip_stat_source_show">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="states_range_merge_v3_show">
+                <xs:annotation>
+                    <xs:documentation>行程划分结果，V2算法</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_table_field_sink">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="test_yearly_discharge_stat">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_constants_sink">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="exception_check_show">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="test_yearly_charge_stat">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_gps_stat_sink">
+                <xs:annotation>
+                    <xs:documentation>放电行程GPS详细数据</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="tsp_normalized_data_day_test">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_table_cycle_sink">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="quarterly_trip_stat_trans_show">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_table_blood_sink">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="pipeline_show">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="trip_stat_show">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_description_sink">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_stat_first_sink">
+                <xs:annotation>
+                    <xs:documentation>放电行程统计</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_dimension_sink">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_blood_sink">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_blood_deep_sink">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="yearly_monthly_trip_stat_source_show">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_storage_level_sink">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="weekly_trip_stat_source_show">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_trip_sink">
+                <xs:annotation>
+                    <xs:documentation>充电行程划分</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_storage_blood_sink">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="tsp_raw_data_day_command2_5_show">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="trip_stats_test">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="discharge_trip_sink">
+                <xs:annotation>
+                    <xs:documentation>放电行程划分</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_trip_show">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="data_parser_source_show">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="charge_stat_first_sink">
+                <xs:annotation>
+                    <xs:documentation>首次充电行程统计表</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="tsp_normalized_data_day_show">
+                <xs:annotation>
+                    <xs:documentation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,37 @@
+<dw xmlns="https://www.rocy-data.com/dw/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://www.rocy-data.com/dw/v1.0.0 ../../.dw/dw.xsd" dw_market="market1" dw_subject="subject1"
+    owner="whq" dw_level="ods"
+>
+    <transforms>
+        <transform_quality id="id_transform_quality_field_check" transform_ref="id_source_csv">
+            <quality_types>
+                <field_check/>
+            </quality_types>
+        </transform_quality>
+        <transform_quality id="id_transform_quality_data_check" transform_ref="id_source_csv">
+            <quality_types>
+                <data_check/>
+            </quality_types>
+        </transform_quality>
+        <transform_quality id="id_transform_quality_cross_check" transform_ref="id_source_csv">
+            <quality_types>
+                <cross_check>
+                    <cross_tabs target_field="amount" agg_fun="sum">
+                        <cross_tab field_name="product_id"/>
+                        <cross_tab field_name="seller_id"/>
+                    </cross_tabs>
+                </cross_check>
+            </quality_types>
+        </transform_quality>
+        <transform_quality id="id_transform_quality_cross_check_separator" transform_ref="id_source_csv">
+            <quality_types>
+                <cross_check>
+                    <cross_tabs target_field="amount" agg_fun="sum">
+                        <cross_tab field_name="product_id" separator="2"/>
+                        <cross_tab field_name="seller_id" separator="3"/>
+                    </cross_tabs>
+                </cross_check>
+            </quality_types>
+        </transform_quality>
+    </transforms>
+</dw>

@@ -1,0 +1,110 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="https://www.rocy-data.com/iov_dw/v1.0.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://www.rocy-data.com/dw/v1.0.0 ./dw.xsd"
+           xmlns:dw="https://www.rocy-data.com/dw/v1.0.0"
+           elementFormDefault="qualified">
+    <xs:element name="compose" type="dw:compose"/>
+    <xs:element name="dw">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="dw:dw">
+                    <xs:all>
+                        <xs:element name="sources" minOccurs="0">
+                            <xs:complexType>
+                                <xs:complexContent>
+                                    <xs:extension base="dw:sources">
+                                        <xs:sequence>
+                                            <xs:choice maxOccurs="unbounded" minOccurs="0">
+                                                <xs:element name="source_iov_can_signals" type="dw:action"/>
+                                            </xs:choice>
+                                        </xs:sequence>
+                                    </xs:extension>
+                                </xs:complexContent>
+                            </xs:complexType>
+                        </xs:element>
+
+                        <xs:element name="transforms" minOccurs="0">
+                            <xs:complexType>
+                                <xs:complexContent>
+                                    <xs:extension base="dw:transforms">
+                                        <xs:sequence>
+                                            <xs:choice maxOccurs="unbounded">
+                                                <xs:element name="transform_iov_exception_pattern_extract" type="transform_iov_exception_pattern_extract_type"/>
+                                                <xs:element name="transform_iov_standardize_name" type="transform_iov_standardize_name_type"/>
+                                                <xs:element name="transform_iov_standardize_check" type="transform_iov_standardize_check_type"/>
+                                            </xs:choice>
+                                        </xs:sequence>
+                                    </xs:extension>
+                                </xs:complexContent>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:all>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="transform_iov_standardize_check_type">
+        <xs:complexContent>
+            <xs:extension base="dw:transform_one_ref">
+                <xs:attribute name="mode">
+                    <xs:simpleType>
+                        <xs:list itemType="standardize_check_type"/>
+                    </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="stat_type">
+                    <xs:simpleType>
+                        <xs:list itemType="standardize_stat_type"/>
+                    </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="field_pattern"/>
+                <xs:attribute name="sample_radio" type="dw:percent"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="transform_iov_exception_pattern_extract_type">
+        <xs:complexContent>
+            <xs:extension base="dw:transform_one_ref">
+                <xs:attribute name="min_support" type="xs:double"/>
+                <xs:attribute name="min_confidence" type="xs:double"/>
+                <xs:attribute name="partition_col" type="xs:Name" use="required"/>
+                <xs:attribute name="time_col" type="xs:Name" use="required"/>
+                <xs:attribute name="alarms_cols" type="dw:field_list" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="transform_iov_standardize_name_type">
+        <xs:complexContent>
+            <xs:extension base="dw:transform_one_ref">
+                <xs:attribute name="mode">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="recommend"/>
+                            <xs:enumeration value="standardize"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:simpleType name="standardize_check_type">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="number"/>
+            <xs:enumeration value="array"/>
+            <xs:enumeration value="enumeration"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="standardize_stat_type">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="min"/>
+            <xs:enumeration value="max"/>
+            <xs:enumeration value="mean"/>
+            <xs:enumeration value="avg"/>
+            <xs:enumeration value="stddev"/>
+            <xs:enumeration value="skewness"/>
+            <xs:enumeration value="kurtosis"/>
+            <xs:enumeration value="countDistinct"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="dw_pipeline" type="dw:dw_pipeline"/>
+</xs:schema>

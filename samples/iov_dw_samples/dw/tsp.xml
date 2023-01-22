@@ -1,0 +1,26 @@
+<dw dw_level="tmp" dw_subject="subject1"
+    dw_market="market1" owner="whq"
+    xsi:schemaLocation="https://www.rocy-data.com/iov_dw/v1.0.0  ../.dw/iov_dw.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://www.rocy-data.com/iov_dw/v1.0.0">
+    <computed_column_groups>
+        <computed_column_group description="None" id="tsp_log_data_columns" category="electric">
+            <computed_column chinese_name="数据时间差" category="electric" expression="tsp_got_time-(lag(tsp_got_time,1) over (partition by vin order by tsp_got_time))" description="前后两条数据的时间间隔,单位毫秒" name="tsp_got_time_span"/>
+            <computed_column chinese_name="数据时间差" category="electric" expression="(lead(tsp_got_time,1,null) over (partition by vin order by tsp_got_time)) - tsp_got_time" description="前后两条数据的时间间隔,单位毫秒" name="tsp_got_time_span_lead"/>
+            <computed_column chinese_name="加速度" category="lbs" expression="(veh_spd - (lag(veh_spd,1,null) over (partition by vin order by tsp_got_time)))*1000/3600/tsp_got_time_span" description="加速度" name="acceleration_speed"/>
+            <computed_column chinese_name="急加速" category="lbs" expression="acceleration_speed &gt; 2.0" description="急加速" name="rapidly_speed_accelerate"/>
+            <computed_column chinese_name="急减速" category="lbs" expression="acceleration_speed &lt; -2.0" description="急减速" name="rapidly_speed_decelerate"/>
+            <computed_column chinese_name="油门使用时长" category="controller" expression="case when accelerator_pedal_position is not null and accelerator_pedal_position!=0 then tsp_got_time_span else 0 end " description="油门使用时长" name="accelerator_pedal_duration"/>
+            <computed_column chinese_name="刹车使用时长" category="controller" expression="case when brake_pedal_position is not null and brake_pedal_position!=0 then tsp_got_time_span else 0 end" description="刹车使用时长" name="brake_pedal_duration"/>
+            <computed_column chinese_name="单体平均电压" category="electric" expression="array_stat_component(voltage_list,'avg')" description="单体平均电压" name="avg_su"/>
+            <computed_column chinese_name="车辆总电流_平均" category="electric" expression="(veh_curr + lag(veh_curr,1,null) over (partition by vin order by tsp_got_time))/2" description="前后两条数据的总电流均值" name="avg_veh_curr"/>
+            <computed_column chinese_name="车辆总电压_平均" category="electric" expression="(veh_volt + lag(veh_volt,1,null) over (partition by vin order by tsp_got_time))/2" description="前后两条数据的总电压均值" name="avg_veh_volt"/>
+            <computed_column chinese_name="电量-安时" category="electric" expression="avg_veh_curr*tsp_got_time_span/${hour_milli}" description="前后两条数据的充电量" name="charge_ah"/>
+            <computed_column chinese_name="功率-瓦" category="electric" expression="avg_veh_volt*avg_veh_curr" description="前后两条数据的充电量" name="charge_w"/>
+            <computed_column chinese_name="电量-瓦时" category="electric" expression="charge_w*tsp_got_time_span/${hour_milli}/1000" description="前后两条数据的充电量" name="charge_kwh"/>
+            <computed_column chinese_name="探针平均温度" category="electric" expression="array_stat_component(temp_list,'avg')" description="所有探针的平均温度" name="avg_temp"/>
+            <computed_column chinese_name="探针最大温差" category="extreme" expression="jz_high_temperature-jz_low_temperature" description="探针最大温差" name="jz_temperature_range"/>
+            <computed_column chinese_name="单体最大压差" category="extreme" expression="jz_high_voltage_su-jz_low_voltage_su" description="单体最大压差" name="jz_voltage_range"/>
+        </computed_column_group>
+    </computed_column_groups>
+</dw>

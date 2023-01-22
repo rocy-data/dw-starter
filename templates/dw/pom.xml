@@ -1,0 +1,54 @@
+<compose active_profile="test"
+         xsi:schemaLocation="https://www.rocy-data.com/dw/v1.0.0  .dw/dw.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="https://www.rocy-data.com/dw/v1.0.0">
+    <path_list>
+        <profile name="test">
+            <path pattern="none" path="dw/data/hello_world" name="hello_world" parent="PROJECT_PATH"/>
+        </profile>
+    </path_list>
+    <constants>
+        <constant value="3600*1000" name="hour_milli"/>
+    </constants>
+    <modules>
+        <module path="dw/scheduler/schedule.xml"/>
+        <module path="dw/bloods/bloods.xml"/>
+        <module path="dw/variable.xml"/>
+        <module path="dw/constant.xml"/>
+
+        <module path="dw/transform/multi_operations.xml"/>
+        <module path="dw/transform/transform_data_governance.xml"/>
+        <module path="dw/transform/transform_dimension.xml"/>
+        <module path="dw/transform/transform_dimension_merge.xml"/>
+        <module path="dw/transform/transform_flat_json.xml"/>
+        <module path="dw/transform/transform_pipeline_reference.xml"/>
+        <module path="dw/transform/transform_quality.xml"/>
+        <module path="dw/transform/transform_schema.xml"/>
+        <module path="dw/transform/transform_split.xml"/>
+        <module path="dw/transform/transform_summary.xml"/>
+
+        <module path="dw/plugin/sink.xml"/>
+        <module path="dw/plugin/transform.xml"/>
+        <module path="dw/plugin/source.xml"/>
+
+        <module path="dw/range_date/range_date_ref.xml"/>
+        <module path="dw/range_date/range_date_none.xml"/>
+        <module path="dw/range_date/range_date_refs.xml"/>
+
+        <module path="dw/sql/aggregation_after/aggregation_after.xml"/>
+        <module path="dw/sql/aggregation/aggregation.xml"/>
+        <module path="dw/sql/aggregation_before/computed_columns.xml"/>
+        <module path="dw/sql/aggregation_before/aggregation_before.xml"/>
+
+        <module path="dw/sources.xml"/>
+
+        <module path="dw/path/paths.xml"/>
+        <module path="dw/path/path_pattern.xml"/>
+
+        <module path="dw/hello_world.xml"/>
+        <module path=".dw/system.xml"/>
+    </modules>
+    <pipelines>
+        <pipeline path="dw/transform/transform_pipeline_definition.xml"/>
+    </pipelines>
+
+</compose>

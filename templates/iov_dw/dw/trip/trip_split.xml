@@ -1,0 +1,86 @@
+<dw dw_level="tmp" dw_subject="subject1"
+    dw_market="market1" owner="whq"
+    xsi:schemaLocation="https://www.rocy-data.com/iov_dw/v1.0.0  ../../.dw/iov_dw.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://www.rocy-data.com/iov_dw/v1.0.0">
+    <computed_column_groups>
+        <computed_column_group description="None" id="charge_discharge" category="trip">
+            <computed_column category="trip"
+                             expression="cast((split_range.split_end-split_range.split_begin)/${second_milli} as long)"
+                             description="None" name="trip_seconds"/>
+            <computed_column chinese_name="行程开始时间" category="trip" expression="split_range.split_begin"
+                             description="常用维度" name="trip_begin_time"/>
+            <computed_column chinese_name="行程结束时间" category="trip" expression="split_range.split_end" description="常用维度"
+                             name="trip_end_time"/>
+            <computed_column category="trip" expression="round3(split_data_range.split_begin.veh_soc)"
+                             description="None" name="trip_begin_soc"/>
+            <computed_column category="trip" expression="round3(split_data_range.split_end.veh_soc)" description="None"
+                             name="trip_end_soc"/>
+            <computed_column category="trip" expression="split_data_range.split_begin.jz_high_temperature"
+                             description="None" name="trip_begin_temperature"/>
+            <computed_column category="trip" expression="split_data_range.split_end.jz_high_temperature"
+                             description="None" name="trip_end_temperature"/>
+            <computed_column category="trip" expression="split_data_range.split_begin.jz_low_voltage_su"
+                             description="None" name="trip_begin_low_voltage_su"/>
+            <computed_column category="trip" expression="split_data_range.split_end.jz_low_voltage_su"
+                             description="None" name="trip_end_low_voltage_su"/>
+            <computed_column category="trip" expression="split_data_range.split_begin.jz_high_voltage_su"
+                             description="None" name="trip_begin_high_voltage_su"/>
+            <computed_column category="trip" expression="split_data_range.split_end.jz_high_voltage_su"
+                             description="None" name="trip_end_high_voltage_su"/>
+            <computed_column category="trip" expression="split_data_range.split_begin.voltage_list" description="None"
+                             name="trip_begin_voltage_list"/>
+            <computed_column category="trip" expression="split_data_range.split_end.voltage_list" description="None"
+                             name="trip_end_voltage_list"/>
+            <computed_column category="trip" expression="split_data_range.split_begin.temp_list" description="None"
+                             name="trip_begin_temp_list"/>
+            <computed_column category="trip" expression="split_data_range.split_end.temp_list" description="None"
+                             name="trip_end_temp_list"/>
+            <computed_column category="trip" expression="split_data_range.split_begin.loc_lon84" description="None"
+                             name="trip_begin_loc_lon84"/>
+            <computed_column category="trip" expression="split_data_range.split_end.loc_lon84" description="None"
+                             name="trip_end_loc_lon84"/>
+            <computed_column category="trip" expression="split_data_range.split_begin.loc_lat84" description="None"
+                             name="trip_begin_loc_lat84"/>
+            <computed_column category="trip" expression="split_data_range.split_end.loc_lat84" description="None"
+                             name="trip_end_loc_lat84"/>
+            <computed_column category="trip" expression="split_data_range.split_begin.veh_state" description="None"
+                             name="veh_state"/>
+            <computed_column category="trip" expression="split_data_range.split_begin.battery_state_remain_mileage"
+                             description="None" name="trip_begin_battery_state_remain_mileage"/>
+            <computed_column category="trip" expression="split_data_range.split_end.battery_state_remain_mileage"
+                             description="None" name="trip_end_battery_state_remain_mileage"/>
+            <computed_column chinese_name="充电开始时段" category="trip" expression="ts2hour(trip_begin_time)"
+                             description="None" name="trip_begin_hour"/>
+            <computed_column chinese_name="充电开始时段" category="trip" expression="ts2hour(trip_end_time)"
+                             description="None" name="trip_end_hour"/>
+            <computed_column chinese_name="SOC变化量" category="trip" expression="round3(trip_end_soc-trip_begin_soc)"
+                             description="None" name="trip_soc_amount"/>
+            <computed_column chinese_name="每小时充(放)电量" category="trip" expression="trip_soc_amount/(trip_seconds/3600)"
+                             description="None" name="trip_charge_soc_speed"/>
+            <computed_column chinese_name="充(放)满电所需时长" category="trip" expression="100/trip_charge_soc_speed"
+                             description="None" name="trip_charge_full_hours"/>
+        </computed_column_group>
+    </computed_column_groups>
+    <transforms>
+        <transform_split
+                dw_level="tmp" path="trip_split" description="行程划分，车辆状态和充电状态发生改变，两天"
+                data_fields="battery_state_remain_mileage,jz_high_temperature,jz_high_voltage_su,jz_low_voltage_su,loc_lat84,loc_lon84,temp_list,veh_charge_state,veh_odo,veh_soc,veh_state,voltage_list"
+                is_cache="false" id="transform_trip_split" sort_columns="false"
+                transform_ref="add_state"
+                id_field="tsp_got_time" state_field="state" where="yyyyMMdd(split_range.split_end) = yyyyMMdd(@@DW_TS)"
+                owner="whq" partition_field="vin" range_date="none" is_rollup="false"/>
+        <transform_transform dw_level="tmp" description="行程划分，车辆状态和充电状态发生改变，两天" is_cache="false" id="add_state"
+                             sort_columns="false" transform_ref="tsp_normalized_data_day2" owner="whq" range_date="none" output_range_date="day_one"
+                             is_rollup="false">
+            <computed_column_group>
+                <computed_column name="running"
+                                 expression="(driver_motor_rotate_speed &gt; 0 and veh_spd is null) or veh_spd &gt; 0"/>
+                <computed_column
+                        name="state" description="两个状态的组合"
+                        expression=" case when tsp_got_time_span &gt; ${missing_milli_threshold} then 'missing' when veh_state = 'veh_state_on' and @{running} then 'discharge' when veh_charge_state = 'charging_full' and !@{running} then 'charging_full' when veh_charge_state = 'charge_fault' and !@{running} then 'charge_fault' when veh_charge_state = 'not_charge' and !@{running} then 'rest' when veh_charge_state = 'not_charge' and veh_state = 'veh_state_off' then 'rest' when veh_charge_state = 'ready_stoped' and veh_state = 'veh_state_off' then 'rest' when veh_charge_state = 'charging' and veh_spd = 0 then 'charging' else CONCAT_WS('&amp;',veh_state,veh_charge_state) end"
+                        chinese_name="车辆状态和充电状态"/>
+            </computed_column_group>
+        </transform_transform>
+    </transforms>
+</dw>

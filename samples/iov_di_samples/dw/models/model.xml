@@ -1,0 +1,89 @@
+<dw
+        xsi:schemaLocation="https://www.rocy-data.com/iov_di/v1.0.0  ../../.dw/iov_di.xsd"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="https://www.rocy-data.com/iov_di/v1.0.0" owner="whq"
+        dw_subject="subject1" dw_market="market1" dw_level="dws">
+    <sources>
+        <source_iov_can_signals
+                is_rollup="false" range_date="none" owner="whq" sort_columns="false" id="source_iov_can_signals"
+                is_cache="false" dw_level="dws">
+        </source_iov_can_signals>
+        <source_parquet
+                is_rollup="false" range_date="none" owner="whq" sort_columns="false" id="id_raw_data_source"
+                is_cache="false" path="tsp_raw_data" dw_level="dws">
+        </source_parquet>
+        <source_json id="id_source_iov_source_iov_alarm_package_diff" path="iov_alarm_package_diff"/>
+        <source_json id="id_source_iov_exception_pattern_extract" path="iov_exception_pattern_extract"/>
+        <source_json id="id_source_iov_iov_exception_capacity_cyclic" path="iov_exception_capacity_cyclic"/>
+
+        <source_json id="id_source_iov_exception_capacity_usage_time" path="iov_exception_capacity_usage_time"/>
+        <source_json id="id_source_iov_exception_charge_temperature" path="iov_exception_charge_temperature"/>
+        <source_json id="id_source_iov_exception_charge_voltage_current" path="iov_exception_charge_voltage_current"/>
+        <source_json id="id_source_iov_exception_temperature_difference" path="iov_exception_temperature_difference"/>
+        <source_json id="id_source_iov_exception_voltage_difference" path="iov_exception_voltage_difference"/>
+        <source_json id="id_source_iov_health_down_predict" path="iov_health_down_predict">
+            <computed_column_group>
+                <computed_column name="date_ts" expression="yyyyMMdd2long(date)"/>
+            </computed_column_group>
+        </source_json>
+        <source_json id="id_source_iov_health_factor_analysis" path="iov_health_factor_analysis"/>
+
+    </sources>
+    <transforms>
+        <transform_iov_exception_pattern_extract id="id_transform_iov_exception_pattern_extract"
+                                                 transform_ref="id_source_iov_exception_pattern_extract"
+                                                 alarms_cols="alarm_common_brk,alarm_common_dcdc_st,alarm_common_dcdc_temp,alarm_common_driver_motor_temp,alarm_common_esd_charge_over"
+                                                 partition_col="vin"
+                                                 time_col="time"/>
+
+        <transform_ml_iov_alarm_package_diff
+                temperatures_col="db_probe_temperature_list" is_rollup="false" range_date="none" owner="whq"
+                transform_ref="id_source_iov_source_iov_alarm_package_diff"
+                sort_columns="false" voltages_col="dbe_su_voltage_list"
+                data_id_by_group="vin" id="id_transform_ml_iov_alarm_package_diff2" is_cache="false"
+                tsp_got_time_col="tsp_got_time" dw_level="dws">
+        </transform_ml_iov_alarm_package_diff>
+        <transform_ml_iov_exception_capacity_cyclic id="id_transform_iov_exception_capacity_cyclic_group"
+                                                    transform_ref="id_source_iov_iov_exception_capacity_cyclic"
+                                                    acc_cyclic_times_col="acc_cyclic_times" recognize_by_group="model"
+                                                    capacity_attenuation_name_col="capacity_attenuation"/>
+
+        <transform_ml_iov_exception_capacity_usage_time id="id_transform_iov_exception_capacity_usage_time"
+                                                        transform_ref="id_source_iov_exception_capacity_usage_time"
+                                                        acc_usage_time_col="acc_usage_time"
+                                                        capacity_attenuation_name_col="capacity_attenuation"/>
+        <transform_ml_iov_exception_charge_temperature id="id_transform_iov_exception_charge_temperature"
+                                                       transform_ref="id_source_iov_exception_charge_temperature"
+                                                       charge_temperature_up_hour_col="charge_temperature_up_hour"
+                                                       charge_avg_current_hour_col="charge_avg_current_hour"/>
+        <transform_ml_iov_exception_charge_voltage_current id="id_transform_iov_exception_charge_voltage_current"
+                                                           transform_ref="id_source_iov_exception_charge_voltage_current"
+                                                           current_col="current"
+                                                           single_max_voltage_col="single_max_voltage"/>
+        <transform_ml_iov_exception_temperature_difference id="id_transform_iov_exception_temperature_difference"
+                                                           transform_ref="id_source_iov_exception_temperature_difference"
+                                                           trip_avg_temperature_range_col="trip_avg_temperature_range"
+                                                           trip_five_percent_temperature_range_col="trip_five_percent_temperature_range"/>
+
+        <transform_ml_iov_exception_voltage_difference id="id_transform_exception_voltage_difference"
+                                                       transform_ref="id_source_iov_exception_voltage_difference"
+                                                       trip_avg_voltage_range_col="trip_avg_voltage_range"
+                                                       trip_five_percent_voltage_range_col="trip_five_percent_voltage_range"/>
+        <transform_ml_iov_health_down_predict id="id_transform_iov_health_down_predict"
+                                              transform_ref="id_source_iov_health_down_predict" date_col="date_ts"
+                                              health_col="health" health_to="20">
+            <computed_column_group>
+                <computed_column name="predict" expression="long2yyyyMMdd(predict_date)"/>
+            </computed_column_group>
+        </transform_ml_iov_health_down_predict>
+        <transform_ml_iov_health_factor_analysis
+                transform_ref="id_source_iov_health_factor_analysis"
+                id="id_transform_iov_health_factor_analysis"
+                health_col="health"
+                med_charge_duration_col="med_charge_duration"
+                med_charge_start_soc_col="med_charge_start_soc"
+                med_charge_end_soc_col="med_charge_end_soc"
+                sum_charge_soc_times_col="sum_charge_soc_times"
+                med_charge_soc_col="med_charge_soc"/>
+    </transforms>
+</dw>

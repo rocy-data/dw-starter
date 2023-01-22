@@ -1,0 +1,58 @@
+<dw xmlns="https://www.rocy-data.com/dw/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://www.rocy-data.com/dw/v1.0.0 ../../../.dw/dw.xsd" dw_market="market1" dw_subject="subject1"
+    owner="whq" dw_level="ods"
+>
+    <sources>
+        <source_csv id="id_aggregation_after_having" path="csv_path_none"
+                    group_by="product_id" having="total &lt; 10">
+            <measures>
+                <computed_column name="total" expression="sum(amount)"/>
+            </measures>
+        </source_csv>
+        <source_csv id="id_aggregation_after_selects_select_fields" path="csv_path_none"
+                    group_by="product_id">
+            <measures>
+                <computed_column name="total" expression="sum(amount)"/>
+            </measures>
+            <selects>
+                <select select_fields="product_id,total"/>
+            </selects>
+        </source_csv>
+        <source_csv id="id_aggregation_after_selects_select_pattern" path="csv_path_none"
+                    group_by="product_id">
+            <measures>
+                <computed_column name="total" expression="sum(amount)"/>
+            </measures>
+            <selects>
+                <select select_pattern="^tot.*$"/>
+            </selects>
+        </source_csv>
+        <source_csv id="id_aggregation_after_selects_drop_pattern" path="csv_path_none"
+                    group_by="product_id">
+            <measures>
+                <computed_column name="total" expression="sum(amount)"/>
+            </measures>
+            <selects>
+                <select drop_pattern="^tot.*$"/>
+            </selects>
+        </source_csv>
+        <source_csv id="id_aggregation_after_drop" path="csv_path_none" drop="product_id"
+                    group_by="product_id">
+            <measures>
+                <computed_column name="total" expression="sum(amount)"/>
+            </measures>
+        </source_csv>
+        <source_csv id="id_aggregation_after_sort_columns" path="csv_path_none"
+                    group_by="product_id" sort_columns="false">
+            <measures>
+                <computed_column name="total" expression="sum(amount)"/>
+            </measures>
+        </source_csv>
+        <source_csv id="id_aggregation_after_order_by" path="csv_path_none"
+                    group_by="product_id" order_by="total desc">
+            <measures>
+                <computed_column name="total" expression="sum(amount)"/>
+            </measures>
+        </source_csv>
+    </sources>
+</dw>

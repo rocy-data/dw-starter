@@ -1,0 +1,21 @@
+<dw xmlns="https://www.rocy-data.com/di/v1.0.0"
+    xsi:schemaLocation="https://www.rocy-data.com/di/v1.0.0 ../../.dw/di.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" dw_level="tmp" dw_market="market1" dw_subject="subject1"
+    owner="rocy">
+    <sources>
+        <source_sequence_constants id="id_pipeline_training">
+            <sequence_constant column_name="id" column_values="0,1,2,3"/>
+            <sequence_constant column_name="text" column_values="a b c d e spark,b d,spark f g h,adoop mapreduce"/>
+            <sequence_constant column_name="label" column_values="1,0,1,0"/>
+            <computed_column_group>
+                <computed_column name="label" expression="cast(label as double)"/>
+            </computed_column_group>
+        </source_sequence_constants>
+    </sources>
+    <transforms>
+        <transform_ml_pipeline id="id_use_pipeline" transform_ref="id_pipeline_training" pipeline_id="tokenizer"/>
+    </transforms>
+    <sinks>
+        <sink_show id="test" transform_ref="id_use_pipeline"/>
+    </sinks>
+</dw>

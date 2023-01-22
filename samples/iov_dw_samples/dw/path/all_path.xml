@@ -1,0 +1,24 @@
+<dw dw_level="tmp" dw_subject="subject1"
+    dw_market="market1" owner="whq"
+    xsi:schemaLocation="https://www.rocy-data.com/iov_dw/v1.0.0  ../../.dw/iov_dw.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://www.rocy-data.com/iov_dw/v1.0.0">
+    <path_list>
+        <profile name="test">
+            <path pattern="none" path="dw/data" name="data" parent="PROJECT_PATH"/>
+            <path pattern="none" path="dw/data/sink_join_fill" name="sink_join_fill" parent="PROJECT_PATH"/>
+
+            <path pattern="none" path="dwd" name="dwd" parent="data"/>
+            <path pattern="none" path="trip" name="trip" parent="dwd"/>
+            <path pattern="none" path="dws" name="dws" parent="data"/>
+
+            <path pattern="day" path="normalized" name="normalized" parent="dwd"/>
+            <path pattern="day" path="standardized" name="standardized" parent="dwd"/>
+
+            <path pattern="day" path="split" name="trip_split" parent="trip"/>
+            <path pattern="day" path="charge_stat" name="charge_stat" parent="dws"/>
+            <path pattern="none" path="charge_stat_first" name="charge_stat_first" parent="dws"/>
+
+        </profile>
+    </path_list>
+</dw>

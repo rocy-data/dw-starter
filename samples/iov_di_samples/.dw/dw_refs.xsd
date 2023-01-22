@@ -1,0 +1,290 @@
+<xs:schema 
+elementFormDefault="qualified" targetNamespace="https://www.rocy-data.com/dw/refs" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:simpleType name="pipeline_id">
+        <xs:restriction base="xs:string"> </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="estimator_id">
+        <xs:restriction base="xs:string"> </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="di_pipeline_id">
+        <xs:restriction base="xs:string"> </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="evaluator_id">
+        <xs:restriction base="xs:string"> </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="computed_column_group_id">
+        <xs:restriction base="xs:string"> </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="valid_path">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="iov_health_down_predict">
+                <xs:annotation>
+                    <xs:documentation> dw/data/iov_exception_discover/iov_health_down_predict.jsonl </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="iov_alarm_package_diff">
+                <xs:annotation>
+                    <xs:documentation> dw/data/iov_exception_discover/iov_alarm_package_diff.jsonl </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="iov_exception_capacity_usage_time">
+                <xs:annotation>
+                    <xs:documentation> dw/data/iov_exception_discover/iov_exception_capacity_usage_time.jsonl </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="iov_exception_pattern_extract">
+                <xs:annotation>
+                    <xs:documentation> dw/data/iov_exception_discover/iov_exception_pattern_extract.jsonl </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="iov_exception_charge_voltage_current">
+                <xs:annotation>
+                    <xs:documentation> dw/data/iov_exception_discover/iov_exception_charge_voltage_current.jsonl </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="iov_exception_capacity_cyclic">
+                <xs:annotation>
+                    <xs:documentation> dw/data/iov_exception_discover/iov_exception_capacity_cyclic.jsonl </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="iov_exception_charge_temperature">
+                <xs:annotation>
+                    <xs:documentation> dw/data/iov_exception_discover/iov_exception_charge_temperature.jsonl </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="iov_health_factor_analysis">
+                <xs:annotation>
+                    <xs:documentation> dw/data/iov_exception_discover/iov_health_factor_analysis.jsonl </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="iov_exception_voltage_difference">
+                <xs:annotation>
+                    <xs:documentation> dw/data/iov_exception_discover/iov_exception_voltage_difference.jsonl </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="name_hello_world_path">
+                <xs:annotation>
+                    <xs:documentation> dw/data/hello_world </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="tsp_raw_data">
+                <xs:annotation>
+                    <xs:documentation> dw/data/ods </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="iov_exception_temperature_difference">
+                <xs:annotation>
+                    <xs:documentation> dw/data/iov_exception_discover/iov_exception_temperature_difference.jsonl </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="source_id">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="id_source_iov_exception_charge_temperature">
+                <xs:annotation>
+                    <xs:documentation> source_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="source_iov_can_signals">
+                <xs:annotation>
+                    <xs:documentation> source_iov_can_signals </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_raw_data_source">
+                <xs:annotation>
+                    <xs:documentation> source_parquet </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_iov_exception_capacity_usage_time">
+                <xs:annotation>
+                    <xs:documentation> source_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_iov_source_iov_alarm_package_diff">
+                <xs:annotation>
+                    <xs:documentation> source_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_iov_iov_exception_capacity_cyclic">
+                <xs:annotation>
+                    <xs:documentation> source_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_iov_exception_voltage_difference">
+                <xs:annotation>
+                    <xs:documentation> source_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_iov_health_factor_analysis">
+                <xs:annotation>
+                    <xs:documentation> source_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_iov_exception_pattern_extract">
+                <xs:annotation>
+                    <xs:documentation> source_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_whole_text_files_source">
+                <xs:annotation>
+                    <xs:documentation> source_whole_text_files </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_iov_health_down_predict">
+                <xs:annotation>
+                    <xs:documentation> source_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_iov_exception_temperature_difference">
+                <xs:annotation>
+                    <xs:documentation> source_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_iov_exception_charge_voltage_current">
+                <xs:annotation>
+                    <xs:documentation> source_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="common_computed_column_name">
+        <xs:restriction base="xs:string"> </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="transform_id">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="id_transform_iov_exception_charge_temperature">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_iov_exception_charge_temperature </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_iov_exception_charge_temperature">
+                <xs:annotation>
+                    <xs:documentation> source_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_iov_exception_temperature_difference">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_iov_exception_temperature_difference </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_iov_exception_charge_voltage_current">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_iov_exception_charge_voltage_current </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_iov_exception_capacity_usage_time">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_iov_exception_capacity_usage_time </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="source_iov_can_signals">
+                <xs:annotation>
+                    <xs:documentation> source_iov_can_signals </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_iov_health_down_predict">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_iov_health_down_predict </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_raw_data_source">
+                <xs:annotation>
+                    <xs:documentation> source_parquet </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_word_count_stat_transform">
+                <xs:annotation>
+                    <xs:documentation> transform_transform </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_ml_iov_alarm_package_diff2">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_iov_alarm_package_diff </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_iov_exception_capacity_usage_time">
+                <xs:annotation>
+                    <xs:documentation> source_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_iov_source_iov_alarm_package_diff">
+                <xs:annotation>
+                    <xs:documentation> source_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_exception_voltage_difference">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_iov_exception_voltage_difference </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_iov_iov_exception_capacity_cyclic">
+                <xs:annotation>
+                    <xs:documentation> source_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_iov_exception_capacity_cyclic_group">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_iov_exception_capacity_cyclic </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_iov_exception_voltage_difference">
+                <xs:annotation>
+                    <xs:documentation> source_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_iov_health_factor_analysis">
+                <xs:annotation>
+                    <xs:documentation> source_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_iov_exception_pattern_extract">
+                <xs:annotation>
+                    <xs:documentation> transform_iov_exception_pattern_extract </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_iov_exception_pattern_extract">
+                <xs:annotation>
+                    <xs:documentation> source_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_whole_text_files_source">
+                <xs:annotation>
+                    <xs:documentation> source_whole_text_files </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_iov_health_down_predict">
+                <xs:annotation>
+                    <xs:documentation> source_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_iov_exception_temperature_difference">
+                <xs:annotation>
+                    <xs:documentation> source_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_iov_exception_charge_voltage_current">
+                <xs:annotation>
+                    <xs:documentation> source_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_iov_health_factor_analysis">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_iov_health_factor_analysis </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="classifier_id">
+        <xs:restriction base="xs:string"> </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="sink_id">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="id_word_count_stat_sink">
+                <xs:annotation>
+                    <xs:documentation> sink_show </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,33 @@
+<dw_pipeline xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://www.rocy-data.com/dw/v1.0.0 ../../.dw/dw.xsd"
+             xmlns="https://www.rocy-data.com/dw/v1.0.0" dw_market="market1" dw_subject="subject1" owner="rocy" dw_level="tmp">
+    <transforms>
+        <!--first pipeline id = id_pipeline_where,because it is first transform, and it contains 3 transforms-->
+        <transform_transform id="id_pipeline_where" where="amount &gt; 5 and amount &lt; 80"/>
+        <transform_transform id="id_pipeline_distinct_by" distinct_by="product_id,seller_id"/>
+        <transform_transform id="id_pipeline_standardize">
+            <name_standardize_list>
+                <name_standardize name="product_id" standardized_name="product_number"/>
+                <name_standardize name="seller_id" standardized_name="seller_number"/>
+            </name_standardize_list>
+            <value_standardize_list>
+                <value_standardize name="amount" expression="0-100_0-1"/>
+            </value_standardize_list>
+            <boolean_convert_list>
+                <boolean_convert true_values="yes" names_regex="on_"/>
+            </boolean_convert_list>
+        </transform_transform>
+        <!--this is second pipeline,its id = id_pipeline_agg,because its is_begin=true,and it contains 2 transforms-->
+        <transform_transform id="id_pipeline_add_computed_columns" computed_columns_ref="g2" is_begin="true">
+            <computed_column_group>
+                <computed_column name="amount_middle" expression="amount &gt; 0.3 and amount &lt; 0.6"/>
+            </computed_column_group>
+        </transform_transform>
+        <transform_transform id="ig_pipeline_group" group_by="product_number">
+            <measures>
+                <computed_column name="total" expression="sum(amount)"/>
+                <computed_column name="amount_middle_count" expression="sum(if(amount_middle,1,0))"/>
+            </measures>
+        </transform_transform>
+    </transforms>
+</dw_pipeline>

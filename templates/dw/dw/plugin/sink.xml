@@ -1,0 +1,11 @@
+<dw xmlns="https://www.rocy-data.com/dw/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://www.rocy-data.com/dw/v1.0.0 ../../.dw/dw.xsd" dw_market="market1" dw_subject="subject1"
+    owner="whq" dw_level="ods"
+>
+    <sinks>
+        <sink_plugin id="id_sink_plugin" transform_ref="id_source_csv" full_class_name="com.rocy.data.plugin.sink.MyFirstSinkPlugin">
+            <parameter key="key1" value="value1"/>
+            <parameter key="key2" value="value2"/>
+        </sink_plugin>
+    </sinks>
+</dw>

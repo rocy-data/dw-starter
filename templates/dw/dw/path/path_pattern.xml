@@ -1,0 +1,14 @@
+<dw xmlns="https://www.rocy-data.com/dw/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://www.rocy-data.com/dw/v1.0.0 ../../.dw/dw.xsd" dw_market="market1" dw_subject="subject1"
+    owner="whq" dw_level="ods"
+>
+    <sources>
+        <source_csv id="id_source_csv_path_none" path="csv_path_none"/>
+        <source_csv id="id_source_csv_path_day" path="csv_path_day" range_date="day_one"/>
+        <source_csv id="id_source_csv_path_week" path="csv_path_day" range_date="this_week"/>
+        <source_csv id="id_source_csv_path_month" path="csv_path_day" range_date="this_month"/>
+        <source_csv id="id_source_csv_path_quarter" path="csv_path_day" range_date="this_quarter"/>
+        <source_csv id="id_source_csv_path_half_year" path="csv_path_day" range_date="this_half_year"/>
+        <source_csv id="id_source_csv_path_year" path="csv_path_day" range_date="this_year"/>
+    </sources>
+</dw>

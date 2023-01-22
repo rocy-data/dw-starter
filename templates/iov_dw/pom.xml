@@ -1,0 +1,28 @@
+<compose active_profile="test"
+         xsi:schemaLocation="https://www.rocy-data.com/iov_dw/v1.0.0  ./.dw/iov_dw.xsd"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="https://www.rocy-data.com/iov_dw/v1.0.0">
+    <!--
+
+
+			charge_stat_first_join
+    -->
+    <modules>
+        <module path="dw/hello_world.xml"/>
+        <module path=".dw/system.xml"/>
+        <module path="dw/path/tsp_path.xml"/>
+        <module path="dw/path/all_path.xml"/>
+        <module path="dw/all_constant.xml"/>
+        <module path="dw/tsp.xml"/>
+        <module path="dw/sources.xml"/>
+        <module path="dw/name_standardize.xml"/>
+        <module path="dw/data_governance.xml"/>
+        <module path="dw/trip/charging.xml"/>
+        <module path="dw/trip/charging_full.xml"/>
+        <module path="dw/trip/discharging.xml"/>
+        <module path="dw/trip/trip_split.xml"/>
+        <module path="dw/trip_stat.xml"/>
+        <module path="dw/first/charge_first.xml"/>
+        <module path="dw/first/transform_join_fill.xml"/>
+    </modules>
+</compose>

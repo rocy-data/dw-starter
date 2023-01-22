@@ -1,0 +1,6 @@
+<xs:schema 
+elementFormDefault="qualified" targetNamespace="https://www.rocy-data.com/dw/market" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:simpleType name="market">
+        <xs:restriction base="xs:string"> </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

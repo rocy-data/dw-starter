@@ -1,0 +1,14 @@
+<dw dw_level="tmp" dw_subject="subject1"
+    dw_market="market1" owner="whq"
+    xsi:schemaLocation="https://www.rocy-data.com/iov_dw/v1.0.0  ../.dw/iov_dw.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://www.rocy-data.com/iov_dw/v1.0.0">
+    <transforms>
+        <transform_transform is_rollup="false" range_date="none" owner="whq" transform_ref="charge_trip_detail"
+                             id="charge_gps_stat" description="充电行程GPS详细数据" dw_level="tmp">
+            <selects>
+                <select select_fields="vin,trip_begin_time,trip_end_time,tsp_got_time,loc_lon84,loc_lat84"/>
+            </selects>
+        </transform_transform>
+    </transforms>
+</dw>

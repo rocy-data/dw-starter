@@ -1,0 +1,31 @@
+<dw xmlns="https://www.rocy-data.com/dw/v1.0.0"
+     xsi:schemaLocation="https://www.rocy-data.com/dw/v1.0.0  ../.dw/dw.xsd"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     dw_market="market1" dw_subject="subject1" owner="whq" dw_level="dws">
+    <path_list>
+        <profile name="test">
+            <path name="name_hello_world_path" path="dw/data/hello_world" pattern="none" parent="PROJECT_PATH"/>
+        </profile>
+    </path_list>
+    <sources>
+        <source_whole_text_files id="id_whole_text_files_source" path="name_hello_world_path"/>
+    </sources>
+    <transforms>
+        <transform_transform id="id_word_count_stat_transform" transform_ref="id_whole_text_files_source" group_by="word">
+            <computed_column_group>
+                <computed_column name="file_content_splits" expression="split(file_content,'[,\r\n ]+')"/>
+                <computed_column name="word" expression="explode(file_content_splits)"/>
+            </computed_column_group>
+            <measures>
+                <computed_column name="file_count" expression="size(collect_set(file_name))"/>
+                <computed_column name="word_count" expression="count(distinct word)"/>
+            </measures>
+            <selects>
+                <select select_fields="word,word_count,file_count"/>
+            </selects>
+        </transform_transform>
+    </transforms>
+    <sinks>
+        <sink_show id="id_word_count_stat_sink" transform_ref="id_word_count_stat_transform"/>
+    </sinks>
+</dw>

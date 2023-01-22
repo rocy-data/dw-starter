@@ -1,0 +1,59 @@
+<dw xmlns="https://www.rocy-data.com/dw/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://www.rocy-data.com/dw/v1.0.0 ../../.dw/dw.xsd" dw_market="market1" dw_subject="subject1"
+    owner="whq" dw_level="ods"
+>
+    <transforms>
+        <transform_transform id="id_transform_this_week" transform_ref="id_source_csv_path_day"
+                             range_date="this_week" output_range_date="this_week">
+            <measures>
+                <computed_column name="days" expression="count(distinct PARTITIONS)"/>
+                <computed_column name="min_day" expression="min(PARTITIONS)"/>
+                <computed_column name="max_day" expression="max(PARTITIONS)"/>
+            </measures>
+        </transform_transform>
+        <transform_transform id="id_transform_last_week" transform_ref="id_source_csv_path_day"
+                             range_date="last_week">
+            <measures>
+                <computed_column name="days" expression="count(distinct PARTITIONS)"/>
+                <computed_column name="min_day" expression="min(PARTITIONS)"/>
+                <computed_column name="max_day" expression="max(PARTITIONS)"/>
+            </measures>
+        </transform_transform>
+        <transform_transform id="id_transform_this_month" transform_ref="id_source_csv_path_day"
+                              range_date="this_month">
+            <measures>
+                <computed_column name="days" expression="count(distinct PARTITIONS)"/>
+                <computed_column name="min_day" expression="min(PARTITIONS)"/>
+                <computed_column name="max_day" expression="max(PARTITIONS)"/>
+            </measures>
+        </transform_transform>
+        <transform_transform id="id_transform_this_month2week" transform_ref="id_transform_this_week"
+                             range_date="this_month">
+            <measures>
+                <computed_column name="days" expression="sum(days)"/>
+                <computed_column name="min_day" expression="min(min_day)"/>
+                <computed_column name="max_day" expression="max(max_day)"/>
+            </measures>
+        </transform_transform>
+        <transform_transform id="id_transform_last_month" transform_ref="id_source_csv_path_day"
+                             range_date="last_month">
+            <measures>
+                <computed_column name="days" expression="count(distinct PARTITIONS)"/>
+                <computed_column name="min_day" expression="min(PARTITIONS)"/>
+                <computed_column name="max_day" expression="max(PARTITIONS)"/>
+            </measures>
+        </transform_transform>
+        <transform_transform id="id_transform_last_month2week" transform_ref="id_transform_last_week"
+                             range_date="last_month">
+            <measures>
+                <computed_column name="days" expression="sum(days)"/>
+                <computed_column name="min_day" expression="min(min_day)"/>
+                <computed_column name="max_day" expression="max(max_day)"/>
+            </measures>
+        </transform_transform>
+    </transforms>
+    <sinks>
+        <sink_show id="id_sink_range_date_quarter" transform_ref="id_transform_this_month" range_date="this_quarter"/>
+        <sink_show id="id_sink_range_date_sink_quarter" transform_ref="id_transform_this_month" range_date_sink="this_quarter"/>
+    </sinks>
+</dw>

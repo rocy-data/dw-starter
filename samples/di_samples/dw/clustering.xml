@@ -1,0 +1,18 @@
+<dw dw_level="tmp" dw_subject="subject1" dw_market="RX-DATA" owner="whq"
+    xsi:schemaLocation="https://www.rocy-data.com/di/v1.0.0  ../.dw/di.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://www.rocy-data.com/di/v1.0.0">
+    <sources>
+        <source_ml_model_invoke id="lda_model_invoke_describeTopics" path="path_clustering_lda_model"
+                                method_name="describeTopics" method_parameters="3"/>
+        <source_ml_model_invoke id="lda_model_invoke_logLikelihood" path="path_clustering_lda_model" method_name="logLikelihood" method_parameters="source_sample_lda_libsvm_data"/>
+        <source_ml_model_invoke id="lda_model_invoke_logPerplexity" path="path_clustering_lda_model" method_name="logPerplexity" method_parameters="source_sample_lda_libsvm_data"/>
+    </sources>
+    <transforms>
+        <transform_ml_estimator_clustering_k_means id="id_kmeans" transform_ref="source_sample_kmeans_data" k="2" seed="1"/>
+        <transform_ml_estimator_clustering_lda id="id_clustering_lda" transform_ref="source_sample_lda_libsvm_data" k="10" max_iter="10" model_path="path_clustering_lda_model"/>
+    </transforms>
+    <sinks>
+        <sink_ml_evaluator_clustering id="id_evaluator_clustering" transform_ref="id_kmeans"/>
+    </sinks>
+</dw>

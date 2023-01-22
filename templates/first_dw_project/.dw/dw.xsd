@@ -1,0 +1,1242 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<xs:schema
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:index_category="https://www.rocy-data.com/dw/index_category"
+        xmlns:market="https://www.rocy-data.com/dw/market"
+        xmlns:owner="https://www.rocy-data.com/dw/owner"
+        xmlns:standard_index="https://www.rocy-data.com/dw/standard_index"
+        xmlns:standard_fields="https://www.rocy-data.com/dw/standard_fields"
+        xmlns:subject="https://www.rocy-data.com/dw/subject"
+        xmlns:refs="https://www.rocy-data.com/dw/refs"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+        https://www.rocy-data.com/dw/index_category ../dw/schema/index_category.xsd
+        https://www.rocy-data.com/dw/market ../dw/schema/market.xsd
+        https://www.rocy-data.com/dw/owner ../dw/schema/owner.xsd
+        https://www.rocy-data.com/dw/standard_index ../dw/schema/standard_index.xsd
+        https://www.rocy-data.com/dw/standard_fields ./standard_fields.xsd
+        https://www.rocy-data.com/dw/subject ../dw/schema/subject.xsd
+        https://www.rocy-data.com/dw/refs ./dw_refs.xsd"
+        targetNamespace="https://www.rocy-data.com/dw/v1.0.0"
+        elementFormDefault="qualified"
+>
+    <xs:import schemaLocation="../dw/schema/index_category.xsd" namespace="https://www.rocy-data.com/dw/index_category"/>
+    <xs:import schemaLocation="../dw/schema/market.xsd" namespace="https://www.rocy-data.com/dw/market"/>
+    <xs:import schemaLocation="../dw/schema/owner.xsd" namespace="https://www.rocy-data.com/dw/owner"/>
+    <xs:import schemaLocation="../dw/schema/standard_index.xsd" namespace="https://www.rocy-data.com/dw/standard_index"/>
+    <xs:import schemaLocation="./standard_fields.xsd" namespace="https://www.rocy-data.com/dw/standard_fields"/>
+    <xs:import schemaLocation="../dw/schema/subject.xsd" namespace="https://www.rocy-data.com/dw/subject"/>
+    <xs:import schemaLocation="dw_refs.xsd" namespace="https://www.rocy-data.com/dw/refs"/>
+
+    <xs:element name="compose" type="compose"/>
+    <xs:element name="dw" type="dw"/>
+    <xs:element name="dw_pipeline" type="dw_pipeline"/>
+
+    <xs:complexType name="compose">
+        <xs:all>
+            <xs:element type="path_list" name="path_list" minOccurs="0"/>
+            <xs:element type="constants" name="constants" minOccurs="0"/>
+            <xs:element name="modules">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="module" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:attribute name="path" use="required"/>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="pipelines">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="pipeline" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:attribute name="path" use="required"/>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:all>
+        <xs:attribute name="active_profile" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="constants">
+        <xs:sequence>
+            <xs:element name="constant" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:attribute name="name" type="xs:string" use="required"/>
+                    <xs:attribute name="value" type="xs:string" use="required"/>
+                    <xs:attribute name="description" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="path_list">
+        <xs:sequence>
+            <xs:element name="profile" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="path" type="path" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                    <xs:attribute name="name" use="required"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="path">
+        <xs:attribute name="overwrite" type="xs:boolean" default="false"/>
+        <xs:attribute name="name" type="xs:Name" use="required"/>
+        <xs:attribute name="path" type="xs:anyURI" use="required"/>
+        <xs:attribute name="parent">
+            <xs:simpleType>
+                <xs:union memberTypes="refs:valid_path">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="RX_DATA_DW_HOME"/>
+                            <xs:enumeration value="PROJECT_PATH"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:union>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="pattern" use="required">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="none"/>
+                    <xs:enumeration value="day"/>
+                    <xs:enumeration value="week"/>
+                    <xs:enumeration value="month"/>
+                    <xs:enumeration value="quarter"/>
+                    <xs:enumeration value="half_year"/>
+                    <xs:enumeration value="this_year"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="partition_count" type="xs:int" default="10"/>
+        <xs:attribute name="description" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="dw_pipeline">
+        <xs:sequence>
+            <xs:element type="path_list" name="path_list" minOccurs="0"/>
+            <xs:element type="constants" name="constants" minOccurs="0"/>
+            <xs:element type="computed_column_groups" name="computed_column_groups" minOccurs="0"/>
+            <xs:element type="common_computed_columns" name="common_computed_columns" minOccurs="0"/>
+            <xs:element type="columns_group" name="columns_group" minOccurs="0"/>
+            <xs:element type="transforms_pipeline" name="transforms"/>
+        </xs:sequence>
+        <xs:attribute name="dw_market" type="market:market" use="required"/>
+        <xs:attribute name="dw_subject" type="subject:subject" use="required"/>
+        <xs:attribute name="owner" type="owner:owner" use="required"/>
+        <xs:attribute name="dw_level" type="dw_level" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="dw">
+        <xs:annotation>
+            <xs:documentation>
+                <![CDATA[
+                          SQL ORDERS:
+
+                          1-name_standardize_list
+                          2-value_standardize_list
+                          3-boolean_convert_list
+                          4-distinct_by
+                          5-flat_json
+                          6-where
+                          7-computed_columns_ref/computed_column_group <===
+                          8-where_after_compute
+                          9-group_where_list/groups/measures
+                          10-having
+                          11-select
+                          12-drop
+                          13-order_by
+                    ]]>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element type="path_list" name="path_list" minOccurs="0"/>
+            <xs:element type="constants" name="constants" minOccurs="0"/>
+            <xs:element type="computed_column_groups" name="computed_column_groups" minOccurs="0"/>
+            <xs:element type="common_computed_columns" name="common_computed_columns" minOccurs="0"/>
+            <xs:element type="columns_group" name="columns_group" minOccurs="0"/>
+            <xs:element type="sources" name="sources" minOccurs="0"/>
+            <xs:element type="transforms" name="transforms" minOccurs="0"/>
+            <xs:element type="sinks" name="sinks" minOccurs="0"/>
+        </xs:all>
+        <xs:attribute name="dw_market" type="market:market" use="required"/>
+        <xs:attribute name="dw_subject" type="subject:subject" use="required"/>
+        <xs:attribute name="owner" type="owner:owner" use="required"/>
+        <xs:attribute name="dw_level" type="dw_level" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="sources">
+        <xs:sequence>
+            <xs:choice maxOccurs="unbounded" minOccurs="0">
+                <xs:element name="source_dictionary" type="source_dictionary"/>
+                <xs:element name="source_csv" type="source_csv"/>
+                <xs:element name="source_text" type="source_text"/>
+                <xs:element name="source_json" type="source_json"/>
+                <xs:element name="source_parquet" type="source_parquet"/>
+                <xs:element name="source_protocol_bytes" type="source_protocol_bytes"/>
+                <xs:element name="source_sequence_file" type="source_sequence_file"/>
+                <xs:element name="source_sequence_constants" type="source_sequence_constants"/>
+                <xs:element name="source_jdbc" type="source_jdbc"/>
+                <xs:element name="source_plugin" type="source_plugin"/>
+                <xs:element name="source_xml" type="source_xml"/>
+                <xs:element name="source_whole_text_files" type="source_path"/>
+                <xs:element name="source_hbase" type="source_hbase"/>
+                <xs:element name="source_elastic_search" type="source_elastic_search"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="transforms">
+        <xs:sequence>
+            <xs:choice maxOccurs="unbounded" minOccurs="0">
+                <xs:element name="transform_schema" type="transform_one_ref"/>
+                <xs:element name="transform_plugin" type="transform_plugin"/>
+                <xs:element name="transform_transform" type="transform_one_ref"/>
+                <xs:element name="transform_flat_json" type="transform_flat_json"/>
+                <xs:element name="transform_summary" type="transform_one_ref"/>
+                <xs:element name="transform_summary_text" type="transform_one_ref"/>
+                <xs:element name="transform_split" type="transform_split"/>
+                <xs:element name="transform_data_governance" type="transform_data_governance"/>
+                <xs:element name="transform_pipeline">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="transform_one_ref">
+                                <xs:attribute name="pipeline_ref" use="required" type="refs:pipeline_id"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="transform_quality" type="transform_quality"/>
+                <xs:element name="transform_dimension">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="transform_one_ref">
+                                <xs:attribute name="dimensions" type="xs:string"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="transform_join" type="transform_join"/>
+                <xs:element name="transform_dimension_merge" type="transform_dimension_merge"/>
+                <xs:element name="transform_join_dimensions" type="transform_join_dimensions"/>
+                <xs:element name="transform_union" type="transform_union"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="transforms_pipeline">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="transform_schema" type="pipeline_action"/>
+                <xs:element name="transform_plugin">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="transform_plugin">
+                                <xs:attributeGroup ref="pipeline_no_ref"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="transform_transform" type="pipeline_action"/>
+                <xs:element name="transform_flat_json">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="transform_flat_json">
+                                <xs:attributeGroup ref="pipeline_no_ref"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="transform_summary" type="pipeline_action"/>
+                <xs:element name="transform_summary_text" type="pipeline_action"/>
+                <xs:element name="transform_split">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="transform_split">
+                                <xs:attributeGroup ref="pipeline_no_ref"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="transform_data_governance">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="transform_data_governance">
+                                <xs:attributeGroup ref="pipeline_no_ref"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="transform_pipeline">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="pipeline_action">
+                                <xs:attribute name="pipeline_ref" use="required" type="refs:pipeline_id"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="transform_quality">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="transform_quality">
+                                <xs:attributeGroup ref="pipeline_no_ref"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="sinks">
+        <xs:sequence>
+            <xs:choice maxOccurs="unbounded" minOccurs="0">
+                <xs:element name="sink_csv" type="sink_csv"/>
+                <xs:element name="sink_json" type="sink_json"/>
+                <xs:element name="sink_parquet" type="sink_parquet"/>
+                <xs:element name="sink_sequence_file" type="sink_sequence_file"/>
+                <xs:element name="sink_jdbc" type="sink_jdbc"/>
+                <xs:element name="sink_plugin" type="sink_plugin"/>
+                <xs:element name="sink_xml" type="sink_xml"/>
+                <xs:element name="sink_hbase" type="sink_hbase"/>
+                <xs:element name="sink_elastic_search" type="sink_elastic_search"/>
+                <xs:element name="sink_show" type="sink_show"/>
+                <xs:element name="sink_join_fill" type="sink_join_fill"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="action">
+        <xs:all>
+            <xs:element name="measures" minOccurs="0" type="measures"/>
+            <xs:element name="computed_column_group" minOccurs="0" type="computed_column_group"/>
+            <xs:element name="group_where_list" minOccurs="0" type="group_where_list"/>
+            <xs:element name="boolean_convert_list" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="boolean_convert" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:attribute name="names_regex" type="xs:string"/>
+                                <xs:attribute name="full_names" type="xs:string"/>
+                                <xs:attribute name="start_with" type="xs:string"/>
+                                <xs:attribute name="end_with" type="xs:string"/>
+                                <xs:attribute name="true_values" type="xs:string" use="required"/>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="name_standardize_list" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="name_standardize">
+                            <xs:complexType>
+                                <xs:attribute name="name" type="xs:Name" use="required"/>
+                                <xs:attribute name="standardized_name" type="standard_fields:standard_fields"
+                                              use="required"/>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="value_standardize_list" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="value_standardize">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    <![CDATA[
+                                           expression ex: 0-250_-40-210
+                                           it means that convert the value within range [0,250] to
+                                    [40-210]
+                                    ]]>
+                                </xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:attribute name="name" type="xs:string" use="required"/>
+                                <xs:attribute name="expression" type="xs:string" use="required"/>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="schema_definitions" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="field" minOccurs="0">
+                            <xs:complexType>
+                                <xs:attribute name="field_name" type="xs:Name"/>
+                                <xs:attribute name="data_type">
+                                    <xs:simpleType>
+                                        <xs:restriction base="xs:string">
+                                            <xs:enumeration value="STRING"/>
+                                            <xs:enumeration value="BOOLEAN"/>
+                                            <xs:enumeration value="INT"/>
+                                            <xs:enumeration value="FLOAT"/>
+                                            <xs:enumeration value="DOUBLE"/>
+                                            <xs:enumeration value="LONG"/>
+                                        </xs:restriction>
+                                    </xs:simpleType>
+                                </xs:attribute>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                    <xs:attribute name="content" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="selects" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="select">
+                            <xs:complexType>
+                                <xs:attribute name="select_pattern">
+                                    <xs:annotation>
+                                        <xs:documentation>regex pattern to match the field name</xs:documentation>
+                                    </xs:annotation>
+                                    <xs:simpleType>
+                                        <xs:restriction base="xs:string"/>
+                                    </xs:simpleType>
+                                </xs:attribute>
+                                <xs:attribute name="drop_pattern">
+                                    <xs:annotation>
+                                        <xs:documentation>regex pattern to match the field name</xs:documentation>
+                                    </xs:annotation>
+                                    <xs:simpleType>
+                                        <xs:restriction base="xs:string"/>
+                                    </xs:simpleType>
+                                </xs:attribute>
+                                <xs:attribute name="drop_fields">
+                                    <xs:simpleType>
+                                        <xs:restriction base="xs:string"/>
+                                    </xs:simpleType>
+                                </xs:attribute>
+                                <xs:attribute name="select_fields">
+                                    <xs:simpleType>
+                                        <xs:restriction base="xs:string"/>
+                                    </xs:simpleType>
+                                </xs:attribute>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:all>
+        <xs:attribute name="range_date" type="range_date" default="none"/>
+        <xs:attribute name="output_range_date" type="range_date" default="none"/>
+        <xs:attribute name="id" type="xs:Name" use="required"/>
+        <xs:attribute name="description" type="xs:string"/>
+        <xs:attribute name="dw_level" type="dw_level"/>
+        <xs:attribute name="owner" type="owner:owner"/>
+        <xs:attribute name="where" type="xs:string"/>
+        <xs:attribute name="is_cache" type="xs:boolean"/>
+        <xs:attribute name="computed_columns_ref" type="refs:computed_column_group_id"/>
+        <xs:attribute name="where_after_compute" type="xs:string"/>
+        <xs:attribute name="distinct_by" type="field_list"/>
+        <xs:attribute name="order_by">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="(\w+(\s+(asc|desc|ASC|DESC))?,)*\w+(\s+(asc|desc|ASC|DESC))?"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="having" type="xs:string"/>
+        <xs:attribute name="drop" type="xs:string"/>
+        <xs:attribute name="sort_columns" type="xs:boolean"/>
+        <xs:attribute name="is_rollup" type="xs:boolean"/>
+        <xs:attribute name="pivot_column" type="xs:string"/>
+        <xs:attribute name="group_by" type="xs:string"/>
+        <xs:attribute name="measures_ref">
+            <xs:simpleType>
+                <xs:list itemType="refs:computed_column_group_id"/>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="action_path" abstract="true">
+        <xs:complexContent>
+            <xs:extension base="action">
+                <xs:attribute name="path" type="refs:valid_path"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="source_path">
+        <xs:complexContent>
+            <xs:extension base="action">
+                <xs:attribute name="path" type="refs:valid_path" use="required"/>
+                <xs:anyAttribute/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="transform_one_ref" abstract="true">
+        <xs:complexContent>
+            <xs:extension base="action_path">
+                <xs:attribute name="transform_ref" type="transform_source_id" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="transform_multi_refs">
+        <xs:complexContent>
+            <xs:extension base="action_path">
+                <xs:sequence>
+                    <xs:element name="transform_refs">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="transform_ref" type="transform_ref" maxOccurs="unbounded"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="sink" abstract="true">
+        <xs:complexContent>
+            <xs:extension base="action">
+                <xs:all>
+                    <xs:element name="parents" minOccurs="0">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="sink_ref">
+                                    <xs:complexType>
+                                        <xs:attribute name="id" type="refs:sink_id" use="required"/>
+                                    </xs:complexType>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:all>
+                <xs:attribute name="range_date_sink" type="range_date" default="day_one"/>
+                <xs:attribute name="parent" type="refs:sink_id"/>
+                <xs:attribute name="sink_t_add" type="xs:int"/>
+                <xs:attribute name="sink_cycle" type="sink_cycle"/>
+                <xs:attribute name="sink_cycle_pattern" type="xs:string"/>
+                <xs:attribute name="transform_ref" type="transform_source_id" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="sink_path">
+        <xs:complexContent>
+            <xs:extension base="sink">
+                <xs:attribute name="path" type="refs:valid_path" use="required"/>
+                <xs:anyAttribute/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="source_elastic_search">
+        <xs:complexContent>
+            <xs:extension base="action">
+                <xs:attribute name="es_nodes" type="xs:string" use="required"/>
+                <xs:attribute name="es_port" type="xs:int" use="required"/>
+                <xs:attribute name="es_table" type="xs:string" use="required"/>
+                <xs:attribute name="es_nodes_wan_only" type="xs:boolean"/>
+                <xs:attribute name="es_index_auto_create" type="xs:boolean"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="source_hbase">
+        <xs:complexContent>
+            <xs:extension base="action">
+                <xs:sequence>
+                    <xs:element name="family">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="column" type="value_node" minOccurs="0"/>
+                            </xs:sequence>
+                            <xs:attribute name="name" type="xs:string" use="required"/>
+                            <xs:attribute name="columns" type="xs:string"/>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+                <xs:attribute name="zookeeper_quorum" type="xs:string" use="required"/>
+                <xs:attribute name="zookeeper_znode_parent" type="xs:string" use="required"/>
+                <xs:attribute name="table_name" type="xs:Name" use="required"/>
+                <xs:attribute name="key_start" type="xs:string"/>
+                <xs:attribute name="key_end" type="xs:string"/>
+
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="source_model">
+        <xs:attribute name="model_type" use="required">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="k-means"/>
+                    <xs:enumeration value="linear-regression"/>
+                    <xs:enumeration value="decision-tree"/>
+                    <xs:enumeration value="neural-network"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="source_xml">
+        <xs:complexContent>
+            <xs:extension base="source_path">
+                <xs:attribute name="element_path" use="required">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:pattern value="(\w+/)*\w+"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="source_jdbc">
+        <xs:complexContent>
+            <xs:extension base="action">
+                <xs:attributeGroup ref="jdbc"/>
+                <xs:attribute name="query"/>
+                <xs:attribute name="dbtable" type="xs:Name"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="source_sequence_constants">
+        <xs:complexContent>
+            <xs:extension base="action">
+                <xs:sequence>
+                    <xs:element name="sequence_constant" maxOccurs="unbounded">
+                        <xs:complexType>
+                            <xs:attribute name="column_name" use="required" type="xs:Name"/>
+                            <xs:attribute name="column_values" use="required">
+                                <xs:simpleType>
+                                    <xs:list itemType="xs:string"/>
+                                </xs:simpleType>
+                            </xs:attribute>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+                <xs:attribute name="quote_char" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="source_sequence_file">
+        <xs:complexContent>
+            <xs:extension base="source_path">
+                <xs:attribute name="key_class" use="required" type="sequence_key_value_class"/>
+                <xs:attribute name="value_class" use="required" type="sequence_key_value_class"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="source_protocol_bytes">
+        <xs:complexContent>
+            <xs:extension base="source_path">
+                <xs:attribute name="protocol_file_path" use="required" type="refs:valid_path"/>
+                <xs:attribute name="convert_file_path" type="refs:valid_path"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="source_parquet">
+        <xs:complexContent>
+            <xs:extension base="source_path">
+                <xs:attribute name="inferSchema" default="true"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="source_json">
+        <xs:complexContent>
+            <xs:extension base="source_path">
+                <xs:attribute name="dateFormat" default="yyyy-MM-dd"/>
+                <xs:attribute name="lineSep" default="\n"/>
+                <xs:attribute name="inferSchema" default="true"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="source_dictionary">
+        <xs:complexContent>
+            <xs:extension base="action">
+                <xs:attribute name="dictionary_type" type="data_dictionary"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="source_csv">
+        <xs:complexContent>
+            <xs:extension base="source_path">
+                <xs:attribute name="sep" default=","/>
+                <xs:attribute name="header" default="true"/>
+                <xs:attribute name="inferSchema" default="true"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="source_text">
+        <xs:complexContent>
+            <xs:extension base="source_path"/>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="source_plugin">
+        <xs:complexContent>
+            <xs:extension base="action">
+                <xs:sequence>
+                    <xs:element name="parameter" maxOccurs="unbounded" minOccurs="0"
+                                type="parameter"/>
+                </xs:sequence>
+                <xs:attribute name="full_class_name" type="xs:string" use="required">
+                    <xs:annotation>
+                        <xs:documentation>
+                            the full name of class which extends com.rocy.data.action.plugin.TPluginTransform
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="pipeline_action">
+        <xs:complexContent>
+            <xs:extension base="action_path">
+                <xs:attributeGroup ref="pipeline_no_ref"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="transform">
+        <xs:complexContent>
+            <xs:extension base="transform_one_ref"/>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="transform_flat_json">
+        <xs:complexContent>
+            <xs:extension base="transform_one_ref">
+                <xs:attribute name="is_long_name" type="xs:boolean">
+                    <xs:annotation>
+                        <xs:documentation>
+                            default true,true to transform nested field name to format:a.b.c
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="transform_ref">
+        <xs:attribute name="id" type="transform_source_id" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="transform_join">
+        <xs:complexContent>
+            <xs:extension base="action_path">
+                <xs:attribute name="left" type="transform_source_id" use="required"/>
+                <xs:attribute name="right" type="transform_source_id" use="required"/>
+                <xs:attribute name="join_columns" type="xs:string"/>
+                <xs:attribute name="join_type" type="join_type"/>
+                <xs:attribute name="join_expr" type="xs:string"/>
+                <xs:attribute name="drop_duplicate_fields" type="xs:boolean"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="transform_union">
+        <xs:complexContent>
+            <xs:extension base="transform_multi_refs">
+                <xs:attribute name="union_type" type="union_type"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="transform_split">
+        <xs:complexContent>
+            <xs:extension base="transform_one_ref">
+                <xs:attribute name="partition_field" type="xs:string" use="required"/>
+                <xs:attribute name="id_field" type="xs:string" use="required"/>
+                <xs:attribute name="state_field" type="xs:string" use="required"/>
+                <xs:attribute name="data_fields" type="xs:string"/>
+                <xs:attribute name="short_range_milli" type="xs:long" default="60000"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="transform_dimension_merge">
+        <xs:complexContent>
+            <xs:extension base="transform_one_ref">
+                <xs:all>
+                    <xs:element name="merges" type="merges"/>
+                </xs:all>
+                <xs:attribute type="xs:string" name="dimensions_columns_ref" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="transform_plugin">
+        <xs:complexContent>
+            <xs:extension base="transform_one_ref">
+                <xs:sequence>
+                    <xs:element name="parameter" maxOccurs="unbounded" minOccurs="0" type="parameter"/>
+                </xs:sequence>
+                <xs:attribute name="full_class_name" type="xs:string" use="required">
+                    <xs:annotation>
+                        <xs:documentation>
+                            the full name of class which extends com.rocy.data.action.plugin.TPluginTransform
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="transform_join_dimensions">
+        <xs:complexContent>
+            <xs:extension base="transform_multi_refs">
+                <xs:attribute name="dimensions_columns_ref" type="xs:string" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="transform_quality">
+        <xs:complexContent>
+            <xs:extension base="transform_one_ref">
+                <xs:all>
+                    <xs:element name="quality_types" type="quality_types"/>
+                </xs:all>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="sink_sequence_file">
+        <xs:complexContent>
+            <xs:extension base="sink_path">
+                <xs:attribute name="key_class" use="required" type="xs:string"/>
+                <xs:attribute name="value_class" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="sink_join_fill">
+        <xs:complexContent>
+            <xs:extension base="sink_path">
+                <xs:attribute name="join_columns" type="xs:string"/>
+                <xs:attribute name="join_expr" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="sink_plugin">
+        <xs:complexContent>
+            <xs:extension base="sink">
+                <xs:sequence>
+                    <xs:element name="parameter" maxOccurs="unbounded" minOccurs="0"
+                                type="parameter"/>
+                </xs:sequence>
+                <xs:attribute name="full_class_name" use="required" type="class_name"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="sink_hbase">
+        <xs:complexContent>
+            <xs:extension base="sink">
+                <xs:sequence>
+                    <xs:element name="key" type="value_node"/>
+                    <xs:element name="family">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="column" type="value_node" minOccurs="0"/>
+                            </xs:sequence>
+                            <xs:attribute name="name" type="xs:string" use="required"/>
+                            <xs:attribute name="columns" type="xs:string"/>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+                <xs:attribute name="hbase.zookeeper.quorum" type="xs:string" use="required"/>
+                <xs:attribute name="hbase.zookeeper.znode.parent" type="xs:string" use="required"/>
+                <xs:attribute name="table_name" type="xs:string" use="required"/>
+                <xs:attribute name="key_append" type="xs:string"/>
+                <xs:attribute name="keys" type="xs:string" use="required"/>
+                <xs:anyAttribute/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="sink_shell">
+        <xs:complexContent>
+            <xs:extension base="sink">
+                <xs:attribute name="command"/>
+                <xs:attribute name="work_directory"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="sink_elastic_search">
+        <xs:complexContent>
+            <xs:extension base="sink">
+                <xs:attribute name="nodes" type="xs:string" use="required"/>
+                <xs:attribute name="port" type="xs:int" use="required"/>
+                <xs:attribute name="add_date_format" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="sink_csv">
+        <xs:complexContent>
+            <xs:extension base="sink_path">
+                <xs:attribute name="sep" default=","/>
+                <xs:attribute name="header" default="true"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="sink_xml">
+        <xs:complexContent>
+            <xs:extension base="sink_path"/>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="sink_json">
+        <xs:complexContent>
+            <xs:extension base="sink_path">
+                <xs:attribute name="dateFormat" default="yyyy-MM-dd"/>
+                <xs:attribute name="lineSep" default="\n"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="sink_parquet">
+        <xs:complexContent>
+            <xs:extension base="sink_path"/>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="sink_show">
+        <xs:complexContent>
+            <xs:extension base="sink">
+                <xs:attribute name="show_count" default="20"/>
+                <xs:attribute name="truncate" type="xs:boolean" default="false"/>
+                <xs:attribute name="truncate_count" type="xs:int" default="0"/>
+                <xs:attribute name="vertical" type="xs:boolean" default="false"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="sink_jdbc">
+        <xs:complexContent>
+            <xs:extension base="sink">
+                <xs:attributeGroup ref="jdbc"/>
+                <xs:attribute name="mode">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="overwrite"/>
+                            <xs:enumeration value="append"/>
+                            <xs:enumeration value="ignore"/>
+                            <xs:enumeration value="error"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="dbtable" default="test_table"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="merge">
+        <xs:sequence>
+            <xs:element name="computed_column" type="computed_column" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="column" type="xs:string"/>
+        <xs:attribute name="groups" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="common_computed_column">
+        <xs:attribute name="category" type="index_category:index_category" default="dw_system"/>
+        <xs:attribute name="name" use="required" type="computed_column_name"/>
+        <xs:attribute name="expression" use="required"/>
+        <xs:attribute name="chinese_name"/>
+        <xs:attribute name="description"/>
+    </xs:complexType>
+    <xs:complexType name="computed_column">
+        <xs:complexContent>
+            <xs:extension base="common_computed_column">
+                <xs:attribute name="ref" type="refs:common_computed_column_name"/>
+                <xs:attribute name="name" type="computed_column_name"/>
+                <xs:attribute name="expression"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="merges">
+        <xs:sequence>
+            <xs:element name="merge" type="merge"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="quality_types">
+        <xs:choice>
+            <xs:element name="field_check"/>
+            <xs:element name="data_check"/>
+            <xs:element name="cross_check">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="cross_tabs" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="cross_tab" maxOccurs="unbounded">
+                                        <xs:complexType>
+                                            <xs:attribute name="field_name" use="required"/>
+                                            <xs:attribute name="separator" type="xs:float"/>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                                <xs:attribute name="target_field" type="xs:string" use="required"/>
+                                <xs:attribute name="agg_fun" type="agg_functions" use="required"/>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:complexType name="measures">
+        <xs:sequence>
+            <xs:element name="computed_column" type="computed_column" maxOccurs="unbounded" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="measures_ref">
+            <xs:simpleType>
+                <xs:list itemType="refs:computed_column_group_id"/>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="category" type="index_category:index_category"/>
+    </xs:complexType>
+    <xs:complexType name="computed_column_groups">
+        <xs:sequence>
+            <xs:element name="computed_column_group" maxOccurs="unbounded" type="computed_column_group"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="columns_group">
+        <xs:sequence>
+            <xs:element name="columns" type="columns" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="columns">
+        <xs:attribute name="id" type="xs:Name" use="required"/>
+        <xs:attribute name="columns" use="required">
+            <xs:simpleType>
+                <xs:list itemType="xs:Name"/>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="common_computed_columns">
+        <xs:sequence>
+            <xs:element name="common_computed_column" type="common_computed_column" maxOccurs="unbounded"
+            />
+        </xs:sequence>
+        <xs:attribute name="description" type="xs:string"/>
+        <xs:attribute name="category" type="index_category:index_category" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="computed_column_group">
+        <xs:sequence>
+            <xs:element name="computed_column" type="computed_column" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="description" type="xs:string"/>
+        <xs:attribute name="category" type="index_category:index_category"/>
+        <xs:attribute name="id" type="xs:Name"/>
+    </xs:complexType>
+    <xs:complexType name="parameter">
+        <xs:attribute name="key" type="xs:Name" use="required"/>
+        <xs:attribute name="value" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="group_where_list">
+        <xs:sequence minOccurs="2" maxOccurs="unbounded">
+            <xs:element type="computed_column" name="where"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="value_node">
+        <xs:attribute name="value" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="sequence_constants">
+        <xs:sequence>
+            <xs:element name="sequence_constant">
+                <xs:complexType>
+                    <xs:attribute name="column_name" use="required"/>
+                    <xs:attribute name="column_values" use="required">
+                        <xs:simpleType>
+                            <xs:list itemType="xs:string"/>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="sequence_bytes">
+        <xs:complexContent>
+            <xs:extension base="action_path">
+                <xs:attribute name="protocol_file_path" use="required" type="refs:valid_path"/>
+                <xs:attribute name="convert_file_path" type="refs:valid_path"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="transform_data_governance">
+        <xs:complexContent>
+            <xs:extension base="transform_one_ref">
+                <xs:sequence>
+                    <xs:choice>
+                        <xs:element name="data_governance_list">
+                            <xs:complexType>
+                                <xs:all>
+                                    <xs:element name="set_as_value_for_expression" minOccurs="0">
+                                        <xs:complexType>
+                                            <xs:attribute name="value" use="required"/>
+                                            <xs:attribute name="column" use="required"/>
+                                            <xs:attribute name="expression" use="required"/>
+                                        </xs:complexType>
+                                    </xs:element>
+                                    <xs:element name="set_as_value_for_expression_array" minOccurs="0"
+                                    >
+                                        <xs:complexType>
+                                            <xs:attribute name="column" use="required"/>
+                                            <xs:attribute name="expression" use="required"/>
+                                            <xs:attribute name="value" use="required"/>
+                                        </xs:complexType>
+                                    </xs:element>
+                                    <xs:element name="drop_if_exception" minOccurs="0">
+                                        <xs:complexType>
+                                            <xs:attribute name="column" use="required"/>
+                                            <xs:attribute name="k" type="xs:float" use="required"/>
+                                        </xs:complexType>
+                                    </xs:element>
+                                    <xs:element name="set_as_avg_if_exception_array" minOccurs="0">
+                                        <xs:complexType>
+                                            <xs:attribute name="column" use="required">
+                                                <xs:simpleType>
+                                                    <xs:list itemType="xs:string"/>
+                                                </xs:simpleType>
+                                            </xs:attribute>
+                                        </xs:complexType>
+                                    </xs:element>
+                                    <xs:element name="drop_if_expression" minOccurs="0">
+                                        <xs:complexType>
+                                            <xs:attribute name="expression" use="required"/>
+                                        </xs:complexType>
+                                    </xs:element>
+                                    <xs:element name="interpolation_governance" minOccurs="0">
+                                        <xs:complexType>
+                                            <xs:attribute name="column" use="required"/>
+                                            <xs:attribute name="partition_by">
+                                                <xs:simpleType>
+                                                    <xs:union
+                                                            memberTypes="standard_fields:standard_fields standard_index:standard_index"/>
+                                                </xs:simpleType>
+                                            </xs:attribute>
+                                            <xs:attribute name="time_column" default="tsp_got_time"/>
+                                            <xs:attribute name="k" default="3"/>
+                                            <xs:attribute name="std" default="3"/>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:all>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:choice>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:attributeGroup name="jdbc">
+        <xs:attribute name="driver" use="required" type="class_name"/>
+        <xs:attribute name="url" use="required" type="xs:anyURI"/>
+        <xs:attribute name="user" use="required" type="xs:Name"/>
+        <xs:attribute name="password" use="required"/>
+    </xs:attributeGroup>
+    <xs:attributeGroup name="pipeline_no_ref">
+        <xs:attribute name="transform_ref" use="prohibited"/>
+        <xs:attribute name="is_begin" type="xs:boolean"/>
+    </xs:attributeGroup>
+
+    <xs:simpleType name="percent">
+        <xs:restriction base="xs:float">
+            <xs:minExclusive value="0"/>
+            <xs:maxExclusive value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="field_list">
+        <xs:list itemType="xs:Name"/>
+    </xs:simpleType>
+    <xs:simpleType name="dw_level">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ods"/>
+            <xs:enumeration value="dwd"/>
+            <xs:enumeration value="dim"/>
+            <xs:enumeration value="dws"/>
+            <xs:enumeration value="mid"/>
+            <xs:enumeration value="app"/>
+            <xs:enumeration value="tmp"/>
+            <xs:enumeration value="sys"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="range_date">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="none"/>
+            <xs:enumeration value="day_one"/>
+            <xs:enumeration value="day_two"/>
+            <xs:enumeration value="day_three"/>
+            <xs:enumeration value="last_week"/>
+            <xs:enumeration value="last_month"/>
+            <xs:enumeration value="last_quarter"/>
+            <xs:enumeration value="last_half_year"/>
+            <xs:enumeration value="last_year"/>
+            <xs:enumeration value="this_week"/>
+            <xs:enumeration value="this_month"/>
+            <xs:enumeration value="this_quarter"/>
+            <xs:enumeration value="this_half_year"/>
+            <xs:enumeration value="this_year"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="owner">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="whq"/>
+            <xs:enumeration value="zq"/>
+            <xs:enumeration value="mgx"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="agg_functions">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="max"/>
+            <xs:enumeration value="min"/>
+            <xs:enumeration value="stddev"/>
+            <xs:enumeration value="count"/>
+            <xs:enumeration value="sum"/>
+            <xs:enumeration value="avg"/>
+            <xs:enumeration value="countDistinct"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="data_dictionary">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="path_tree"/>
+            <xs:enumeration value="storage_blood"/>
+            <xs:enumeration value="constants"/>
+            <xs:enumeration value="storage_level"/>
+            <xs:enumeration value="table_field"/>
+            <xs:enumeration value="table_cycle"/>
+            <xs:enumeration value="table_blood"/>
+            <xs:enumeration value="index_description"/>
+            <xs:enumeration value="index_dimension"/>
+            <xs:enumeration value="index_blood"/>
+            <xs:enumeration value="index_blood_deep"/>
+            <xs:enumeration value="udf"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="sink_cycle">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="daily"/>
+            <xs:enumeration value="weekly"/>
+            <xs:enumeration value="monthly"/>
+            <xs:enumeration value="quarterly"/>
+            <xs:enumeration value="half_yearly"/>
+            <xs:enumeration value="yearly"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="class_name">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="(\w+\.)+\w+"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="sequence_key_value_class">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="byte"/>
+            <xs:enumeration value="bytes"/>
+            <xs:enumeration value="long"/>
+            <xs:enumeration value="array"/>
+            <xs:enumeration value="date"/>
+            <xs:enumeration value="datetime"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="transform_source_id">
+        <xs:union memberTypes="refs:transform_id refs:source_id"/>
+    </xs:simpleType>
+    <xs:simpleType name="join_type">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="inner"/>
+            <xs:enumeration value="left"/>
+            <xs:enumeration value="right"/>
+            <xs:enumeration value="full"/>
+            <xs:enumeration value="left_semi"/>
+            <xs:enumeration value="left_anti"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="union_type">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="unionByName"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="computed_column_name">
+        <xs:union memberTypes="standard_index:standard_index xs:string"/>
+    </xs:simpleType>
+</xs:schema>

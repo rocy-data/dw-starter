@@ -1,0 +1,12 @@
+<di_pipeline xsi:schemaLocation="https://www.rocy-data.com/di/v1.0.0  ../.dw/di.xsd"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns="https://www.rocy-data.com/di/v1.0.0" dw_level="dws" dw_market="market1" dw_subject="subject1" owner="rocy">
+    <transforms>
+<!--
+        // Configure an ML pipeline, which consists of three stages: tokenizer, hashingTF, and lr.
+-->
+        <transform_ml_transformer_feature_tokenizer id="id_ml_tune_tokenizer" input_col="text" output_col="words"/>
+        <transform_ml_transformer_feature_hashing_tf id="id_ml_tune_hashingTF" input_col="words" output_col="features"/>
+        <transform_ml_estimator_classification_logistic_regression id="id_ml_tune_lr" max_iter="10"/>
+    </transforms>
+</di_pipeline>

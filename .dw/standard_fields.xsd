@@ -1,0 +1,14 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="https://www.rocy-data.com/dw/standard_fields"
+           xmlns:standard_field="https://www.rocy-data.com/dw/standard_field"
+           xmlns:iov_signals="https://www.rocy-data.com/dw/iov_signals"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="
+           https://www.rocy-data.com/dw/standard_field ../dw/schema/standard_field.xsd
+           https://www.rocy-data.com/dw/iov_signals ./iov_signals.xsd"
+           elementFormDefault="qualified">
+    <xs:simpleType name="standard_fields">
+        <xs:union memberTypes="standard_field:standard_field iov_signals:standard_signal_name"/>
+    </xs:simpleType>
+</xs:schema>

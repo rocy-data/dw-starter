@@ -1,0 +1,13 @@
+<dw dw_level="tmp" dw_subject="subject1" dw_market="RX-DATA" owner="whq"
+    xsi:schemaLocation="https://www.rocy-data.com/di/v1.0.0  ../.dw/di.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://www.rocy-data.com/di/v1.0.0">
+    <sources>
+        <source_ml_model_file id="id_model_check" path="lr_model" is_output_metadata="false"/>
+    </sources>
+    <transforms>
+        <transform_ml_estimator_classification_logistic_regression id="lr" transform_ref="training"
+                                                                   max_iter="10" reg_param="0.3"
+                                                                   elastic_net_param="0.8" model_path="lr_model"/>
+    </transforms>
+</dw>

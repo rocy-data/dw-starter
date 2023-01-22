@@ -1,0 +1,18 @@
+<compose active_profile="test"
+         xsi:schemaLocation="https://www.rocy-data.com/dw/v1.0.0  .dw/dw.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="https://www.rocy-data.com/dw/v1.0.0">
+    <path_list>
+        <profile name="test">
+            <path pattern="none" path="dw/data/hello_world" name="hello_world" parent="PROJECT_PATH"/>
+        </profile>
+    </path_list>
+    <constants>
+        <constant value="3600*1000" name="hour_milli"/>
+    </constants>
+    <modules>
+        <module path="dw/sources.xml"/>
+        <module path="dw/hello_world.xml"/>
+        <module path="dw/join.xml"/>
+        <module path=".dw/system.xml"/>
+    </modules>
+</compose>

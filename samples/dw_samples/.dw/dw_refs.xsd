@@ -1,0 +1,1000 @@
+<xs:schema 
+elementFormDefault="qualified" targetNamespace="https://www.rocy-data.com/dw/refs" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:simpleType name="pipeline_id">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="id_pipeline_where">
+                <xs:annotation>
+                    <xs:documentation> transform_transform </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_pipeline_add_computed_columns">
+                <xs:annotation>
+                    <xs:documentation> transform_transform </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="computed_column_group_id">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="g2">
+                <xs:annotation>
+                    <xs:documentation> computed_column_group </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_group_measures_ref">
+                <xs:annotation>
+                    <xs:documentation> computed_column_group </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="g1">
+                <xs:annotation>
+                    <xs:documentation> computed_column_group </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="valid_path">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="index_description">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/metadata/index_description </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="csv_path">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/dw/data/ods/orders/order.csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="data_governance_array">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/dw/data/ods/data_governance_array.jsonl </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="csv_path_none">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/dw/data/ods/orders/order.csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="table_field">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/metadata/table_field </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="path_tree">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/metadata/path_tree </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="json_path">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/dw/data/ods/test.jsonl </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="csv_time_series">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/dw/data/ods/time_series.csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="index_blood">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/metadata/index_blood </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="hello_world">
+                <xs:annotation>
+                    <xs:documentation> dw/data/hello_world </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="csv_path_day">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/dw/data/ods/orders_day </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="constants">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/metadata/constants </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="storage_blood">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/metadata/storage_blood </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="interpolation_governance">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/dw/data/ods/interpolation_governance.csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="data_governance">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/dw/data/ods/data_governance.csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="index_dimension">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/metadata/index_dimension </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="udf">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/metadata/udf </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="index_blood_deep">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/metadata/index_blood_deep </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="table_cycle">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/metadata/table_cycle </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="name_hello_world_path">
+                <xs:annotation>
+                    <xs:documentation> dw/data/hello_world </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="table_blood">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/metadata/table_blood </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="storage_level">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/metadata/storage_level </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="csv_path_week">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/dw/data/ods/orders_week </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="source_id">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="id_source_csv_path_half_year">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_before_computed_column_group">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_before_where_after_compute">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_after_having">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_before_value_standardize">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_csv_path_quarter">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_blood_deep">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_before_where">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_csv">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_after_order_by">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_table_field">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_storage_level">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_multi_operations">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_path_tree">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_sell_percent">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_storage_blood">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_pivot_column">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_after_sort_columns">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_csv_path_month">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_measures_ref">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_description">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_csv_path_week">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_csv_path_year">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_csv_time_series">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_blood">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_test_constants">
+                <xs:annotation>
+                    <xs:documentation> source_sequence_constants </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_test_range_date">
+                <xs:annotation>
+                    <xs:documentation> source_sequence_constants </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_before_computed_columns_ref">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_after_selects_select_pattern">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_before_boolean_convert">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_group_by">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_before_distinct_by">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_after_selects_drop_pattern">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_csv_path_none">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_dimension">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_data_governance_csv">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_group_where_list">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_table_blood">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_table_cycle">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_whole_text_files_source">
+                <xs:annotation>
+                    <xs:documentation> source_whole_text_files </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_is_rollup">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_after_selects_select_fields">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_interpolation_governance_csv">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_json">
+                <xs:annotation>
+                    <xs:documentation> source_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_plugin">
+                <xs:annotation>
+                    <xs:documentation> source_plugin </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_constants">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_before_name_standardize">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_json_array">
+                <xs:annotation>
+                    <xs:documentation> source_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_csv_path_day">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_after_drop">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_udf">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="common_computed_column_name">
+        <xs:restriction base="xs:string"> </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="transform_id">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="id_test_variable">
+                <xs:annotation>
+                    <xs:documentation> transform_transform </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_last_month2week">
+                <xs:annotation>
+                    <xs:documentation> transform_transform </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_csv_path_half_year">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_before_computed_column_group">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_interpolation_governance">
+                <xs:annotation>
+                    <xs:documentation> transform_data_governance </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_before_where_after_compute">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_quality_data_check">
+                <xs:annotation>
+                    <xs:documentation> transform_quality </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_trans_range_date_week">
+                <xs:annotation>
+                    <xs:documentation> transform_transform </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_after_having">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_before_value_standardize">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_this_week">
+                <xs:annotation>
+                    <xs:documentation> transform_transform </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_pipeline">
+                <xs:annotation>
+                    <xs:documentation> transform_pipeline </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_csv_path_quarter">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_blood_deep">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_last_week">
+                <xs:annotation>
+                    <xs:documentation> transform_transform </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_dimension_by_seller">
+                <xs:annotation>
+                    <xs:documentation> transform_dimension </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_set_as_value_for_expression">
+                <xs:annotation>
+                    <xs:documentation> transform_data_governance </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_before_where">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_csv">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_quality_field_check">
+                <xs:annotation>
+                    <xs:documentation> transform_quality </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_after_order_by">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_test_variable2">
+                <xs:annotation>
+                    <xs:documentation> transform_transform </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_pipeline_another">
+                <xs:annotation>
+                    <xs:documentation> transform_pipeline </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_table_field">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_join_dimensions">
+                <xs:annotation>
+                    <xs:documentation> transform_join_dimensions </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_split">
+                <xs:annotation>
+                    <xs:documentation> transform_split </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_range_date_week_join_month">
+                <xs:annotation>
+                    <xs:documentation> transform_join </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_join_dimensions_copy">
+                <xs:annotation>
+                    <xs:documentation> transform_transform </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_storage_level">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_union">
+                <xs:annotation>
+                    <xs:documentation> transform_union </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_set_as_avg_if_exception_array">
+                <xs:annotation>
+                    <xs:documentation> transform_data_governance </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_multi_operations">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_drop_if_expression">
+                <xs:annotation>
+                    <xs:documentation> transform_data_governance </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_path_tree">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_sell_percent">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_word_count_stat_transform">
+                <xs:annotation>
+                    <xs:documentation> transform_transform </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_storage_blood">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_pivot_column">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_after_sort_columns">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_csv_path_month">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_drop_if_exception">
+                <xs:annotation>
+                    <xs:documentation> transform_data_governance </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_measures_ref">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_description">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_csv_path_week">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_this_month">
+                <xs:annotation>
+                    <xs:documentation> transform_transform </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_csv_path_year">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_csv_time_series">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_blood">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_test_constants">
+                <xs:annotation>
+                    <xs:documentation> source_sequence_constants </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_this_month2week">
+                <xs:annotation>
+                    <xs:documentation> transform_transform </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_set_as_value_for_expression_array">
+                <xs:annotation>
+                    <xs:documentation> transform_data_governance </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_test_range_date">
+                <xs:annotation>
+                    <xs:documentation> source_sequence_constants </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_before_computed_columns_ref">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_dimension_by_area">
+                <xs:annotation>
+                    <xs:documentation> transform_dimension </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_summary">
+                <xs:annotation>
+                    <xs:documentation> transform_summary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_quality_cross_check">
+                <xs:annotation>
+                    <xs:documentation> transform_quality </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_after_selects_select_pattern">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_test_constant">
+                <xs:annotation>
+                    <xs:documentation> transform_transform </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_before_boolean_convert">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_summary_text">
+                <xs:annotation>
+                    <xs:documentation> transform_summary_text </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_trans_range_date_none">
+                <xs:annotation>
+                    <xs:documentation> transform_transform </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_group_by">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_before_distinct_by">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_after_selects_drop_pattern">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_csv_path_none">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_flat_json">
+                <xs:annotation>
+                    <xs:documentation> transform_flat_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_dimension">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_data_governance_csv">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_schema">
+                <xs:annotation>
+                    <xs:documentation> transform_schema </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_quality_cross_check_separator">
+                <xs:annotation>
+                    <xs:documentation> transform_quality </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_group_where_list">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_table_blood">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_table_cycle">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_whole_text_files_source">
+                <xs:annotation>
+                    <xs:documentation> source_whole_text_files </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_last_month">
+                <xs:annotation>
+                    <xs:documentation> transform_transform </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_dimension_merge">
+                <xs:annotation>
+                    <xs:documentation> transform_dimension_merge </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_is_rollup">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_range_date_week">
+                <xs:annotation>
+                    <xs:documentation> transform_transform </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_after_selects_select_fields">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_transform_plugin">
+                <xs:annotation>
+                    <xs:documentation> transform_plugin </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_interpolation_governance_csv">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_sell_add">
+                <xs:annotation>
+                    <xs:documentation> transform_transform </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_json">
+                <xs:annotation>
+                    <xs:documentation> source_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_trans_join_range_date">
+                <xs:annotation>
+                    <xs:documentation> transform_join </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_plugin">
+                <xs:annotation>
+                    <xs:documentation> source_plugin </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_constants">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_before_name_standardize">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_json_array">
+                <xs:annotation>
+                    <xs:documentation> source_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_csv_path_day">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_range_date_month">
+                <xs:annotation>
+                    <xs:documentation> transform_transform </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_aggregation_after_drop">
+                <xs:annotation>
+                    <xs:documentation> source_csv </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_trans_join_range_date_week">
+                <xs:annotation>
+                    <xs:documentation> transform_join </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_udf">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="sink_id">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="sys_path_tree_sink">
+                <xs:annotation>
+                    <xs:documentation> sink_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_udf_sink">
+                <xs:annotation>
+                    <xs:documentation> sink_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_word_count_stat_sink">
+                <xs:annotation>
+                    <xs:documentation> sink_show </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_sink_schedule">
+                <xs:annotation>
+                    <xs:documentation> sink_show </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_sink_range_date_quarter">
+                <xs:annotation>
+                    <xs:documentation> sink_show </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_sink_schedule_year2">
+                <xs:annotation>
+                    <xs:documentation> sink_show </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_sink_range_date_sink_quarter">
+                <xs:annotation>
+                    <xs:documentation> sink_show </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_sink_schedule_month_end">
+                <xs:annotation>
+                    <xs:documentation> sink_show </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_table_field_sink">
+                <xs:annotation>
+                    <xs:documentation> sink_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_sink_schedule_month_day1">
+                <xs:annotation>
+                    <xs:documentation> sink_show </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_constants_sink">
+                <xs:annotation>
+                    <xs:documentation> sink_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_sink_schedule_year1">
+                <xs:annotation>
+                    <xs:documentation> sink_show </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_table_cycle_sink">
+                <xs:annotation>
+                    <xs:documentation> sink_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_sink_schedule_weekly">
+                <xs:annotation>
+                    <xs:documentation> sink_show </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_table_blood_sink">
+                <xs:annotation>
+                    <xs:documentation> sink_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_description_sink">
+                <xs:annotation>
+                    <xs:documentation> sink_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_dimension_sink">
+                <xs:annotation>
+                    <xs:documentation> sink_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_blood_sink">
+                <xs:annotation>
+                    <xs:documentation> sink_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_blood_deep_sink">
+                <xs:annotation>
+                    <xs:documentation> sink_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_storage_level_sink">
+                <xs:annotation>
+                    <xs:documentation> sink_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_storage_blood_sink">
+                <xs:annotation>
+                    <xs:documentation> sink_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_sink_plugin">
+                <xs:annotation>
+                    <xs:documentation> sink_plugin </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,21 @@
+<dw xmlns="https://www.rocy-data.com/dw/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://www.rocy-data.com/dw/v1.0.0 ../.dw/dw.xsd" dw_market="market1" dw_subject="subject1"
+    owner="whq" dw_level="ods"
+>
+    <sources>
+        <source_sequence_constants id="id_source_sequence_constants1">
+            <sequence_constant column_name="c1" column_values="1,2,3"/>
+            <sequence_constant column_name="c2" column_values="21,22,23"/>
+        </source_sequence_constants>
+        <source_sequence_constants id="id_source_sequence_constants2">
+            <sequence_constant column_name="c1" column_values="1,2,3,4"/>
+            <sequence_constant column_name="c3" column_values="321,322,323,324"/>
+        </source_sequence_constants>
+    </sources>
+    <transforms>
+        <transform_join id="id_transform_join" left="id_source_sequence_constants1" right="id_source_sequence_constants2"/>
+    </transforms>
+    <sinks>
+        <sink_show id="id_sink_show" transform_ref="id_transform_join"/>
+    </sinks>
+</dw>

@@ -1,0 +1,14 @@
+<dw dw_level="tmp" dw_subject="subject1" dw_market="RX-DATA" owner="whq"
+    xsi:schemaLocation="https://www.rocy-data.com/di/v1.0.0  ../.dw/di.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://www.rocy-data.com/di/v1.0.0">
+    <transforms>
+        <transform_ml_estimator_feature_string_indexer id="labelIndexer" transform_ref="training" input_col="label" output_col="indexedLabel"/>
+        <transform_ml_estimator_feature_vector_indexer id="featureIndexer" transform_ref="labelIndexer" input_col="features" output_col="indexedFeatures" max_categories="4"/>
+        <transform_ml_estimator_classification_decision_tree_classifier id="dt" transform_ref="featureIndexer" label_col="indexedLabel" features_col="indexedFeatures"/>
+        <transform_schema id="schema" transform_ref="dt"/>
+    </transforms>
+    <sinks>
+        <sink_ml_evaluator_multiclass_classification id="evaluator" transform_ref="dt" label_col="indexedLabel" prediction_col="prediction" metric_name="accuracy"/>
+    </sinks>
+</dw>

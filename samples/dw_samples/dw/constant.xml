@@ -1,0 +1,19 @@
+<dw xmlns="https://www.rocy-data.com/dw/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://www.rocy-data.com/dw/v1.0.0 ../.dw/dw.xsd" dw_market="market1" dw_subject="subject1"
+    owner="whq" dw_level="ods"
+>
+    <constants>
+        <constant name="PI" value="3.1415926"/>
+        <constant name="HOUR_MILLI" value="3600*1000"/>
+        <constant name="DAY_MILLI" value="24*${HOUR_MILLI}"/>
+    </constants>
+    <transforms>
+        <transform_transform id="id_test_constant" transform_ref="id_source_csv">
+            <computed_column_group>
+                <computed_column name="value_PI" expression="${PI}"/>
+                <computed_column name="test_PI" expression="sin(${PI}/3)"/>
+                <computed_column name="test_nest_variable" expression="${DAY_MILLI}"/>
+            </computed_column_group>
+        </transform_transform>
+    </transforms>
+</dw>

@@ -1,0 +1,31 @@
+<dw dw_level="tmp" dw_subject="subject1" dw_market="RX-DATA" owner="whq"
+    xsi:schemaLocation="https://www.rocy-data.com/di/v1.0.0  ../../.dw/di.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://www.rocy-data.com/di/v1.0.0">
+    <variable_actions>
+        <transform_ml_estimator_classification_logistic_regression id="classifier_def" max_iter="10" tol="1e-6"
+                                                                   fit_intercept="true"/>
+    </variable_actions>
+    <path_list>
+        <profile name="test">
+            <path pattern="none" path="dw/data/spark/data/mllib/sample_multiclass_classification_data.txt"
+                  name="sample_multiclass_classification_data" parent="PROJECT_PATH"/>
+            <path name="path_lr_multiclass" path="${PROJECT_PATH}/model_output/lr_multiclass" pattern="none"/>
+        </profile>
+    </path_list>
+
+    <transforms>
+        <transform_ml_estimator_classification_one_vs_rest dw_level="tmp" classifier_id="classifier_def"
+                                                           id="id_one_vs_rest_transform"
+                                                           transform_ref="id_sample_multiclass_classification_data_source"
+                                                           owner="whq"/>
+        <transform_ml_estimator_classification_logistic_regression id="lr_multiclass"
+                                                                   transform_ref="id_sample_multiclass_classification_data_source"
+                                                                   max_iter="10" reg_param="0.3" elastic_net_param="0.8"
+                                                                   model_path="path_lr_multiclass" />
+    </transforms>
+    <sinks>
+        <sink_show dw_level="tmp" sink_t_add="1" sink_cycle="daily" id="sink_ml_test"
+                   transform_ref="id_one_vs_rest_transform" owner="whq" range_date="none" is_rollup="false"/>
+    </sinks>
+</dw>

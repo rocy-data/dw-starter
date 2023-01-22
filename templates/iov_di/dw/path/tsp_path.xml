@@ -1,0 +1,23 @@
+<dw
+        xsi:schemaLocation="https://www.rocy-data.com/iov_di/v1.0.0  ../../.dw/iov_di.xsd"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://www.rocy-data.com/iov_di/v1.0.0" owner="whq"
+        dw_subject="subject1" dw_market="market1" dw_level="tmp">
+    <path_list>
+        <profile name="test">
+            <path partition_count="10" pattern="day" path="dw/data/ods" name="tsp_raw_data" parent="PROJECT_PATH"/>
+            <path pattern="none" path="dw/data/iov_exception_discover/iov_alarm_package_diff.jsonl" name="iov_alarm_package_diff" parent="PROJECT_PATH"/>
+            <path pattern="none" path="dw/data/iov_exception_discover/iov_exception_pattern_extract.jsonl" name="iov_exception_pattern_extract" parent="PROJECT_PATH"/>
+            <path pattern="none" path="dw/data/iov_exception_discover/iov_exception_capacity_cyclic.jsonl" name="iov_exception_capacity_cyclic" parent="PROJECT_PATH"/>
+
+            <path pattern="none" path="dw/data/iov_exception_discover/iov_exception_capacity_usage_time.jsonl" name="iov_exception_capacity_usage_time" parent="PROJECT_PATH"/>
+            <path pattern="none" path="dw/data/iov_exception_discover/iov_exception_charge_temperature.jsonl" name="iov_exception_charge_temperature" parent="PROJECT_PATH"/>
+            <path pattern="none" path="dw/data/iov_exception_discover/iov_exception_charge_voltage_current.jsonl" name="iov_exception_charge_voltage_current" parent="PROJECT_PATH"/>
+            <path pattern="none" path="dw/data/iov_exception_discover/iov_exception_temperature_difference.jsonl" name="iov_exception_temperature_difference" parent="PROJECT_PATH"/>
+            <path pattern="none" path="dw/data/iov_exception_discover/iov_exception_voltage_difference.jsonl" name="iov_exception_voltage_difference" parent="PROJECT_PATH"/>
+            <path pattern="none" path="dw/data/iov_exception_discover/iov_health_down_predict.jsonl" name="iov_health_down_predict" parent="PROJECT_PATH"/>
+            <path pattern="none" path="dw/data/iov_exception_discover/iov_health_factor_analysis.jsonl" name="iov_health_factor_analysis" parent="PROJECT_PATH"/>
+
+        </profile>
+
+    </path_list>
+</dw>

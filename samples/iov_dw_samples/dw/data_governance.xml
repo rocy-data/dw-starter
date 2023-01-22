@@ -1,0 +1,41 @@
+<dw dw_level="tmp" dw_subject="subject1"
+    dw_market="market1" owner="whq"
+    xsi:schemaLocation="https://www.rocy-data.com/iov_dw/v1.0.0  ../.dw/iov_dw.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://www.rocy-data.com/iov_dw/v1.0.0">
+    <sources>
+        <source_parquet dw_level="ods" path="normalized" is_cache="false" id="tsp_normalized_data_day2"
+                        sort_columns="false" owner="whq" range_date="day_two" is_rollup="false"/>
+    </sources>
+    <transforms>
+        <transform_iov_standardize_name dw_level="tmp" path="standardized" is_cache="false"
+                                        id="transform_standardize_name" sort_columns="false"
+                                        transform_ref="tsp_raw_data_day_command2_5" mode="recommend" owner="whq"
+                                        range_date="none" is_rollup="false"/>
+        <transform_data_governance dw_level="ods" path="normalized" is_cache="false" id="tsp_normalized_data_day"
+                                   sort_columns="false" transform_ref="tsp_raw_data_day_command2_5" owner="whq"
+                                   range_date="none" is_rollup="false">
+            <data_governance_list>
+                <set_as_value_for_expression_array column="temp_list" expression="DW_ARRAY_ITEM==-40"
+                                                   value="DW_ARRAY_NULL"/>
+                <set_as_value_for_expression_array column="voltage_list" expression="DW_ARRAY_ITEM==0"
+                                                   value="DW_ARRAY_NULL"/>
+                <interpolation_governance column="veh_soc" time_column="tsp_got_time" partition_by="vin" k="3"/>
+                <interpolation_governance column="veh_odo" time_column="tsp_got_time" partition_by="vin" k="3"/>
+            </data_governance_list>
+        </transform_data_governance>
+        <transform_iov_standardize_check dw_level="tmp" is_cache="false" id="standardize_check_transform_num"
+                                         sort_columns="false" transform_ref="tsp_normalized_data_day2"
+                                         stat_type="min,max" field_pattern="temp"
+                                         sample_radio="0.10000000149011612" mode="number" owner="whq"
+                                         range_date="none" is_rollup="false"/>
+        <transform_iov_standardize_check dw_level="tmp" is_cache="false" id="standardize_check_transform_array"
+                                         sort_columns="false" transform_ref="tsp_normalized_data_day2"
+                                         sample_radio="0.10000000149011612" mode="array" owner="whq"
+                                         range_date="none" is_rollup="false"/>
+        <transform_iov_standardize_check dw_level="tmp" is_cache="false" id="standardize_check_transform_enum"
+                                         sort_columns="false" transform_ref="tsp_normalized_data_day2"
+                                         sample_radio="0.10000000149011612" mode="enumeration" owner="whq"
+                                         range_date="none" is_rollup="false"/>
+    </transforms>
+</dw>

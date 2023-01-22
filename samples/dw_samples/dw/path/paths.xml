@@ -1,0 +1,12 @@
+<dw xmlns="https://www.rocy-data.com/dw/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://www.rocy-data.com/dw/v1.0.0 ../../.dw/dw.xsd" dw_market="market1" dw_subject="subject1"
+    owner="whq" dw_level="ods"
+>
+    <path_list>
+        <profile name="test">
+            <path name="csv_path_none" path="${PROJECT_PATH}/dw/data/ods/orders/order.csv" pattern="none"/>
+            <path name="csv_path_day" path="${PROJECT_PATH}/dw/data/ods/orders_day" pattern="day"/>
+            <path name="csv_path_week" path="${PROJECT_PATH}/dw/data/ods/orders_week" pattern="week"/>
+        </profile>
+    </path_list>
+</dw>

@@ -1,0 +1,49 @@
+<dw dw_level="tmp" dw_subject="subject1" dw_market="RX-DATA" owner="whq"
+    xsi:schemaLocation="https://www.rocy-data.com/di/v1.0.0  ../.dw/di.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://www.rocy-data.com/di/v1.0.0">
+    <variable_actions>
+        <sink_ml_evaluator_binary_classification id="id_v_evaluator_binary_classification"/>
+    </variable_actions>
+    <sources>
+        <!--
+                Prepare training data from a list of (id, text, label) tuples
+        -->
+        <source_sequence_constants id="id_ml_tuning_training" quote_char="'">
+            <sequence_constant column_name="id" column_values="0L,1L,2L,3L,4L,5L,6L,7L,8L,9L,10L,11L"/>
+            <sequence_constant column_name="text"
+                               column_values="'a b c d e spark','b d','spark f g h','hadoop mapreduce','b spark who', 'g d a y','spark fly','was mapreduce','e spark program','a e c l','spark compile','hadoop software'"/>
+            <sequence_constant column_name="label" column_values="1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0"/>
+        </source_sequence_constants>
+        <source_sequence_constants id="id_ml_tuning_test" quote_char="'">
+            <sequence_constant column_name="id" column_values="4L,5L,6L,7L"/>
+            <sequence_constant column_name="text" column_values="'spark i j k','l m n','mapreduce spark','apache hadoop'"/>
+        </source_sequence_constants>
+    </sources>
+    <transforms>
+        <transform_schema id="id_schema_test" transform_ref="id_ml_tuning_test"/>
+        <transform_ml_pipeline id="id_ml_tuning_pipeline" transform_ref="id_ml_tuning_training"
+                               pipeline_id="id_ml_tune_tokenizer"/>
+        <!--
+        We now treat the Pipeline as an Estimator, wrapping it in a CrossValidator instance.
+        This will allow us to jointly choose parameters for all Pipeline stages.
+        A CrossValidator requires an Estimator, a set of Estimator ParamMaps, and an Evaluator.
+        Note that the evaluator here is a BinaryClassificationEvaluator and its default metric
+        is areaUnderROC.
+        -->
+        <!--
+        We use a ParamGridBuilder to construct a grid of parameters to search over.
+        With 3 values for hashingTF.numFeatures and 2 values for lr.regParam,
+        this grid will have 3 x 2 = 6 parameter settings for CrossValidator to choose from.-->
+        <transform_ml_estimator_tuning_cross_validator id="id_estimator_cv" transform_ref="id_ml_tuning_training"
+                                                       estimator_id="id_ml_tune_tokenizer"
+                                                       evaluator_id="id_v_evaluator_binary_classification"
+                                                       num_folds="2"
+                                                       parallelism="2"
+                                                       model_path="path_id_cross_validation_model"
+                                                       estimator_param_maps_param_map="id_ml_tune_hashingTF.numFeatures=10,100,100;id_ml_tune_lr.regParam=0.1, 0.01"/>
+        <transform_ml_model_tuning_cross_validator id="id_estimator_cv_test" transform_ref="id_ml_tuning_test" model_path="path_id_cross_validation_model"/>
+    </transforms>
+    <sinks>
+    </sinks>
+</dw>

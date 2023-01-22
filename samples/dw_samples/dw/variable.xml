@@ -1,0 +1,20 @@
+<dw xmlns="https://www.rocy-data.com/dw/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://www.rocy-data.com/dw/v1.0.0 ../.dw/dw.xsd" dw_market="market1" dw_subject="subject1"
+    owner="whq" dw_level="ods"
+>
+    <transforms>
+        <transform_transform id="id_test_variable" transform_ref="id_source_csv">
+            <computed_column_group>
+                <computed_column name="v1" expression="amount - 10"/>
+                <computed_column name="v2" expression="@{v1} - 10"/>
+            </computed_column_group>
+        </transform_transform>
+        <transform_transform id="id_test_variable2" transform_ref="id_source_csv" group_by="product_id">
+            <measures>
+                <computed_column name="v1" expression="sum(amount)"/>
+                <computed_column name="v2" expression="count(amount)"/>
+                <computed_column name="avg" expression="@{v1}/@{v2}"/>
+            </measures>
+        </transform_transform>
+    </transforms>
+</dw>

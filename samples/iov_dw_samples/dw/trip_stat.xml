@@ -1,0 +1,384 @@
+<dw dw_level="tmp" dw_subject="subject1"
+    dw_market="market1" owner="whq"
+    xsi:schemaLocation="https://www.rocy-data.com/iov_dw/v1.0.0  ../.dw/iov_dw.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://www.rocy-data.com/iov_dw/v1.0.0">
+    <computed_column_groups>
+        <computed_column_group description="None" id="discharge_stat_first_join" category="trip_discharging">
+            <computed_column category="trip_discharging"
+                             expression="coalesce(discharge_stat_first_source.avg_veh_curr,discharge_stat_first.avg_veh_curr)"
+                             description="None" name="avg_veh_curr"/>
+            <computed_column category="trip_discharging"
+                             expression="coalesce(discharge_stat_first_source.trip_charge_per_soc_electric,discharge_stat_first.trip_charge_per_soc_electric)"
+                             description="None" name="trip_charge_per_soc_electric"/>
+            <computed_column category="trip_discharging"
+                             expression="coalesce(discharge_stat_first_source.trip_avg_temperature_range,discharge_stat_first.trip_avg_temperature_range)"
+                             description="None" name="trip_avg_temperature_range"/>
+            <computed_column category="trip_discharging"
+                             expression="coalesce(discharge_stat_first_source.trip_avg_voltage_range,discharge_stat_first.trip_avg_voltage_range)"
+                             description="None" name="trip_avg_voltage_range"/>
+            <computed_column category="trip_discharging"
+                             expression="coalesce(discharge_stat_first_source.trip_charge_power,discharge_stat_first.trip_charge_power)"
+                             description="None" name="trip_charge_power"/>
+            <computed_column category="trip_discharging"
+                             expression="coalesce(discharge_stat_first_source.avg_su,discharge_stat_first.avg_su)"
+                             description="None" name="avg_su"/>
+            <computed_column category="trip_discharging"
+                             expression="coalesce(discharge_stat_first_source.avg_veh_volt,discharge_stat_first.avg_veh_volt)"
+                             description="None" name="avg_veh_volt"/>
+            <computed_column category="trip_discharging"
+                             expression="coalesce(discharge_stat_first_source.trip_charge_full_hours,discharge_stat_first.trip_charge_full_hours)"
+                             description="None" name="trip_charge_full_hours"/>
+        </computed_column_group>
+        <computed_column_group description="None" id="brake_pedal_stat" category="trip_discharging">
+            <computed_column chinese_name="前一条数据制动踏板状态" category="trip_discharging"
+                             expression="lag(brake_pedal_position,1,null) over (partition by vin,trip_begin_time order by tsp_got_time)"
+                             description="None" name="prev_brake_pedal_position"/>
+            <computed_column chinese_name="制动踏板深度改变" category="trip_discharging"
+                             expression="case when brake_pedal_position&gt;0 and (prev_brake_pedal_position=0 or prev_brake_pedal_position=null) then true else false end"
+                             description="None" name="brake_pedal_state"/>
+        </computed_column_group>
+        <computed_column_group description="None" id="stat_first" category="trip_charging">
+            <computed_column chinese_name="每小时充(放)电量" category="trip_charging" expression="avg(trip_charge_soc_speed)"
+                             description="None" name="trip_charge_soc_speed"/>
+            <computed_column chinese_name="平均电流" category="trip_charging" expression="avg(avg_veh_curr)"
+                             description="None" name="avg_veh_curr"/>
+            <computed_column chinese_name="每SOC充(放)电安时量" category="trip_charging"
+                             expression="avg(trip_charge_per_soc_electric)" description="None"
+                             name="trip_charge_per_soc_electric"/>
+            <computed_column chinese_name="探针平均温差" category="trip_charging" expression="avg(trip_avg_temperature_range)"
+                             description="None" name="trip_avg_temperature_range"/>
+            <computed_column chinese_name="单体平均压差" category="trip_charging" expression="avg(trip_avg_voltage_range)"
+                             description="None" name="trip_avg_voltage_range"/>
+            <computed_column chinese_name="单体最大压差" category="trip_charging" expression="avg(trip_avg_voltage_range)"
+                             description="None" name="trip_max_voltage_range"/>
+            <computed_column chinese_name="充(放)电功率" category="trip_charging" expression="avg(trip_charge_power)"
+                             description="None" name="trip_charge_power"/>
+            <computed_column chinese_name="单体平均电压" category="trip_charging" expression="avg(avg_su)" description="None"
+                             name="avg_su"/>
+            <computed_column chinese_name="平均总电压" category="trip_charging" expression="avg(avg_veh_volt)"
+                             description="None" name="avg_veh_volt"/>
+            <computed_column chinese_name="充(放)满电所需时长" category="trip_charging" expression="avg(trip_charge_full_hours)"
+                             description="None" name="trip_charge_full_hours"/>
+        </computed_column_group>
+        <computed_column_group description="None" id="charge_stat" category="trip">
+            <computed_column chinese_name="行程经度均值" category="trip" expression="avg(loc_lon84)" description="None"
+                             name="loc_lon84"/>
+            <computed_column chinese_name="行程纬度均值" category="trip" expression="avg(loc_lat84)" description="None"
+                             name="loc_lat84"/>
+            <computed_column chinese_name="充电位置" category="trip"
+                             expression="province_city_district(@{loc_lon84},@{loc_lat84})" description="None"
+                             name="location"/>
+        </computed_column_group>
+        <computed_column_group description="None" id="common_stat" category="trip">
+            <computed_column chinese_name="充(放)电速度" category="trip"
+                             expression="(trip_end_soc-trip_begin_soc)/trip_seconds" description="None"
+                             name="soc_speed_per_second"/>
+            <computed_column chinese_name="充(放)满秒长" category="trip"
+                             expression="(100-trip_end_soc)/@{soc_speed_per_second}" description="None"
+                             name="trip_charge_full_seconds"/>
+            <computed_column chinese_name="充(放)满时长" category="trip"
+                             expression="@{trip_charge_full_seconds}/${hour_milli}" description="None"
+                             name="trip_charge_full_hours"/>
+            <computed_column chinese_name="充(放)时安时量" category="trip" expression="round3(sum(charge_ah))"
+                             description="None" name="trip_electric_amount"/>
+            <computed_column chinese_name="充(放)时千瓦时" category="trip" expression="round3(sum(charge_kwh))"
+                             description="None" name="charge_kwh"/>
+            <computed_column chinese_name="充(放)时千瓦时" category="trip" expression="round3(sum(charge_kwh))"
+                             description="None" name="trip_charge_power"/>
+            <computed_column chinese_name="满电时千瓦时" category="trip"
+                             expression="round3(@{charge_kwh}*100/trip_soc_amount)" description="None"
+                             name="charge_kwh_full"/>
+            <computed_column chinese_name="充(放)时功率" category="trip" expression="round3(avg(charge_w))"
+                             description="None" name="charge_w"/>
+            <computed_column chinese_name="每SOC充(放)电安时量" category="trip"
+                             expression="round3(@{trip_electric_amount}/trip_soc_amount)" description="None"
+                             name="trip_charge_per_soc_electric"/>
+            <computed_column chinese_name="充满电量" category="trip"
+                             expression="round3(@{trip_charge_per_soc_electric}*100)" description="None"
+                             name="charge_full_electric"/>
+            <computed_column chinese_name="充(放)电开始时电量" category="trip"
+                             expression="round3(trip_begin_soc*@{trip_charge_per_soc_electric})" description="None"
+                             name="trip_charge_begin_electric"/>
+            <computed_column chinese_name="充(放)电结束时电量" category="trip"
+                             expression="round3(trip_end_soc*@{trip_charge_per_soc_electric})" description="None"
+                             name="trip_charge_end_electric"/>
+            <computed_column chinese_name="平均电压" category="trip" expression="round3(avg(veh_volt))" description="None"
+                             name="avg_veh_volt"/>
+            <computed_column chinese_name="平均电流" category="trip" expression="round3(avg(veh_curr))" description="None"
+                             name="avg_veh_curr"/>
+            <computed_column chinese_name="最大总电流" category="trip" expression="max(veh_curr)" description="None"
+                             name="trip_max_current"/>
+            <computed_column chinese_name="最小总电流" category="trip" expression="min(veh_curr)" description="None"
+                             name="trip_min_current"/>
+            <computed_column chinese_name="异常温度序号及时段" category="trip"
+                             expression="duration_by_array(collect_list(struct(tsp_got_time,arr_exception_index_list(temp_list,5,1))))"
+                             description="None" name="temp_exception_index_list"/>
+            <computed_column chinese_name="平均温升" category="trip"
+                             expression="array_stat_component(matrix_stat_component(matrix_swap(collect_list(temp_list)),'max_diff'),'avg')"
+                             description="None" name="trip_temperature_up_avg"/>
+            <computed_column chinese_name="最大温升" category="trip"
+                             expression="array_stat_component(matrix_stat_component(matrix_swap(collect_list(temp_list)),'max_diff'),'max')"
+                             description="None" name="trip_temperature_up_max"/>
+            <computed_column chinese_name="每个探针平均温度" category="trip"
+                             expression="matrix_stat_component(matrix_swap(collect_list(temp_list)),'avg')"
+                             description="None" name="trip_prob_avg_temperature"/>
+            <computed_column chinese_name="每个探针最大温差" category="trip"
+                             expression="matrix_stat_component(matrix_swap(collect_list(temp_list)),'max_diff')"
+                             description="None" name="trip_prob_diff_temperature"/>
+            <computed_column chinese_name="每个探针最大温度" category="trip"
+                             expression="matrix_stat_component(matrix_swap(collect_list(temp_list)),'max')"
+                             description="None" name="trip_prob_max_temperature"/>
+            <computed_column chinese_name="所有探针平均温度" category="trip"
+                             expression="round3(array_stat_component(flatten(collect_list(temp_list)),'avg'))"
+                             description="None" name="trip_all_prob_avg_temperature"/>
+            <computed_column chinese_name="所有探针最大温差" category="trip"
+                             expression="round3(array_stat_component(flatten(collect_list(temp_list)),'max_diff'))"
+                             description="None" name="trip_all_prob_diff_temperature"/>
+            <computed_column chinese_name="所有探针最大温差" category="trip"
+                             expression="round3(array_stat_component(flatten(collect_list(temp_list)),'max_diff'))"
+                             description="None" name="trip_avg_temperature_range"/>
+            <computed_column chinese_name="所有探针最大温度" category="trip"
+                             expression="round3(array_stat_component(flatten(collect_list(temp_list)),'max'))"
+                             description="None" name="trip_all_prob_max_temperature"/>
+            <computed_column chinese_name="最大单体间温差top5" category="trip"
+                             expression="array_stat_component(top_array(matrix_stat_component(collect_list(temp_list),'max_diff'),95),'avg')"
+                             description="None" name="trip_temperature_max_diff_top5"/>
+            <computed_column chinese_name="异常电压序号及时段" category="trip"
+                             expression="duration_by_array(collect_list(struct(tsp_got_time,arr_exception_index_list(voltage_list,300,1.5))))"
+                             description="None" name="voltage_exception_index_list"/>
+            <computed_column chinese_name="平均压升" category="trip"
+                             expression="array_stat_component(matrix_stat_component(matrix_swap(collect_list(voltage_list)),'max_diff'),'avg')"
+                             description="None" name="trip_voltage_up_avg"/>
+            <computed_column chinese_name="最大压升" category="trip"
+                             expression="array_stat_component(matrix_stat_component(matrix_swap(collect_list(voltage_list)),'max_diff'),'max')"
+                             description="None" name="trip_voltage_up_max"/>
+            <computed_column chinese_name="每个单体平均电压" category="trip"
+                             expression="matrix_stat_component(matrix_swap(collect_list(voltage_list)),'avg')"
+                             description="None" name="trip_prob_avg_voltage"/>
+            <computed_column chinese_name="每个单体最大电压" category="trip"
+                             expression="matrix_stat_component(matrix_swap(collect_list(voltage_list)),'max')"
+                             description="None" name="trip_prob_max_voltage"/>
+            <computed_column chinese_name="每个单体最小电压" category="trip"
+                             expression="matrix_stat_component(matrix_swap(collect_list(voltage_list)),'min')"
+                             description="None" name="trip_prob_min_voltage"/>
+            <computed_column chinese_name="每个单体最大压差" category="trip"
+                             expression="matrix_stat_component(matrix_swap(collect_list(voltage_list)),'max_diff')"
+                             description="None" name="trip_prob_diff_voltage"/>
+            <computed_column chinese_name="所有单体平均电压" category="trip"
+                             expression="round3(array_stat_component(flatten(collect_list(voltage_list)),'avg'))"
+                             description="None" name="trip_all_prob_avg_voltage"/>
+            <computed_column chinese_name="所有单体平均电压" category="trip"
+                             expression="round3(array_stat_component(flatten(collect_list(voltage_list)),'avg'))"
+                             description="None" name="avg_su"/>
+            <computed_column chinese_name="所有单体最大电压" category="trip"
+                             expression="round3(array_stat_component(flatten(collect_list(voltage_list)),'max'))"
+                             description="None" name="trip_all_prob_max_voltage"/>
+            <computed_column chinese_name="所有单体最小电压" category="trip"
+                             expression="round3(array_stat_component(flatten(collect_list(voltage_list)),'min'))"
+                             description="None" name="trip_all_prob_min_voltage"/>
+            <computed_column chinese_name="所有单体最大压差" category="trip"
+                             expression="round3(array_stat_component(flatten(collect_list(voltage_list)),'max_diff'))"
+                             description="None" name="trip_all_prob_diff_voltage"/>
+            <computed_column chinese_name="所有单体最大压差" category="trip"
+                             expression="round3(array_stat_component(flatten(collect_list(voltage_list)),'max_diff'))"
+                             description="None" name="trip_avg_voltage_range"/>
+            <computed_column chinese_name="最大单体间压差top5" category="trip"
+                             expression="array_stat_component(top_array(matrix_stat_component(collect_list(voltage_list),'max_diff'),95),'avg')"
+                             description="None" name="trip_voltage_max_diff_top5"/>
+            <computed_column category="trip" expression="avg(veh_insulation)" description="None"
+                             name="veh_insulation_avg"/>
+            <computed_column category="trip" expression="avg(hv_battery_resistance)" description="None"
+                             name="hv_battery_resistance_avg"/>
+            <computed_column chinese_name="电池高温异常" category="trip"
+                             expression="sum(if(alarm_common_temperature_high,1,0))" description="None"
+                             name="alarm_common_temperature_high"/>
+            <computed_column chinese_name="单体电池过压报警" category="trip" expression="sum(if(alarm_common_sc_high,1,0))"
+                             description="None" name="alarm_common_sc_high"/>
+            <computed_column chinese_name="电池单体一致性差报警" category="trip"
+                             expression="sum(if(alarm_common_sc_consistency,1,0))" description="None"
+                             name="alarm_common_sc_consistency"/>
+            <computed_column chinese_name="绝缘报警" category="trip" expression="sum(if(alarm_common_insulation,1,0))"
+                             description="None" name="alarm_common_insulation"/>
+            <computed_column chinese_name="高压互锁状态报警" category="trip" expression="sum(if(alarm_common_hvil_st,1,0))"
+                             description="None" name="alarm_common_hvil_st"/>
+            <computed_column chinese_name="SOC跳变报警" category="trip" expression="sum(if(alarm_common_soc_hop,1,0))"
+                             description="None" name="alarm_common_soc_hop"/>
+            <computed_column chinese_name="驱动电机控制器温度报警" category="trip" expression="sum(if(alarm_common_dmc_temp,1,0))"
+                             description="None" name="alarm_common_dmc_temp"/>
+            <computed_column chinese_name="DC-DC温度报警" category="trip" expression="sum(if(alarm_common_dcdc_temp,1,0))"
+                             description="None" name="alarm_common_dcdc_temp"/>
+            <computed_column chinese_name="SOC过高报警" category="trip" expression="sum(if(alarm_common_soc_high,1,0))"
+                             description="None" name="alarm_common_soc_high"/>
+            <computed_column chinese_name="SOC低报警" category="trip" expression="sum(if(alarm_common_soc_low,1,0))"
+                             description="None" name="alarm_common_soc_low"/>
+            <computed_column chinese_name="温度差异报警（温差）" category="trip"
+                             expression="sum(if(alarm_common_temperature_diff,1,0))" description="None"
+                             name="alarm_common_temperature_diff"/>
+            <computed_column chinese_name="DC-DC状态报警" category="trip" expression="sum(if(alarm_common_dcdc_st,1,0))"
+                             description="None" name="alarm_common_dcdc_st"/>
+            <computed_column chinese_name="车载储能装置欠压报警" category="trip" expression="sum(if(alarm_common_esd_low,1,0))"
+                             description="None" name="alarm_common_esd_low"/>
+            <computed_column chinese_name="单体电池欠压报警" category="trip" expression="sum(if(alarm_common_sc_low,1,0))"
+                             description="None" name="alarm_common_sc_low"/>
+            <computed_column chinese_name="可充电储能系统不匹配报警" category="trip"
+                             expression="sum(if(alarm_common_esd_unmatch,1,0))" description="None"
+                             name="alarm_common_esd_unmatch"/>
+            <computed_column chinese_name="车载储能装置过压报警" category="trip" expression="sum(if(alarm_common_esd_high,1,0))"
+                             description="None" name="alarm_common_esd_high"/>
+            <computed_column chinese_name="制动系统报警" category="trip" expression="sum(if(alarm_common_brk,1,0))"
+                             description="None" name="alarm_common_brk"/>
+            <computed_column chinese_name="驱动电机温度报警" category="trip"
+                             expression="sum(if(alarm_common_driver_motor_temp,1,0))" description="None"
+                             name="alarm_common_driver_motor_temp"/>
+            <computed_column chinese_name="车载储能装置类型过充" category="trip"
+                             expression="sum(if(alarm_common_esd_charge_over,1,0))" description="None"
+                             name="alarm_common_esd_charge_over"/>
+        </computed_column_group>
+        <computed_column_group description="None" id="stat_first_join" category="trip_charging">
+            <computed_column category="trip_charging" expression="coalesce(t2_trip_avg_current,t1_trip_avg_current)"
+                             description="None" name="avg_veh_curr"/>
+            <computed_column category="trip_charging"
+                             expression="coalesce(t2_trip_charge_per_soc_electric,t1_trip_charge_per_soc_electric)"
+                             description="None" name="trip_charge_per_soc_electric"/>
+            <computed_column category="trip_charging"
+                             expression="coalesce(t2_trip_avg_temperature_range,t1_trip_avg_temperature_range)"
+                             description="None" name="trip_avg_temperature_range"/>
+            <computed_column category="trip_charging"
+                             expression="coalesce(t2_trip_avg_voltage_range,t1_trip_avg_voltage_range)"
+                             description="None" name="trip_avg_voltage_range"/>
+            <computed_column category="trip_charging" expression="coalesce(t2_trip_charge_power,t1_trip_charge_power)"
+                             description="None" name="trip_charge_power"/>
+            <computed_column category="trip_charging" expression="coalesce(t2_avg_cell_voltage,t1_avg_cell_voltage)"
+                             description="None" name="avg_su"/>
+            <computed_column category="trip_charging" expression="coalesce(t2_avg_veh_volt,t1_avg_veh_volt)"
+                             description="None" name="avg_veh_volt"/>
+            <computed_column category="trip_charging"
+                             expression="coalesce(t2_trip_charge_full_hours,t1_trip_charge_full_hours)"
+                             description="None" name="trip_charge_full_hours"/>
+        </computed_column_group>
+        <computed_column_group description="None" id="discharge_stat" category="trip">
+            <computed_column chinese_name="空调状态" category="trip"
+                             expression="agg_by(collect_list(struct(tsp_got_time,ac_control_mode)),'max_diff','sum')"
+                             description="None" name="ac_control_mode"/>
+            <computed_column chinese_name="平均车速" category="trip"
+                             expression="array_descriptive_statistics(collect_list(veh_spd))" description="None"
+                             name="veh_spd_stats"/>
+            <computed_column chinese_name="夜间行驶里程" category="trip"
+                             expression="agg_by(collect_list(struct(veh_odo,is_night_hour(tsp_got_time,0,6))),'max_diff','sum')"
+                             description="None" name="trip_odo_amount_night"/>
+            <computed_column chinese_name="夜间行驶时长" category="trip"
+                             expression="agg_by(collect_list(struct(tsp_got_time,is_night_hour(tsp_got_time,0,6))),'max_diff','sum')"
+                             description="None" name="trip_seconds_night"/>
+            <computed_column chinese_name="百公里电耗" category="trip"
+                             expression="abs(@{trip_electric_amount}*100/veh_odo_change)" description="100公里耗电量"
+                             name="power_consumption_per_hundred_kilometers"/>
+            <computed_column category="trip" expression="sum(cast(brake_pedal_state as int))" description="None"
+                             name="brake_pedal_count"/>
+            <computed_column category="trip"
+                             expression="array_descriptive_statistics(filter_zero_null(collect_list(brake_pedal_position)))"
+                             description="None" name="brake_pedal_position_stat"/>
+            <computed_column category="trip" expression="sum(cast(accelerator_pedal_state as int))" description="None"
+                             name="accelerator_pedal_count"/>
+            <computed_column category="trip"
+                             expression="array_descriptive_statistics(filter_zero_null(collect_list(accelerator_pedal_position)))"
+                             description="None" name="accelerator_pedal_position_stat"/>
+            <computed_column category="trip"
+                             expression="array_descriptive_statistics(filter_zero_null(collect_list(motor_busbar_current)))"
+                             description="None" name="motor_busbar_current_stat"/>
+            <computed_column category="trip"
+                             expression="array_descriptive_statistics(filter_zero_null(collect_list(motor_controller_temp)))"
+                             description="None" name="motor_controller_temp_stat"/>
+            <computed_column category="trip"
+                             expression="array_descriptive_statistics(filter_zero_null(collect_list(motor_current)))"
+                             description="None" name="motor_current_stat"/>
+            <computed_column category="trip"
+                             expression="array_descriptive_statistics(filter_zero_null(collect_list(motor_temp)))"
+                             description="None" name="motor_temp_stat"/>
+            <computed_column category="trip"
+                             expression="array_descriptive_statistics(filter_zero_null(collect_list(motor_torq)))"
+                             description="None" name="motor_torq_stat"/>
+            <computed_column chinese_name="电机控制器温度：时长" category="trip"
+                             expression="agg_by(collect_list(struct(tsp_got_time,driver_controller_temp_section)),'max_diff','sum')"
+                             description="None" name="controller_temp_duration"/>
+            <computed_column chinese_name="电机控制器温度：时长" category="trip"
+                             expression="agg_by(collect_list(struct(tsp_got_time,driver_motor_temp_section)),'max_diff','sum')"
+                             description="None" name="motor_temp_duration"/>
+            <computed_column chinese_name="电机电流_电机电压：时长" category="trip"
+                             expression="agg_by(collect_list(struct(tsp_got_time,concat_ws_null('/',driver_motor_curr_section,driver_motor_volt_section))),'max_diff','sum')"
+                             description="None" name="driver_motor_curr_voltage_duration"/>
+            <computed_column chinese_name="速度_加速度：时长" category="trip"
+                             expression="agg_by(collect_list(struct(tsp_got_time,concat_ws_null('/',veh_spd_section,veh_acc_spd_section))),'max_diff','sum')"
+                             description="None" name="spd_acc_duration"/>
+            <computed_column chinese_name="加速踏板开度：时长" category="trip"
+                             expression="agg_by(collect_list(struct(tsp_got_time,accelerator_position_section)),'max_diff','sum')"
+                             description="None" name="accelerator_position_section_duration"/>
+            <computed_column chinese_name="加速踏板开度_车速：时长" category="trip"
+                             expression="agg_by(collect_list(struct(tsp_got_time,concat_ws_null('/',accelerator_position_section,veh_spd_section))),'max_diff','sum')"
+                             description="None" name="accelerator_spd_duration"/>
+            <computed_column chinese_name="制动踏板开度_车速：时长" category="trip"
+                             expression="agg_by(collect_list(struct(tsp_got_time,concat_ws_null('/',brake_pedal_position_section,veh_spd_section))),'max_diff','sum')"
+                             description="None" name="break_spd_duration"/>
+            <computed_column chinese_name="车速：时长" category="trip"
+                             expression="agg_by(collect_list(struct(tsp_got_time,veh_spd_section)),'max_diff','sum')"
+                             description="None" name="veh_spd_section_duration"/>
+            <computed_column chinese_name="车速：行驶里程" category="trip"
+                             expression="agg_by(collect_list(struct(veh_odo,veh_spd_section)),'max_diff','sum')"
+                             description="None" name="veh_spd_section_mileage"/>
+            <computed_column chinese_name="电机转速_车速：时长" category="trip"
+                             expression="agg_by(collect_list(struct(tsp_got_time,concat_ws_null('/',driver_motor_spd_section,veh_spd_section))),'max_diff','sum')"
+                             description="None" name="rotate_speed_duration"/>
+            <computed_column chinese_name="电机转速_电机转矩：时长" category="trip"
+                             expression="agg_by(collect_list(struct(tsp_got_time,concat_ws_null('/',driver_motor_spd_section,driver_motor_torq_section))),'max_diff','sum')"
+                             description="None" name="rotate_torq_duration"/>
+            <computed_column chinese_name="通勤分数" category="trip"
+                             expression="commute_score(collect_set(value_section(tsp_got_time,${hour_milli})))"
+                             description="None" name="commute_score"/>
+            <computed_column chinese_name="加速时长" category="trip" expression="sum(accelerator_pedal_duration)"
+                             description="None" name="accelerator_pedal_duration"/>
+            <computed_column chinese_name="制动时长" category="trip" expression="sum(brake_pedal_duration)"
+                             description="None" name="brake_pedal_duration"/>
+            <computed_column chinese_name="无加速及制动时长" category="trip"
+                             expression="trip_end_time-trip_begin_time-sum(accelerator_pedal_duration)-sum(brake_pedal_duration)"
+                             description="None" name="no_action_duration"/>
+            <computed_column chinese_name="急加速次数" category="trip"
+                             expression="sum(cast(rapidly_speed_accelerate as int))" description="None"
+                             name="rapidly_accelerate_count"/>
+            <computed_column chinese_name="急减速次数" category="trip"
+                             expression="sum(cast(rapidly_speed_decelerate as int))" description="None"
+                             name="rapidly_decelerate_count"/>
+            <computed_column chinese_name="低中高速持续时长" category="trip"
+                             expression="agg_by(collect_list(struct(tsp_got_time,value_section(veh_spd,${speed_separator}))),'max_diff','sum')"
+                             description="None" name="speed_section_duration"/>
+        </computed_column_group>
+    </computed_column_groups>
+    <sources>
+        <source_parquet dw_level="ods" path="charge_stat" description="充电行程统计表,当月" is_cache="false"
+                        id="charge_stat_source" sort_columns="false" owner="whq" range_date="this_month" output_range_date="this_month"
+                        is_rollup="false"/>
+    </sources>
+    <transforms>
+        <transform_transform
+                dw_level="tmp" path="charge_stat" description="充电行程统计"
+                group_by="vin,is_quick,trip_charge_soc_speed,trip_begin_time,trip_end_time,trip_seconds,trip_soc_amount,trip_begin_soc,trip_end_soc"
+                is_cache="false" id="charge_stat" measures_ref="charge_stat,common_stat" sort_columns="false"
+                transform_ref="charge_trip_detail" owner="whq" range_date="none" is_rollup="false"/>
+        <transform_join
+                dw_level="tmp" join_type="inner" description="充电行程的tbox详细数据" left="charge_trip" join_columns="vin"
+                is_cache="false" id="charge_trip_detail" drop_duplicate_fields="true" sort_columns="false"
+                where="tsp_got_time &gt;= trip_begin_time AND tsp_got_time &lt; trip_end_time" owner="whq"
+                range_date="none" right="tsp_normalized_data_day" is_rollup="false"/>
+        <transform_transform dw_level="tmp" description="充电行程统计表,当月" is_cache="false" id="charge_stat_s"
+                             sort_columns="false" transform_ref="charge_stat_source" owner="whq" range_date="none"
+                             is_rollup="false">
+            <computed_column_group>
+                <computed_column name="trip_begin_time_prev"
+                                 expression="lag(trip_begin_time,1,null) over(partition by vin order by trip_begin_time)"
+                                 category="trip_charging" chinese_name="上次充电时间"/>
+                <computed_column name="days_to_prev"
+                                 expression="cast((trip_begin_time-@{trip_begin_time_prev})/${day_milli} as int)"
+                                 category="trip_charging" chinese_name="距离上次充电间隔"/>
+            </computed_column_group>
+        </transform_transform>
+    </transforms>
+</dw>

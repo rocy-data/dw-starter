@@ -1,0 +1,39 @@
+<dw xmlns="https://www.rocy-data.com/dw/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://www.rocy-data.com/dw/v1.0.0 ../../.dw/dw.xsd" dw_market="market1" dw_subject="subject1"
+    owner="whq" dw_level="ods"
+>
+    <sources>
+        <source_sequence_constants id="id_source_test_range_date">
+            <sequence_constant column_name="product_id" column_values="0,2,3"/>
+        </source_sequence_constants>
+    </sources>
+    <transforms>
+        <transform_join id="id_trans_join_range_date"
+                        join_columns="product_id"
+                        left="id_source_csv_path_day" right="id_source_test_range_date">
+            <measures>
+                <computed_column name="days" expression="count(distinct PARTITIONS)"/>
+            </measures>
+        </transform_join>
+        <transform_join id="id_trans_join_range_date_week"
+                        join_columns="product_id"
+                        left="id_source_csv_path_week" right="id_source_test_range_date">
+            <measures>
+                <computed_column name="days" expression="count(distinct PARTITIONS)"/>
+            </measures>
+        </transform_join>
+
+        <transform_transform id="id_range_date_week" transform_ref="id_source_csv_path_week" group_by="product_id">
+            <measures>
+                <computed_column name="avg" expression="avg(amount)"/>
+            </measures>
+        </transform_transform>
+        <transform_transform id="id_range_date_month" transform_ref="id_source_csv_path_month" group_by="product_id">
+            <measures>
+                <computed_column name="avg" expression="avg(amount)"/>
+            </measures>
+        </transform_transform>
+
+        <transform_join left="id_range_date_week" right="id_range_date_month" id="id_range_date_week_join_month" join_columns="product_id" />
+    </transforms>
+</dw>

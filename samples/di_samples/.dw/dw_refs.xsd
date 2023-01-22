@@ -1,0 +1,919 @@
+<xs:schema 
+elementFormDefault="qualified" targetNamespace="https://www.rocy-data.com/dw/refs" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:simpleType name="pipeline_id">
+        <xs:restriction base="xs:string"> </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="estimator_id">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="test">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_transformer_feature_hashing_tf </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="dt">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_classification_decision_tree_classifier </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_als_training">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_recommendation_als </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="test_estimator">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_classification_logistic_regression </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_kmeans">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_clustering_k_means </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_fpg">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_fp_growth </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="tokenizer">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_transformer_feature_tokenizer </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_one_vs_rest_transform">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_classification_one_vs_rest </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_estimator_cv">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_tuning_cross_validator </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="labelIndexer">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_feature_string_indexer </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="classifier_def">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_classification_logistic_regression </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="lr">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_classification_logistic_regression </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="idf">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_feature_idf </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_ml_tune_tokenizer">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_transformer_feature_tokenizer </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_ml_tune_lr">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_classification_logistic_regression </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_clustering_lda">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_clustering_lda </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="featureIndexer">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_feature_vector_indexer </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_pipeline_lr">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_classification_logistic_regression </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="lr_multiclass">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_classification_logistic_regression </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="di_pipeline_id">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="tokenizer">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_transformer_feature_tokenizer </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="test">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_transformer_feature_hashing_tf </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_ml_tune_tokenizer">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_transformer_feature_tokenizer </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="evaluator_id">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="id_evaluator_als">
+                <xs:annotation>
+                    <xs:documentation> sink_ml_evaluator_regression </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_evaluator_clustering">
+                <xs:annotation>
+                    <xs:documentation> sink_ml_evaluator_clustering </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="evaluator">
+                <xs:annotation>
+                    <xs:documentation> sink_ml_evaluator_multiclass_classification </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_v_evaluator_binary_classification">
+                <xs:annotation>
+                    <xs:documentation> sink_ml_evaluator_binary_classification </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="computed_column_group_id">
+        <xs:restriction base="xs:string"> </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="valid_path">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="index_description">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/metadata/index_description </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sample_libsvm_data">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/dw/data/spark/data/mllib/sample_libsvm_data.txt </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sample_multiclass_classification_data">
+                <xs:annotation>
+                    <xs:documentation> dw/data/spark/data/mllib/sample_multiclass_classification_data.txt </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="table_field">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/metadata/table_field </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="path_tree">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/metadata/path_tree </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="index_blood">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/metadata/index_blood </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sample_movielens_ratings">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/dw/data/spark/data/mllib/als/sample_movielens_ratings.txt </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="path_id_fpg_model">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/model_output/id_fpg </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="constants">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/metadata/constants </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="storage_blood">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/metadata/storage_blood </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="path_id_cross_validation_model">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/model_output/id_cross_validation </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="path_lr_multiclass">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/model_output/lr_multiclass </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sample_kmeans_data">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/dw/data/spark/data/mllib/sample_kmeans_data.txt </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="path_idf_model">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/model_output/idf_model </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="path_clustering_lda_model">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/model_output/clustering_lda </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="index_dimension">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/metadata/index_dimension </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sample_lda_libsvm_data">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/dw/data/spark/data/mllib/sample_lda_libsvm_data.txt </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="udf">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/metadata/udf </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="index_blood_deep">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/metadata/index_blood_deep </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="table_cycle">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/metadata/table_cycle </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="name_hello_world_path">
+                <xs:annotation>
+                    <xs:documentation> dw/data/hello_world </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="table_blood">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/metadata/table_blood </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="storage_level">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/metadata/storage_level </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="lr_model">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/model_output/lr_model </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="path_als_model">
+                <xs:annotation>
+                    <xs:documentation> ${PROJECT_PATH}/model_output/als </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="source_id">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="id_sample_multiclass_classification_data_source">
+                <xs:annotation>
+                    <xs:documentation> source_ml_libsvm </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_blood_deep">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="lda_model_invoke_logPerplexity">
+                <xs:annotation>
+                    <xs:documentation> source_ml_model_invoke </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="lda_model_invoke_logLikelihood">
+                <xs:annotation>
+                    <xs:documentation> source_ml_model_invoke </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_model_check">
+                <xs:annotation>
+                    <xs:documentation> source_ml_model_file </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="source_sample_lda_libsvm_data">
+                <xs:annotation>
+                    <xs:documentation> source_ml_libsvm </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_table_field">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="lda_model_invoke_describeTopics">
+                <xs:annotation>
+                    <xs:documentation> source_ml_model_invoke </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_storage_level">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_path_tree">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_storage_blood">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_als_invoke_recommendForAllItems">
+                <xs:annotation>
+                    <xs:documentation> source_ml_model_invoke </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_als_invoke_recommendForAllUsers">
+                <xs:annotation>
+                    <xs:documentation> source_ml_model_invoke </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="training">
+                <xs:annotation>
+                    <xs:documentation> source_ml_libsvm </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sentenceData">
+                <xs:annotation>
+                    <xs:documentation> source_sequence_constants </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_description">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sample_movielens_ratings">
+                <xs:annotation>
+                    <xs:documentation> source_text </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="source_sample_kmeans_data">
+                <xs:annotation>
+                    <xs:documentation> source_ml_libsvm </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_ml_tuning_test">
+                <xs:annotation>
+                    <xs:documentation> source_sequence_constants </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_blood">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_model_invoke_associationRules">
+                <xs:annotation>
+                    <xs:documentation> source_ml_model_invoke </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_als_invoke_recommendForItemSubset">
+                <xs:annotation>
+                    <xs:documentation> source_ml_model_invoke </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_dimension">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="dataFrame">
+                <xs:annotation>
+                    <xs:documentation> source_sequence_constants </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_pipeline_training">
+                <xs:annotation>
+                    <xs:documentation> source_sequence_constants </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_table_blood">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_model_invoke_freqItemsets">
+                <xs:annotation>
+                    <xs:documentation> source_ml_model_invoke </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_table_cycle">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_whole_text_files_source">
+                <xs:annotation>
+                    <xs:documentation> source_whole_text_files </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_model_invoke_transform">
+                <xs:annotation>
+                    <xs:documentation> source_ml_model_invoke </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_fpgrowth">
+                <xs:annotation>
+                    <xs:documentation> source_sequence_constants </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_constants">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_udf">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_als_invoke_recommendForUserSubset">
+                <xs:annotation>
+                    <xs:documentation> source_ml_model_invoke </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_ml_tuning_training">
+                <xs:annotation>
+                    <xs:documentation> source_sequence_constants </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="common_computed_column_name">
+        <xs:restriction base="xs:string"> </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="transform_id">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="id_sample_multiclass_classification_data_source">
+                <xs:annotation>
+                    <xs:documentation> source_ml_libsvm </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_blood_deep">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="lda_model_invoke_logPerplexity">
+                <xs:annotation>
+                    <xs:documentation> source_ml_model_invoke </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="lda_model_invoke_logLikelihood">
+                <xs:annotation>
+                    <xs:documentation> source_ml_model_invoke </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="dt">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_classification_decision_tree_classifier </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_ml_tuning_pipeline">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_pipeline </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_model_check">
+                <xs:annotation>
+                    <xs:documentation> source_ml_model_file </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_als_training">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_recommendation_als </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="source_sample_lda_libsvm_data">
+                <xs:annotation>
+                    <xs:documentation> source_ml_libsvm </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_table_field">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="lda_model_invoke_describeTopics">
+                <xs:annotation>
+                    <xs:documentation> source_ml_model_invoke </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_storage_level">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_path_tree">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_word_count_stat_transform">
+                <xs:annotation>
+                    <xs:documentation> transform_transform </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_storage_blood">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="normalizer">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_transformer_feature_normalizer </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_als_invoke_recommendForAllItems">
+                <xs:annotation>
+                    <xs:documentation> source_ml_model_invoke </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_als_invoke_recommendForAllUsers">
+                <xs:annotation>
+                    <xs:documentation> source_ml_model_invoke </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_kmeans">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_clustering_k_means </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="training">
+                <xs:annotation>
+                    <xs:documentation> source_ml_libsvm </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sentenceData">
+                <xs:annotation>
+                    <xs:documentation> source_sequence_constants </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_description">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="hashingTF">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_transformer_feature_hashing_tf </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sample_movielens_ratings">
+                <xs:annotation>
+                    <xs:documentation> source_text </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="source_sample_kmeans_data">
+                <xs:annotation>
+                    <xs:documentation> source_ml_libsvm </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_ml_tuning_test">
+                <xs:annotation>
+                    <xs:documentation> source_sequence_constants </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_fpg">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_fp_growth </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_blood">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_one_vs_rest_transform">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_classification_one_vs_rest </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_model_invoke_associationRules">
+                <xs:annotation>
+                    <xs:documentation> source_ml_model_invoke </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_schema_test">
+                <xs:annotation>
+                    <xs:documentation> transform_schema </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="test_schema">
+                <xs:annotation>
+                    <xs:documentation> transform_schema </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="schema">
+                <xs:annotation>
+                    <xs:documentation> transform_schema </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_als_invoke_recommendForItemSubset">
+                <xs:annotation>
+                    <xs:documentation> source_ml_model_invoke </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_estimator_cv_test">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_model_tuning_cross_validator </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_estimator_cv">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_tuning_cross_validator </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="labelIndexer">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_feature_string_indexer </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_random_split_random_test">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_utility_random_split </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_dimension">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="dataFrame">
+                <xs:annotation>
+                    <xs:documentation> source_sequence_constants </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="lr">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_classification_logistic_regression </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_random_split_get_test">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_utility_random_split </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_pipeline_training">
+                <xs:annotation>
+                    <xs:documentation> source_sequence_constants </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="idf">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_feature_idf </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_als_test">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_model_recommendation_als </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_table_blood">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_model_invoke_freqItemsets">
+                <xs:annotation>
+                    <xs:documentation> source_ml_model_invoke </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_random_split_get_training">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_utility_random_split </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_table_cycle">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_whole_text_files_source">
+                <xs:annotation>
+                    <xs:documentation> source_whole_text_files </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_model_invoke_transform">
+                <xs:annotation>
+                    <xs:documentation> source_ml_model_invoke </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sqlTrans">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_transformer_feature_sql_transformer </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_use_pipeline">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_pipeline </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_clustering_lda">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_clustering_lda </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_source_fpgrowth">
+                <xs:annotation>
+                    <xs:documentation> source_sequence_constants </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="featureIndexer">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_feature_vector_indexer </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_feature_tokenizer">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_transformer_feature_tokenizer </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_constants">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="lr_multiclass">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_classification_logistic_regression </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_als_test_path">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_model_recommendation_als </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_udf">
+                <xs:annotation>
+                    <xs:documentation> source_dictionary </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_als_invoke_recommendForUserSubset">
+                <xs:annotation>
+                    <xs:documentation> source_ml_model_invoke </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_ml_tuning_training">
+                <xs:annotation>
+                    <xs:documentation> source_sequence_constants </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="classifier_id">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="dt">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_classification_decision_tree_classifier </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="test_estimator">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_classification_logistic_regression </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_one_vs_rest_transform">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_classification_one_vs_rest </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="classifier_def">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_classification_logistic_regression </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="lr">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_classification_logistic_regression </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_ml_tune_lr">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_classification_logistic_regression </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_pipeline_lr">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_classification_logistic_regression </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="lr_multiclass">
+                <xs:annotation>
+                    <xs:documentation> transform_ml_estimator_classification_logistic_regression </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="sink_id">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="sys_path_tree_sink">
+                <xs:annotation>
+                    <xs:documentation> sink_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_evaluator_als">
+                <xs:annotation>
+                    <xs:documentation> sink_ml_evaluator_regression </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="test">
+                <xs:annotation>
+                    <xs:documentation> sink_show </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_udf_sink">
+                <xs:annotation>
+                    <xs:documentation> sink_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_word_count_stat_sink">
+                <xs:annotation>
+                    <xs:documentation> sink_show </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sink_ml_test">
+                <xs:annotation>
+                    <xs:documentation> sink_show </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="evaluator">
+                <xs:annotation>
+                    <xs:documentation> sink_ml_evaluator_multiclass_classification </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="id_evaluator_clustering">
+                <xs:annotation>
+                    <xs:documentation> sink_ml_evaluator_clustering </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_table_field_sink">
+                <xs:annotation>
+                    <xs:documentation> sink_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_constants_sink">
+                <xs:annotation>
+                    <xs:documentation> sink_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_table_cycle_sink">
+                <xs:annotation>
+                    <xs:documentation> sink_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_table_blood_sink">
+                <xs:annotation>
+                    <xs:documentation> sink_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_description_sink">
+                <xs:annotation>
+                    <xs:documentation> sink_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_dimension_sink">
+                <xs:annotation>
+                    <xs:documentation> sink_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_blood_sink">
+                <xs:annotation>
+                    <xs:documentation> sink_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_index_blood_deep_sink">
+                <xs:annotation>
+                    <xs:documentation> sink_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_storage_level_sink">
+                <xs:annotation>
+                    <xs:documentation> sink_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sys_storage_blood_sink">
+                <xs:annotation>
+                    <xs:documentation> sink_json </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

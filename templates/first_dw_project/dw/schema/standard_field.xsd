@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+        elementFormDefault="qualified"
+        targetNamespace="https://www.rocy-data.com/dw/standard_field"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:simpleType name="standard_field">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="my_brake_master_cylinder_pressure_signal">
+                <xs:annotation>
+                    <xs:documentation>
+                        category:veh/veh_state
+                        signal_chinese:制动主缸压力信号
+                        unit:none
+                        data_type:enumeration
+                        data_range:none
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="my_brake_master_cylinder_pressure_signal2">
+                <xs:annotation>
+                    <xs:documentation>
+                        category:veh/veh_state
+                        signal_chinese:制动主缸压力信号
+                        unit:none
+                        data_type:enumeration
+                        data_range:none
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
+

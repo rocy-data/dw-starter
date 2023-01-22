@@ -1,0 +1,207 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="https://www.rocy-data.com/dw/index_category">
+    <xs:simpleType name="index_category">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="security">
+                <xs:annotation>
+                    <xs:documentation>安全</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="dimension">
+                <xs:annotation>
+                    <xs:documentation>非指标,用作维度</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="none">
+                <xs:annotation>
+                    <xs:documentation>非指标</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="dw_system">
+                <xs:annotation>
+                    <xs:documentation>DW内部使用</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="basic">
+                <xs:annotation>
+                    <xs:documentation>基础指标</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="alarm">
+                <xs:annotation>
+                    <xs:documentation>电气信号/报警数据</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="extreme">
+                <xs:annotation>
+                    <xs:documentation>电气信号/极值数据</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="electric">
+                <xs:annotation>
+                    <xs:documentation>电气信号</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="lbs">
+                <xs:annotation>
+                    <xs:documentation>地理位置服务</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="diagnosis">
+                <xs:annotation>
+                    <xs:documentation>故障诊断</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="working_condition">
+                <xs:annotation>
+                    <xs:documentation>车辆研发/车辆工况</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="vehicle_health">
+                <xs:annotation>
+                    <xs:documentation>车辆研发/整车健康</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="lifecycle">
+                <xs:annotation>
+                    <xs:documentation>车辆研发/车辆生命周期</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="rd_experiment">
+                <xs:annotation>
+                    <xs:documentation>车辆研发/试验车</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+
+            <xs:enumeration value="user_profile">
+                <xs:annotation>
+                    <xs:documentation>车主分析/用户画像</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="vehicle_profile">
+                <xs:annotation>
+                    <xs:documentation>车主分析/单车画像</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="air_condition">
+                <xs:annotation>
+                    <xs:documentation>车主分析/功能行为/空调功能</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="power_function">
+                <xs:annotation>
+                    <xs:documentation>车主分析/功能行为/动力功能</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="other_function">
+                <xs:annotation>
+                    <xs:documentation>车主分析/功能行为/其他功能</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+
+            <xs:enumeration value="drive_habit">
+                <xs:annotation>
+                    <xs:documentation>车主分析/驾驶行为/驾驶习惯</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="drive_travel">
+                <xs:annotation>
+                    <xs:documentation>车主分析/驾驶行为/出行习惯</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="drive_power_consume">
+                <xs:annotation>
+                    <xs:documentation>车主分析/驾驶行为/续航与能耗</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+
+            <xs:enumeration value="charging_pile">
+                <xs:annotation>
+                    <xs:documentation>电桩分析</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="trip">
+                <xs:annotation>
+                    <xs:documentation>行程</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="trip_charging">
+                <xs:annotation>
+                    <xs:documentation>三电分析/电池/充电行程</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="trip_discharging">
+                <xs:annotation>
+                    <xs:documentation>三电分析/电池/放电行程</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="trip_temperature">
+                <xs:annotation>
+                    <xs:documentation>三电分析/电池/充放电行程温度</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="battery_health">
+                <xs:annotation>
+                    <xs:documentation>三电分析/电池/电池健康</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="battery_performance">
+                <xs:annotation>
+                    <xs:documentation>三电分析/电池/电池性能</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="battery_consistency">
+                <xs:annotation>
+                    <xs:documentation>三电分析/电池/一致性</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="battery_running_stat">
+                <xs:annotation>
+                    <xs:documentation>三电分析/电池/运行统计</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="running_stat">
+                <xs:annotation>
+                    <xs:documentation>运行统计</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="battery_fault">
+                <xs:annotation>
+                    <xs:documentation>三电分析/电池/故障</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="battery_model">
+                <xs:annotation>
+                    <xs:documentation>三电分析/电池/模型</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+
+            <xs:enumeration value="motor">
+                <xs:annotation>
+                    <xs:documentation>三电分析/电机</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="controller">
+                <xs:annotation>
+                    <xs:documentation>三电分析/电控</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="second-hand">
+                <xs:annotation>
+                    <xs:documentation>数据增值/二手车</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="maintenance">
+                <xs:annotation>
+                    <xs:documentation>数据增值/车辆维保</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="insurance">
+                <xs:annotation>
+                    <xs:documentation>数据增值/保险服务</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

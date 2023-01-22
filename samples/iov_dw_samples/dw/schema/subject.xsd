@@ -1,0 +1,12 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="https://www.rocy-data.com/dw/subject">
+    <xs:simpleType name="subject">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Meta Data"/>
+            <xs:enumeration value="subject1"/>
+            <xs:enumeration value="subject2"/>
+            <xs:enumeration value="subject3"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

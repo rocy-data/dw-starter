@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="GB2312" ?>
+<dw xmlns="https://www.rocy-data.com/dw/v1.0.0"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="https://www.rocy-data.com/dw/v1.0.0  dw.xsd"
+     owner="whq" dw_market="RX-DATA" dw_subject="Meta Data" dw_level="ods">
+    <path_list>
+        <profile name="SYS_PROFILE">
+            <path name="path_tree" path="${PROJECT_PATH}/metadata/path_tree" pattern="none" partition_count="1"/>
+            <path name="storage_blood" path="${PROJECT_PATH}/metadata/storage_blood" pattern="none" partition_count="1"/>
+            <path name="constants" path="${PROJECT_PATH}/metadata/constants" pattern="none" partition_count="1"/>
+            <path name="index_blood" path="${PROJECT_PATH}/metadata/index_blood" pattern="none"
+                  partition_count="1"/>
+            <path name="index_blood_deep" path="${PROJECT_PATH}/metadata/index_blood_deep" pattern="none"
+                  partition_count="1"/>
+            <path name="index_description" path="${PROJECT_PATH}/metadata/index_description" pattern="none"
+                  partition_count="1"/>
+            <path name="index_dimension" path="${PROJECT_PATH}/metadata/index_dimension" pattern="none"
+                  partition_count="1"/>
+            <path name="storage_level" path="${PROJECT_PATH}/metadata/storage_level" pattern="none"
+                  partition_count="1"/>
+            <path name="table_blood" path="${PROJECT_PATH}/metadata/table_blood" pattern="none"
+                  partition_count="1"/>
+            <path name="table_cycle" path="${PROJECT_PATH}/metadata/table_cycle" pattern="none"
+                  partition_count="1"/>
+            <path name="table_field" path="${PROJECT_PATH}/metadata/table_field" pattern="none"
+                  partition_count="1"/>
+            <path name="udf" path="${PROJECT_PATH}/metadata/udf" pattern="none"
+                  partition_count="1"/>
+        </profile>
+    </path_list>
+    <sources>
+        <source_dictionary dictionary_type="path_tree" is_rollup="false" range_date="none" owner="whq"
+                           id="sys_path_tree" dw_level="ods"/>
+        <source_dictionary dictionary_type="storage_blood" is_rollup="false" range_date="none" owner="whq"
+                           id="sys_storage_blood" dw_level="ods"/>
+        <source_dictionary dictionary_type="constants" is_rollup="false" range_date="none" owner="whq"
+                           id="sys_constants" dw_level="ods"/>
+        <source_dictionary dictionary_type="index_blood" is_rollup="false" range_date="none" owner="whq"
+                           id="sys_index_blood" dw_level="ods"/>
+        <source_dictionary dictionary_type="index_blood_deep" is_rollup="false" range_date="none" owner="whq"
+                           id="sys_index_blood_deep" dw_level="ods"/>
+        <source_dictionary dictionary_type="index_description" is_rollup="false" range_date="none" owner="whq"
+                           id="sys_index_description" dw_level="ods"/>
+        <source_dictionary dictionary_type="index_dimension" is_rollup="false" range_date="none" owner="whq"
+                           id="sys_index_dimension" dw_level="ods"/>
+        <source_dictionary dictionary_type="storage_level" is_rollup="false" range_date="none" owner="whq"
+                           id="sys_storage_level" dw_level="ods"/>
+        <source_dictionary dictionary_type="table_blood" is_rollup="false" range_date="none" owner="whq"
+                           id="sys_table_blood" dw_level="ods"/>
+        <source_dictionary dictionary_type="table_cycle" is_rollup="false" range_date="none" owner="whq"
+                           id="sys_table_cycle" dw_level="ods"/>
+        <source_dictionary dictionary_type="table_field" is_rollup="false" range_date="none" owner="whq"
+                           id="sys_table_field" dw_level="ods"/>
+        <source_dictionary dictionary_type="udf" is_rollup="false" range_date="none" owner="whq"
+                           id="sys_udf" dw_level="ods"/>
+    </sources>
+
+    <sinks>
+        <sink_json is_rollup="false" range_date="none" owner="whq" transform_ref="sys_path_tree" id="sys_path_tree_sink"
+                   sink_cycle="daily" path="path_tree" sink_t_add="1" dw_level="sys"/>
+        <sink_json is_rollup="false" range_date="none" owner="whq" transform_ref="sys_storage_blood" id="sys_storage_blood_sink"
+                   sink_cycle="daily" path="storage_blood" sink_t_add="1" dw_level="sys"/>
+        <sink_json is_rollup="false" range_date="none" owner="whq" transform_ref="sys_constants" id="sys_constants_sink"
+                   sink_cycle="daily" path="constants" sink_t_add="1" dw_level="sys"/>
+        <sink_json is_rollup="false" range_date="none" owner="whq" transform_ref="sys_index_blood"
+                   id="sys_index_blood_sink" sink_cycle="daily" path="index_blood" sink_t_add="1" dw_level="sys"/>
+        <sink_json is_rollup="false" range_date="none" owner="whq" transform_ref="sys_index_blood_deep"
+                   id="sys_index_blood_deep_sink" sink_cycle="daily" path="index_blood_deep" sink_t_add="1"
+                   dw_level="sys"/>
+        <sink_json is_rollup="false" range_date="none" owner="whq" transform_ref="sys_index_description"
+                   id="sys_index_description_sink" sink_cycle="daily" path="index_description" sink_t_add="1"
+                   dw_level="sys"/>
+        <sink_json is_rollup="false" range_date="none" owner="whq" transform_ref="sys_index_dimension"
+                   id="sys_index_dimension_sink" sink_cycle="daily" path="index_dimension" sink_t_add="1"
+                   dw_level="sys"/>
+        <sink_json is_rollup="false" range_date="none" owner="whq" transform_ref="sys_storage_level"
+                   id="sys_storage_level_sink" sink_cycle="daily" path="storage_level" sink_t_add="1" dw_level="sys"/>
+        <sink_json is_rollup="false" range_date="none" owner="whq" transform_ref="sys_table_blood"
+                   id="sys_table_blood_sink" sink_cycle="daily" path="table_blood" sink_t_add="1" dw_level="sys"/>
+        <sink_json is_rollup="false" range_date="none" owner="whq" transform_ref="sys_table_cycle"
+                   id="sys_table_cycle_sink" sink_cycle="daily" path="table_cycle" sink_t_add="1" dw_level="sys"/>
+        <sink_json is_rollup="false" range_date="none" owner="whq" transform_ref="sys_table_field"
+                   id="sys_table_field_sink" sink_cycle="daily" path="table_field" sink_t_add="1" dw_level="sys"/>
+        <sink_json is_rollup="false" range_date="none" owner="whq" transform_ref="sys_udf"
+                   id="sys_udf_sink" sink_cycle="daily" path="udf" sink_t_add="1" dw_level="sys"/>
+    </sinks>
+</dw>

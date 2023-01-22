@@ -1,0 +1,11 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="https://www.rocy-data.com/dw/owner">
+    <xs:simpleType name="owner">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="rocy"/>
+            <xs:enumeration value="jason"/>
+            <xs:enumeration value="whq"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

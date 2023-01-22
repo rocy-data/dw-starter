@@ -1,0 +1,16 @@
+<di_pipeline xsi:schemaLocation="https://www.rocy-data.com/di/v1.0.0  ../../.dw/di.xsd"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns="https://www.rocy-data.com/di/v1.0.0" dw_level="dws" dw_market="market1" dw_subject="subject1" owner="rocy">
+    <transforms>
+        <transform_ml_transformer_feature_tokenizer output_col="words" dw_level="tmp" input_col="text" id="tokenizer"
+                                                    range_date="none" is_rollup="false" is_begin="true"/>
+        <transform_ml_transformer_feature_hashing_tf output_col="features" dw_level="tmp" input_col="words"
+                                                     id="id_pipeline_hashingTF" range_date="none" is_rollup="false"/>
+        <transform_ml_estimator_classification_logistic_regression dw_level="tmp" id="id_pipeline_lr" max_iter="10"
+                                                                   range_date="none" is_rollup="false"/>
+        <transform_ml_transformer_feature_hashing_tf dw_level="tmp" id="test" range_date="none" is_rollup="false"
+                                                     is_begin="true"/>
+        <transform_ml_estimator_classification_logistic_regression dw_level="tmp" id="test_estimator" range_date="none"
+                                                                   is_rollup="false"/>
+    </transforms>
+</di_pipeline>

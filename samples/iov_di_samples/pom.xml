@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<compose xsi:schemaLocation="https://www.rocy-data.com/iov_di/v1.0.0  .dw/iov_di.xsd" active_profile="test"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://www.rocy-data.com/iov_di/v1.0.0">
+    <modules>
+        <module path="dw/hello_world.xml"/>
+        <module path="dw/models/model.xml"/>
+        <module path="dw/path/tsp_path.xml"/>
+    </modules>
+</compose>

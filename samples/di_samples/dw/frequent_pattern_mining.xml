@@ -1,0 +1,20 @@
+<dw dw_level="tmp" dw_subject="subject1" dw_market="RX-DATA" owner="whq"
+    xsi:schemaLocation="https://www.rocy-data.com/di/v1.0.0  ../.dw/di.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://www.rocy-data.com/di/v1.0.0">
+    <sources>
+        <source_sequence_constants id="id_source_fpgrowth" quote_char="'">
+            <sequence_constant column_name="items" column_values="'1 2 5','1 2 3 5','1 2'"/>
+            <computed_column_group>
+                <computed_column name="items" expression="split(items,' ')"/>
+            </computed_column_group>
+        </source_sequence_constants>
+        <source_ml_model_invoke id="id_model_invoke_freqItemsets" path="path_id_fpg_model" method_name="freqItemsets"/>
+        <source_ml_model_invoke id="id_model_invoke_associationRules" path="path_id_fpg_model" method_name="associationRules"/>
+        <source_ml_model_invoke id="id_model_invoke_transform" path="path_id_fpg_model" method_name="transform" method_parameters="id_source_fpgrowth"/>
+    </sources>
+    <transforms>
+        <transform_schema id="test_schema" transform_ref="id_source_fpgrowth"/>
+        <transform_ml_estimator_fp_growth model_path="path_id_fpg_model" id="id_fpg" transform_ref="id_source_fpgrowth" items_col="items" min_support="0.5" min_confidence="0.6"/>
+    </transforms>
+</dw>

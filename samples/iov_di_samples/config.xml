@@ -1,0 +1,7 @@
+<config xmlns="https://www.rocy-data.com/dw/config"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="https://www.rocy-data.com/dw/config .dw/config.xsd"
+        result_return_count="200"
+        date="20210106"
+        local="true"
+        type="iov_di"/>

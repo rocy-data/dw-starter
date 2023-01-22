@@ -1,0 +1,15 @@
+{"health":90,"med_charge_duration": 500,"med_charge_start_soc":45,"med_charge_end_soc":78,"sum_charge_soc_times":187,"med_charge_soc":1000}
+{"health":87,"med_charge_duration": 530,"med_charge_start_soc":55,"med_charge_end_soc":78,"sum_charge_soc_times":187,"med_charge_soc":2000}
+{"health":84,"med_charge_duration": 560,"med_charge_start_soc":45,"med_charge_end_soc":68,"sum_charge_soc_times":284,"med_charge_soc":3000}
+{"health":81,"med_charge_duration": 510,"med_charge_start_soc":55,"med_charge_end_soc":68,"sum_charge_soc_times":381,"med_charge_soc":2000}
+{"health":77,"med_charge_duration": 570,"med_charge_start_soc":45,"med_charge_end_soc":68,"sum_charge_soc_times":477,"med_charge_soc":4000}
+{"health":74,"med_charge_duration": 640,"med_charge_start_soc":35,"med_charge_end_soc":88,"sum_charge_soc_times":274,"med_charge_soc":4000}
+{"health":71,"med_charge_duration": 610,"med_charge_start_soc":25,"med_charge_end_soc":88,"sum_charge_soc_times":571,"med_charge_soc":5000}
+{"health":68,"med_charge_duration": 680,"med_charge_start_soc":25,"med_charge_end_soc":88,"sum_charge_soc_times":668,"med_charge_soc":6000}
+{"health":64,"med_charge_duration": 740,"med_charge_start_soc":25,"med_charge_end_soc":98,"sum_charge_soc_times":764,"med_charge_soc":4000}
+{"health":63,"med_charge_duration": 730,"med_charge_start_soc":25,"med_charge_end_soc":98,"sum_charge_soc_times":563,"med_charge_soc":5000}
+{"health":62,"med_charge_duration": 720,"med_charge_start_soc":15,"med_charge_end_soc":98,"sum_charge_soc_times":862,"med_charge_soc":6000}
+{"health":60,"med_charge_duration": 800,"med_charge_start_soc":15,"med_charge_end_soc":98,"sum_charge_soc_times":860,"med_charge_soc":7000}
+{"health":58,"med_charge_duration": 880,"med_charge_start_soc":15,"med_charge_end_soc":98,"sum_charge_soc_times":858,"med_charge_soc":8000}
+{"health":53,"med_charge_duration": 830,"med_charge_start_soc":5,"med_charge_end_soc":10,"sum_charge_soc_times":1153,"med_charge_soc":9000}
+{"health":51,"med_charge_duration": 910,"med_charge_start_soc":5,"med_charge_end_soc":100,"sum_charge_soc_times":1151,"med_charge_soc":10000}

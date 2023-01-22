@@ -1,0 +1,78 @@
+<dw dw_level="tmp" dw_subject="subject1"
+    dw_market="market1" owner="whq"
+    xsi:schemaLocation="https://www.rocy-data.com/iov_dw/v1.0.0  ../.dw/iov_dw.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://www.rocy-data.com/iov_dw/v1.0.0">
+    <constants>
+        <constant value="5" name="10_soc_travel_odo_section"/>
+        <constant value="10000" name="acc_mileage_section_1w"/>
+        <constant value="1" name="acc_trip_charge_count_section"/>
+        <constant value="100" name="acc_trip_electric_amount_section"/>
+        <constant value="300" name="acc_trip_odo_section"/>
+        <constant value="2" name="acceleration_value_section"/>
+        <constant value="10" name="battery_health_rank_num"/>
+        <constant value="50" name="battery_health_soc_amount"/>
+        <constant value="900" name="battery_health_trip_seconds"/>
+        <constant value="40" name="battery_high_temp_threshold"/>
+        <constant value="3" name="charge_over_min"/>
+        <constant value="20" name="charge_start_ah_section"/>
+        <constant value="charging full" name="charging_full"/>
+        <constant value="charging" name="charging_value"/>
+        <constant value="2" name="commute_threshold"/>
+        <constant value="3" name="current_section"/>
+        <constant value="86400000" name="day_milli"/>
+        <constant value="100" name="driver_motor_torq_section"/>
+        <constant
+        value="alarm_common_brk:制动系统报警,alarm_common_dcdc_st:DC~DC状态报警,alarm_common_dcdc_temp:DC~DC温度报警,alarm_common_dmc_temp:驱动电机控制器温度报警,alarm_common_driver_motor_temp:驱动电机温度报警,alarm_common_esd_charge_over:车载储能装置类型过充,alarm_common_esd_high:车载储能装置类型过压报警,alarm_common_esd_low:车载储能装置类型欠压报警,alarm_common_esd_unmatch:可充电储能系统不匹配报警,alarm_common_hvil_st:高压互锁状态报警,alarm_common_insulation:绝缘报警,alarm_common_sc_consistency:电池单体一致性差报警,alarm_common_sc_high:单体电池过压报警,alarm_common_sc_low:单体电池欠压报警,alarm_common_soc_high:SOC过高报警,alarm_common_soc_hop:SOC跳变报警,alarm_common_soc_low:SOC低报警,alarm_common_temperature_diff:温度差异报警,alarm_common_temperature_high:电池高温报警" name="general_alarm_signals"/>
+        <constant value="5" name="gz_count_section"/>
+        <constant value="30" name="high_temp_weather_threshold"/>
+        <constant value="90" name="high_temperature"/>
+        <constant value="5" name="horizontal_accelerate_value"/>
+        <constant value="3600000" name="hour_milli"/>
+        <constant value="50" name="hundred_kilometers_ah_consume_ac_section"/>
+        <constant value="10" name="hundred_kilometers_soc_consume_ac_section"/>
+        <constant value="30" name="is_quick_threshold"/>
+        <constant value="10" name="low_electric"/>
+        <constant value="-10" name="low_temp_weather_threshold"/>
+        <constant value="10" name="low_temperature"/>
+        <constant value="60" name="minute_seconds"/>
+        <constant value="600000" name="missing_milli_threshold"/>
+        <constant value="4" name="night_end_time"/>
+        <constant value="20" name="night_start_time"/>
+        <constant value="not charge" name="not_charging_value"/>
+        <constant value="600000" name="offline_threshold"/>
+        <constant value="300" name="once_trip_odo_section"/>
+        <constant value="300" name="once_trip_seconds_section"/>
+        <constant value="10" name="position_section"/>
+        <constant value="1000" name="rotate_speed_section"/>
+        <constant value="1000" name="second_milli"/>
+        <constant value="5" name="soc_section_5"/>
+        <constant value="30" name="speed_separator"/>
+        <constant value="50" name="steering_angle_section"/>
+        <constant value="10" name="steering_angle_speed_section"/>
+        <constant value="2" name="temperature_diff_section"/>
+        <constant value="2" name="temperature_section"/>
+        <constant value="44" name="tenant_id"/>
+        <constant value="100" name="torq_section"/>
+        <constant value="20" name="travel_odo_section"/>
+        <constant value="5" name="trip_max_current_section"/>
+        <constant value="100" name="trip_mileage_section_100"/>
+        <constant value="600" name="trip_seconds_section"/>
+        <constant value="300000" name="trip_separator"/>
+        <constant value="180000" name="tsp_got_time_span_threshold"/>
+        <constant value="20" name="two_charge_consume_ah_section"/>
+        <constant value="20" name="two_charge_consume_soc_section"/>
+        <constant value="20" name="two_charge_travel_odo_section"/>
+        <constant value="0:not charge,1:ready/stoped,2:charging,3:charging full,4:charge fault,5:heating" name="veh_charge_state_map"/>
+        <constant value="charge" name="veh_charge_state_no"/>
+        <constant value="10" name="veh_spd_section"/>
+        <constant value="0:off,1:acc,2:on,3:start" name="veh_state_map"/>
+        <constant value="off" name="veh_state_off"/>
+        <constant value="on" name="veh_state_on"/>
+        <constant value="on" name="veh_state_on_value"/>
+        <constant value="5000" name="vehicle_mileage_section"/>
+        <constant value="10" name="voltage_diff_section"/>
+        <constant value="5" name="voltage_section"/>
+        <constant value="31536000000" name="year_milli"/>
+    </constants>
+</dw>

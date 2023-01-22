@@ -1,0 +1,21 @@
+<dw xmlns="https://www.rocy-data.com/dw/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://www.rocy-data.com/dw/v1.0.0 ../../.dw/dw.xsd" dw_market="market1" dw_subject="subject1"
+    owner="whq" dw_level="ods"
+>
+    <sources>
+        <source_csv id="id_sell_percent" path="csv_path_none">
+            <computed_column_group>
+                <computed_column name="amount_percent" expression="amount * 0.8"/>
+                <computed_column name="money" expression="amount_percent * price"/>
+            </computed_column_group>
+        </source_csv>
+    </sources>
+    <transforms>
+        <transform_transform id="id_sell_add" transform_ref="id_sell_percent">
+            <computed_column_group>
+                <computed_column name="amount_add" expression="amount_percent + 10"/>
+                <computed_column name="money_add" expression="amount_add * price"/>
+            </computed_column_group>
+        </transform_transform>
+    </transforms>
+</dw>
